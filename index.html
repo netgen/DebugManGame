@@ -1,80 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>DebugManGame</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="style/stylesheet.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+  <head>
+    <title>DebugManGame</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style/stylesheet.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
+  </head>
 
-</head>
-<body>
+  <body>
+    <div class="main-content">
+      <div class="intro-form page">
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-      <h2 class="gameName">The Debug Quest</h2>
-  </div>
-</nav>
-  
-<div class="container-fluid text-center">    
-  <div class="row content">
-    <div class="col-sm-2 sidenav">
-      <p style="color:blue">BLUE TEAM</p>
-        <p>points:</p>
+      </div>
+
+      <div class="game-board page" style='display: none'>
+
+      </div>
+
+      <div class="error-page page" style='display: none'>
+        <p>Nice try.</p>
+      </div>
     </div>
-    <div class="col-sm-8 text-center"> 
-	  
-						  <!-- Trigger the modal with a button -->
-				<div class="btn-group">
-                    <script type="text/javascript" src="scripts/sourceScript.js"></script>
-                    
 
-					<!-- Modal -->
-					<div id="myModal" class="modal fade" role="dialog">
-
-					  <div class="modal-dialog">
-
-						<!-- Modal content-->
-						<div class="modal-content">
-						  <div class="modal-header">
-							<h3 class="modal-title">Pitanje</h3>
-						  </div>
-						  <div class="modal-body">
-							<h2>30s</h2>
-						  </div>
-						  <div class="modal-footer" style="text-align:center">
-							<button type="button" onclick="correctAnswer()" class="btn btn-modal btn-modal-correct" data-dismiss="modal">CORRECT</button>
-                            <button type="button" class="btn btn-modal btn-modal-wrong" data-dismiss="modal">WRONG</button>
-						  </div>
-						</div>
-
-					  </div>
-					</div>
-				</div>
-				
-	  
-      <hr>
-    </div>
-    <div class="col-sm-2 sidenav">
-        <p style="color:red">RED TEAM</p>
-        <p>points:</p>
-    </div>
-  </div>
-</div>
-
-<footer class="container-fluid text-center">
-        <button class="btn-footer" onClick="window.location.reload()">NEW GAME </button>
-        <button class="btn-footer" onClick="gameOver()">GAME OVER</button>
-        <button class="btn-footer">UNDO</button>
-</footer>
-
-<script>
-//   $('#myModal').on('hidden.bs.modal', function () {
-//        alert("!");
-//});
-</script>
-
-</body>
+    <script>
+        $(".intro-form").load("parameter_form.html");
+        $(".game-board").load("board_game.html");
+    </script>
+    <script src="scripts/game.js"></script>
+    <script src="scripts/initialization.js"></script>
+  </body>
 </html>
