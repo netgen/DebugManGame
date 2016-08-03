@@ -52,9 +52,6 @@ $(function() {
 
 	$("#paramForm").submit(function(event) {
 		event.preventDefault();
-		//noRows = parseInt($("#noRows").val());
-		//noColumns = parseInt($("#noColumns").val());
-		window.location.hash = '#board';
 	});
 });
 

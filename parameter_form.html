@@ -5,33 +5,33 @@
 	 		<option value="1">1</option>
 	 		<option value="2">2</option>
 	 		<option value="3">3</option>
-	 		<option value="4">4</option>
+	 		<option value="4" selected="selected">4</option>
 	 	</select>
 	</div>
-		<br>
+		<br/>
 		<div>
 			Number of columns:
 	 	<select name="noColumns">
 	 		<option value="1">1</option>
 	 		<option value="2">2</option>
 	 		<option value="3">3</option>
-	 		<option value="4">4</option>
+	 		<option value="4" selected="selected">4</option>
 	 	</select>
 		</div>
-		<br>
+		<br/>
 		<div>
 			Number of Z bugs:
-			<input type="text" name="zBugs" value="0">
-			<br>
+			<input type="text" title="Number of Z bugs" id="zBugs" name="zBugs" onblur="validate()" value= "1" />
+			<br/>
 
 			Number of W bugs:
-			<input type="text" name="wBugs" value="0">
-			<br>
+			<input type="text" title="Number of Z bugs" id="wBugs" name="wBugs" onblur="validate()" value="1" />
+			<br/>
 
 			Number of Q bugs:
-			<input type="text" name="qBugs" value="0">
-			<br> 						
+			<input type="text" title="Number of Z bugs" id="qBugs" name="qBugs" onblur="validate()" value="1" />
+			<br/> 						
 		</div>
-	<br>
+	<br/>
 	<input type="submit" id="submitButton" name="potato" />
 </form>

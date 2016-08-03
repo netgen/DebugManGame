@@ -1,5 +1,15 @@
 <script id="board-temp" type="text/x-handlebars-template">
-					<p>The game board.</p>
-					<p>Should have {{noRows}} rows and {{noColumns}} columns.</p>
-					<p>There also ought to be {{zBugs}} Z bugs, {{wBugs}} W bugs and {{qBugs}} Q bugs.</p>
+	<table style="border: 1px solid black">
+	{{#each this}}
+		<tr>
+			{{#each this}}
+			<td style="border: 1px solid black">
+				<p>{{this.question}}</p>
+				<p>Bug: {{this.hasBug}}</p>
+				<p>Difficulty: {{this.difficulty}}</p>
+			</td>
+			{{/each}}
+		</tr>
+	{{/each}}
+	</table>
 </script>

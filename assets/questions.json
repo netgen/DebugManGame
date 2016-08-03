@@ -1,0 +1,133 @@
+{
+  "1" : [
+    {
+      "question": "What isn't round?",
+      "answer": "A square.",
+      "difficulty": 1
+     },
+  
+    {
+      "question": "What does have three points?",
+      "answer": "A triangle.",
+      "difficulty": 1
+    },
+    
+    {
+      "question": "What do students do?",
+      "answer": "Nothing.",
+      "difficulty": 1
+    },
+    
+    {
+      "question": "Which operating system has the most bugs?",
+      "answer": "Windows.",
+      "difficulty": 1
+    },
+    
+    {
+      "question": "From what are juices made?",
+      "answer": "From fruits.",
+      "difficulty": 1
+    },
+   
+    {
+      "question": "Which university is in Zagreb?",
+      "answer": "University of Zagreb.",
+      "difficulty": 1
+    },
+
+    {
+      "question": "What do you use for calling people?",
+      "answer": "A telephone.",
+      "difficulty": 1
+    }
+  ],
+
+  "2" : [
+    {
+      "question": "What is round?",
+      "answer": "A circle.",
+      "difficulty": 2
+    },
+
+    {
+      "question": "Who wants to live forever?",
+      "answer": "Nobody.",
+      "difficulty": 2
+    },
+
+    {
+      "question": "Which planet has a ring?",
+      "answer": "Saturn.",
+      "difficulty": 2
+    },
+
+    {
+      "question": "Who sings \"Can't touch this\"?",
+      "answer": "MC Hammer.",
+      "difficulty": 2
+    },
+
+    {
+      "question": "Who wants to be a...",
+      "answer": "Millionare.",
+      "difficulty": 2
+    },
+
+    {
+      "question": "How do people get up?",
+      "answer": "With great difficulty.",
+      "difficulty": 2
+    },
+
+    {
+      "question": "Which country is the best?",
+      "answer": "USA.",
+      "difficulty": 2
+    }
+  ],
+
+  "3" : [
+    {
+      "question": "What does the fox say?",
+      "answer": "Ring-ding-ding-ding-dingeringeding!",
+      "difficulty": 3
+    },
+
+    {
+      "question": "Who discovered North America first?",
+      "answer": "The Vikings.",
+      "difficulty": 3
+    },
+
+    {
+      "question": "Can rastafarians drink coffee?",
+      "answer": "No.",
+      "difficulty": 3
+    },
+
+    {
+      "question": "Which cookies are the most popular ones?",
+      "answer": "Oreos.",
+      "difficulty": 3
+    },
+
+    {
+      "question": "Who owns the Facebook?",
+      "answer": "Mark Zuckerberg.",
+      "difficulty": 3
+    },
+
+    {
+      "question": "Who plants potatoes?",
+      "answer": "A farmer.",
+      "difficulty": 3
+    },
+
+    {
+      "question": "Where do people sleep?",
+      "answer": "In a bed.",
+      "difficulty": 3
+    }
+  ]
+}
