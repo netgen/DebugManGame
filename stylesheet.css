@@ -19,7 +19,7 @@
     
     /* Set black background color, white text and some padding */
     footer {
-        background-color: rgb(211, 230, 220);
+        background-color: #d3e6dc;
         color: #0c62eb;
         padding: 15px;
         position: fixed;
@@ -37,11 +37,15 @@
       .row.content {height:auto;} 
     }
 
+.btn-group {
+    padding: 5px;
+}
 .btn-box {
     width:70px; 
     height:70px;
     margin-right:5px; 
-    margin-bottom:5px
+    margin-bottom:5px;
+    background-color:#86b9ff;
 }
 
 
@@ -58,4 +62,9 @@
 .btn-modal-wrong {
     background-color: #d61919;
     margin-left: 50px;
+}
+
+.btn-footer {
+    margin-right:20px; 
+    margin-left:20px;
 }
