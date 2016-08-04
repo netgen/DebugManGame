@@ -1,6 +1,5 @@
 <script id="board-temp" type="text/x-handlebars-template">
 	
-
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<h2 class="gameName">The Debug Quest</h2>
@@ -9,17 +8,19 @@
 
 	<div class="container-fluid text-center">    
 		<div class="row content">
+
 			<div class="col-sm-2 sidenav blue">
 				<p class="blueTeam" id="blueTeamId">BLUE TEAM</p>
-				<p>points:</p>
+				<p>POINTS:</p>
 				<p id="blueP">0</p>
 			</div>
+
 			<div class="col-sm-8 text-center"> 
 				<table style="border: 1px solid black">
 					{{#each this}}
 					<div>
 						{{#each this}}
-						{{#button this.row this.column}}{{/button}}
+							{{#button this.row this.column}}{{/button}}
 						{{/each}}
 					</div>
 					{{/each}}
@@ -27,7 +28,6 @@
 
 				<!-- Trigger the modal with a button -->
 				<div id="boardContent" class="btn-group">
-
 
 					<!-- Modal -->
 					<div id="myModal" class="modal fade" role="dialog">
@@ -37,7 +37,7 @@
 							<!-- Modal content-->
 							<div class="modal-content">
 								<div class="modal-header">
-									<h3 class="modal-title">Pitanje</h3>
+									<h3 class="modal-title" id="question">Pitanje</h3>
 								</div>
 								<div class="modal-body" id="timer"> 5s</div>
 								<div class="modal-footer" style="text-align:center">
@@ -49,10 +49,8 @@
 						</div>
 					</div>
 				</div>
-				
-
-
 			</div>
+
 			<div class="col-sm-2 sidenav green">
 				<p clas="greenTeam" id="greenTeamId">GREEN TEAM</p>
 				<p>points:</p>
@@ -62,8 +60,9 @@
 	</div>
 
 	<footer class="container-fluid text-center">
-		<button class="btn-footer" onClick="window.location.reload()">NEW GAME </button>
+		<button class="btn-footer" onClick="window.location.reload()">NEW GAME</button>
 		<button class="btn-footer" onClick="gameOver()">GAME OVER</button>
 		<button class="btn-footer">UNDO</button>
 	</footer>
+
 </script>

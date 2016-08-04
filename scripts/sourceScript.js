@@ -18,15 +18,6 @@ var turn ="blue";
 
 
 (function (){
-    /*
-    for (var i=0; i<x; i++){
-        document.write("<div>");
-        for (var j=0; j<y; j++) {
-                document.write("<input type='button' id='"+i+""+j+"'class='btn-box' onclick='setIdClickedButton(id)' data-toggle='modal' data-target='#myModal' />");      
-        }
-        document.write("</div>");
-    } 
-    */
     var b = document.getElementById("blueTeamId");
     b.style.backgroundColor ="#bad5ff";
     b.style.fontSize = "x-large";
@@ -122,7 +113,7 @@ function changeTurn(){
     }
 }
 
-function checkBug(clickedButton){
+function checkBug(clickedButton) {
     var yClick = clickedButton % 10;
     var xClick = (clickedButton - yClick) / 10;
     
@@ -132,8 +123,12 @@ function checkBug(clickedButton){
 }
 
 
-function setIdClickedButton(buttonId){
+function setIdClickedButton(buttonId) {
     clickedButton = buttonId;
+    var y = parseInt(buttonId.charAt(0));
+    var x = parseInt(buttonId.charAt(1));
+    var questionObj = JSON.parse(localStorage.grid)[y][x];
+    $("#question").text(questionObj.question);
     resetTime();
 }
 

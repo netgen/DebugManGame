@@ -119,6 +119,7 @@ function generateBoard(json) {
 	var template_script = $("#board-temp").html();
 	var template = Handlebars.compile(template_script);
 	$(".game-board").html(template(array));
+	localStorage.setItem("grid", JSON.stringify(array));
 	window.location.hash = '#board';
 }
 
