@@ -59,14 +59,20 @@
 .btn-group {
     padding: 5px;
 }
+
 .btn-box {
     width:70px; 
     height:70px;
     margin-right:5px; 
     margin-bottom:5px;
     background-color:#86b9ff;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
 }
-
 
 .btn-modal {
     width: 150px;

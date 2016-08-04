@@ -1,37 +1,66 @@
-<form id="paramForm" action="">
-	<div>
- 		Number of rows:
-	 	<select name="noRows">
-	 		<option value="1">1</option>
-	 		<option value="2">2</option>
-	 		<option value="3">3</option>
-	 		<option value="4" selected="selected">4</option>
-	 	</select>
-	</div>
-		<br/>
-		<div>
-			Number of columns:
-	 	<select name="noColumns">
-	 		<option value="1">1</option>
-	 		<option value="2">2</option>
-	 		<option value="3">3</option>
-	 		<option value="4" selected="selected">4</option>
-	 	</select>
+<div class="container-fluid">
+	<form id="paramForm" action="">
+		<div class="row well">
+			<div class="col-sm-5"></div>
+	 		<div class="col-sm-1">Number of rows:</div>
+	 		<div class="col-sm-1">
+			 	<select name="noRows">
+			 		<option value="1">1</option>
+			 		<option value="2">2</option>
+			 		<option value="3">3</option>
+			 		<option value="4" selected="selected">4</option>
+			 	</select>
+			 </div>
+			 <div class="col-sm-5"></div>
 		</div>
-		<br/>
-		<div>
-			Number of Z bugs:
-			<input type="text" id="zBugs" name="zBugs" onblur="validate()" value="1" />
-			<br/>
 
-			Number of W bugs:
-			<input type="text" id="wBugs" name="wBugs" onblur="validate()" value="1" />
-			<br/>
-
-			Number of Q bugs:
-			<input type="text" id="qBugs" name="qBugs" onblur="validate()" value="1" />
-			<br/> 						
+		<div class="row well">
+			<div class="col-sm-5"></div>
+			<div class="col-sm-1">Number of columns:</div>
+			<div class="col-sm-1">
+			 	<select name="noColumns">
+			 		<option value="1">1</option>
+			 		<option value="2">2</option>
+			 		<option value="3">3</option>
+			 		<option value="4" selected="selected">4</option>
+			 	</select>
+			</div>
+			<div class="col-sm-5"></div>
 		</div>
-	<br/>
-	<input type="submit" id="submitButton" name="potato" />
-</form>
+
+		<div class="row well">
+			<div class="col-sm-5"></div>
+			<div class="col-sm-1"><img src="assets/images/fly.png" /></div>
+			<div class="col-sm-1">
+				<input type="text" id="zBugs" name="zBugs" onblur="validate()" value="1" data-toggle="tooltip" title="Number of easy questions" />
+			</div>
+			<div class="col-sm-5"></div>
+		</div>
+
+		<div class="row well">
+			<div class="col-sm-5"></div>
+			<div class="col-sm-1"><img src="assets/images/bee.png" /></div>
+			<div class="col-sm-1">
+				<input type="text" id="wBugs" name="wBugs" onblur="validate()" value="1" data-toggle="tooltip" title="Number of normal questions" />
+			</div>
+			<div class="col-sm-5"></div>
+		</div>
+
+		<div class="row well">
+			<div class="col-sm-5"></div>
+			<div class="col-sm-1"><img src="assets/images/ladybug.png" /></div>
+			<div class="col-sm-1">
+				<input type="text" id="qBugs" name="qBugs" onblur="validate()" value="1" data-toggle="tooltip" title="Number of hard questions"/>
+			</div>
+			<div class="col-sm-5"></div>
+		</div>
+
+		<div class="row well">
+			<div class="col-sm-5"></div>	
+			<div class="col-sm-2">
+				<input type="submit" id="submitButton" name="potato" />
+			</div>
+			<div class="col-sm-5"></div>
+		</div>
+	</form>
+</div>
