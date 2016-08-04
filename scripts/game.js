@@ -1,11 +1,11 @@
 var x = 7;
 var y = 7;
-var z = 7;
-var w = 7;
-var q = 7;
+var zKoef = 6;
+var wKoef = 4;
+var qKoef = 2;
 
 var time;
-var fulltime = 5;
+var fulltime = 30;
 var timerReset;
 
 var boxes = x*y;
@@ -14,35 +14,40 @@ var bugs = [];
 
 var bluePoints = 0;
 var greenPoints = 0;
-var turn ="blue";
-
-function correctAnswer() {
     
     $("#"+clickedButton).css ({
         backgroundColor: "#c4ffc9",
         pointerEvents: "none"
     });
     
-    checkBug(clickedButton);
+    var points = checkBug(clickedButton);
+    showAnswer();
     
     if (turn == "blue"){
-        bluePoints++;
+        bluePoints+=points;
         $("#blueP").html(bluePoints);
         changeTurn(turn);
     }
     else {
-        greenPoints++;
+        greenPoints+=points;
         $("#greenP").html(greenPoints);
         changeTurn(turn);
     }
-
+    
     boxes--;
     if (boxes == 0) {
         gameOver();
     }
-    time = 5;
+   
 }
 
+
+function showAnswer(){
+    var questionObj = getQuestion(clickedButton);
+    $("#timer").html(questionObj.answer);
+    time=0;
+    clearTimeout(timerReset);
+}
 
 function wrongAnswer() {
     if (turn == "blue") {
@@ -80,14 +85,19 @@ function checkBug(buttonID) {
     if(questionObj.hasBug){
         if(questionObj.difficulty == 1){
               $("#"+clickedButton).css('backgroundImage','url(assets/images/ladybug.png)');
+            return zKoef;
         }
         if(questionObj.difficulty == 2){
             $("#"+clickedButton).css('backgroundImage','url(assets/images/bee.png)');
+            return wKoef;
         }
         if(questionObj.difficulty == 3){
               $("#"+clickedButton).css('backgroundImage','url(assets/images/fly.png)');
+            return qKoef;
         }
-       
+    }
+    else {
+        return 1;
     }
     console.log(questionObj);
 }
@@ -106,7 +116,7 @@ function gameOver(){
 }
 
 function resetTime(){
-    document.getElementById("timer").innerHTML = "5s";
+    $("#timer").html(fulltime+"s");
     clearTimeout(timerReset);
     time = fulltime;
     timer();
