@@ -60,7 +60,8 @@ function changeTurn(){
     if (turn == "blue"){
         turn = "green";
         $("#greenTeamId").toggleClass("greenActive").toggleClass("notActive");;
-        $("#blueTeamId").toggleClass("blueActive").toggleClass("notActive");
+        $("#blueTeamId").toggleClass("blueActive");
+        $("#blueTeamId").toggleClass("notActive");
     } else {
         turn = "blue";
         $("#greenTeamId").toggleClass("greenActive").toggleClass("notActive");
@@ -77,8 +78,18 @@ function getQuestion(buttonID) {
 function checkBug(buttonID) {
     var questionObj = getQuestion(buttonID);
     if(questionObj.hasBug){
-        document.getElementById(clickedButton).style.backgroundImage = "url('assets/images/ladybug.png')";
+        if(questionObj.difficulty == 1){
+              $("#"+clickedButton).css('backgroundImage','url(assets/images/ladybug.png)');
+        }
+        if(questionObj.difficulty == 2){
+            $("#"+clickedButton).css('backgroundImage','url(assets/images/bee.png)');
+        }
+        if(questionObj.difficulty == 3){
+              $("#"+clickedButton).css('backgroundImage','url(assets/images/fly.png)');
+        }
+       
     }
+    console.log(questionObj);
 }
 
 
