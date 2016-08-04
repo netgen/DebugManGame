@@ -61,5 +61,6 @@ $(function() {
 					" data-toggle='modal' data-target='#myModal' />"
 			);
 	});
-});
 
+	$('[data-toggle="tooltip"]').tooltip();
+});
