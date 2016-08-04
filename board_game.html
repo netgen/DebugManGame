@@ -1,15 +1,71 @@
 <script id="board-temp" type="text/x-handlebars-template">
-	<table style="border: 1px solid black">
+	
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+      <h2 class="gameName">The Debug Quest</h2>
+  </div>
+</nav>
+  
+<div class="container-fluid text-center">    
+  <div class="row content">
+    <div class="col-sm-2 sidenav blue">
+      <p class="blueTeam" id="blueTeamId">BLUE TEAM</p>
+        <p>points:</p>
+        <p id="blueP">0</p>
+    </div>
+    <div  class="col-sm-8 text-center"> 
+        <table style="border: 1px solid black">
 	{{#each this}}
-		<tr>
+		<div>
 			{{#each this}}
-			<td style="border: 1px solid black">
-				<p>{{this.question}}</p>
-				<p>Bug: {{this.hasBug}}</p>
-				<p>Difficulty: {{this.difficulty}}</p>
-			</td>
+			
+				<input type='button' id='"+{{this.row}}+""+{{this.columns}}+"'  class='btn-box' onclick='setIdClickedButton(id)' data-toggle='modal' data-target='#myModal' />
+
 			{{/each}}
-		</tr>
+		</div>
 	{{/each}}
 	</table>
+	  
+						  <!-- Trigger the modal with a button -->
+				<div id="boardContent" class="btn-group">
+                    
+
+					<!-- Modal -->
+					<div id="myModal" class="modal fade" role="dialog">
+
+					  <div class="modal-dialog">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+						  <div class="modal-header">
+							<h3 class="modal-title">Pitanje</h3>
+						  </div>
+						  <div class="modal-body" id="timer"> 5s</div>
+						  <div class="modal-footer" style="text-align:center">
+							<button type="button" class="btn btn-modal btn-modal-correct" data-dismiss="modal" onclick="correctAnswer()" >CORRECT</button>
+                            <button type="button" class="btn btn-modal btn-modal-wrong" data-dismiss="modal" onclick="wrongAnswer()">WRONG</button>
+						  </div>
+						</div>
+
+					  </div>
+					</div>
+				</div>
+				
+	  
+      
+    </div>
+    <div class="col-sm-2 sidenav green">
+      <p clas="greenTeam" id="greenTeamId">GREEN TEAM</p>
+        <p>points:</p>
+        <p id="greenP">0</p>
+    </div>
+  </div>
+</div>
+
+<footer class="container-fluid text-center">
+        <button class="btn-footer" onClick="window.location.reload()">NEW GAME </button>
+        <button class="btn-footer" onClick="gameOver()">GAME OVER</button>
+        <button class="btn-footer">UNDO</button>
+</footer>
 </script>
