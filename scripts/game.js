@@ -34,6 +34,8 @@ function correctAnswer() {
         $("#greenP").html(greenPoints);
         changeTurn(turn);
     }
+
+    playSound("correct_answer");
     
     boxes--;
     if (boxes == 0) {
