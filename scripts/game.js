@@ -14,7 +14,8 @@ var bugs = [];
 
 var bluePoints = 0;
 var greenPoints = 0;
-    
+
+function correctAnswer() {
     $("#"+clickedButton).css ({
         backgroundColor: "#c4ffc9",
         pointerEvents: "none"
