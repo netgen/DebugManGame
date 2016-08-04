@@ -1,8 +1,12 @@
+#blueTeamId {
+  background-color: #bad5ff;
+  font-size: x-large;
+}
+
 .gameName {
     text-transform: uppercase;
     font-size:250%;
 }
-
 
 .navbar {
       border: none;
