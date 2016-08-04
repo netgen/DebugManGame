@@ -1,135 +1,121 @@
-function validate() {
-	var valid = true;
-	valid = isNumber("#qBugs") && isNumber("#wBugs") && isNumber("#zBugs");
+var x = 7;
+var y = 7;
+var z = 7;
+var w = 7;
+var q = 7;
 
-	$("#submitButton").attr("disabled", !valid);
+var time;
+var fulltime = 5;
+var timerReset;
+
+var boxes = x*y;
+var clickedButton;
+var bugs = [];
+
+var bluePoints = 0;
+var greenPoints = 0;
+var turn ="blue";
+
+function correctAnswer() {
+    document.getElementById(clickedButton).style.backgroundColor= "#c4ffc9";
+    document.getElementById(clickedButton).style.pointerEvents = 'none';
+    
+    checkBug(clickedButton);
+    
+    if (turn == "blue"){
+        bluePoints++;
+        document.getElementById("blueP").innerHTML = bluePoints;
+        changeTurn(turn);
+    }
+    else {
+        greenPoints++;
+        document.getElementById("greenP").innerHTML = greenPoints;
+        changeTurn(turn);
+    }
+
+    boxes--;
+    if (boxes == 0) {
+        gameOver();
+    }
+    time = 5;
 }
 
-function isNumber(objName) {
-	var value = $(objName).val();
-	if (value === "") return false;
 
-	var num_regex = /^[0-9]+$/;
-	return num_regex.test(value);
+function wrongAnswer() {
+    if (turn == "blue") {
+        document.getElementById("blueP").innerHTML = bluePoints;
+        changeTurn(turn);
+    }
+    else {
+        document.getElementById("greenP").innerHTML = greenPoints;
+        changeTurn(turn);
+    }
 }
 
-function checkParameters() {
-	var zBugs = parseInt(localStorage["zBugs"]);
-	var wBugs = parseInt(localStorage["wBugs"]);
-	var qBugs = parseInt(localStorage["qBugs"]);
-	var noRows = parseInt(localStorage["noRows"]);
-	var noColumns = parseInt(localStorage["noColumns"]);
-
-	if (zBugs + wBugs + qBugs > noRows * noColumns) {
-		return false;
-	}
-
-	return true;
+function changeTurn(){
+        var g = document.getElementById("greenTeamId");
+        var b = document.getElementById("blueTeamId");
+    
+    if (turn == "blue"){
+        b.style.backgroundColor = "transparent";
+        b.style.fontSize = "medium";
+        turn = "green";
+        g.style.backgroundColor ="#95f892";
+        g.style.fontSize = "x-large";
+    } else {
+        g.style.backgroundColor = "transparent";
+        g.style.fontSize = "medium";
+        turn = "blue";
+        
+        b.style.backgroundColor ="#bad5ff";
+        b.style.fontSize = "x-large";
+    }
 }
 
-function parseInput() {
-	var array = $("#paramForm").serializeArray();
-
-	for (var i = 0; i < array.length; i++) {
-		var pair = array[i];
-		localStorage.setItem(pair["name"], parseInt(pair["value"]));
-	}
-
-	if (!checkParameters()) {
-		alert("Number of bugs exceeds the board size!");
-		return;
-	}
-
-	$.ajax({
-		url: "assets/questions.json",
-		type: "GET",
-		dataType: "json",
-		mimeType:"application/json"
-	})
-		.success(function(json) {
-			generateBoard(json);
-		})
-		.fail(function(json) {
-			alert("Server dieded :(");
-		});
+function getQuestion(buttonID) {
+    var y = parseInt(buttonID.charAt(0)),
+        x = parseInt(buttonID.charAt(1));
+    return JSON.parse(localStorage.grid)[y][x];
 }
 
-function shuffle(array) {
-	var i = 0,
-		j = 0,
-		temp = null;
-
-	for (i = array.length - 1; i > 0; i--) {
-		j = Math.floor(Math.random() * (i));
-		temp = array[i];
-		array[i] = array[j];
-		array[j] = temp; 
-	}
-
-	return array;
+function checkBug(buttonID) {
+    var questionObj = getQuestion(buttonID);
+    if(questionObj.hasBug){
+        document.getElementById(clickedButton).style.backgroundImage = "url('assets/images/ladybug.png')";
+    }
 }
 
-function create2DArray(rows, columns) {
-	var array = new Array(rows);
 
-	for (var i = 0; i < rows; i++) {
-		array[i] = new Array(columns);
-	}
-
-	return array;
+function setIdClickedButton(buttonID) {
+    clickedButton = buttonID;
+    var questionObj = getQuestion(buttonID);
+    $("#question").text(questionObj.question);
+    resetTime();
 }
 
-function generateBoard(json) {
-	var questions = json;
-	var rows = localStorage["noRows"];
-	var cols = localStorage["noColumns"];
 
-	var easy = shuffle(questions["1"]);
-	var ezBugs = easy.splice(0, parseInt(localStorage["zBugs"]));
-
-	var normal = shuffle(questions["2"]);
-	var normBugs = normal.splice(0, parseInt(localStorage["wBugs"]));
-
-	var hard = shuffle(questions["3"]);
-	var hardBugs = hard.splice(0, parseInt(localStorage["qBugs"]));
-
-	var remainder = rows * cols - (ezBugs.length + normBugs.length + hardBugs.length);
-	var otherQs = shuffle(easy.concat(normal, hard)).splice(0, remainder);
-	var allBugs = shuffle(ezBugs.concat(normBugs, hardBugs));
-
-	var array = create2DArray(rows, cols);
-
-	function isBug() {
-		if (allBugs.length === 0) return false;
-		if (otherQs.length === 0) return true;
-		var rand = Math.floor(Math.random() * 10);
-		return rand <= 4;
-	}
-
-	for (var i = 0; i < rows; i++) {
-		for (var j = 0; j < cols; j++) {
-			if (isBug()) {
-				array[i][j] = createField(allBugs.pop(), true, i, j);
-			} else {
-				array[i][j] = createField(otherQs.pop(), false, i, j);
-			}
-		}
-	}
-	
-	var template_script = $("#board-temp").html();
-	var template = Handlebars.compile(template_script);
-	$(".game-board").html(template(array));
-	localStorage.setItem("grid", JSON.stringify(array));
-	window.location.hash = '#board';
+function gameOver(){
+    alert("Game over!");
 }
 
-function createField(question, isBug, row, column) {
-	question["hasBug"] = isBug;
-	question["row"] = row;
-	question["column"] = column;
-	return question;
+function resetTime(){
+    document.getElementById("timer").innerHTML = "5s";
+    clearTimeout(timerReset);
+    time = fulltime;
+    timer();
 }
 
-$(function() {
-	$("#submitButton").click(parseInput);
-})
+
+function timer() {
+	timerReset = setTimeout(function () {
+		var timerDiv = document.getElementById("timer");
+		time--;
+		timerDiv.innerHTML = time + "s";
+        if (time == 0) {
+            $('#myModal').modal('hide');
+            wrongAnswer();
+            return;
+        }
+		timer();
+	}, 1000);
+}
