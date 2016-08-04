@@ -17,19 +17,22 @@ var greenPoints = 0;
 var turn ="blue";
 
 function correctAnswer() {
-    document.getElementById(clickedButton).style.backgroundColor= "#c4ffc9";
-    document.getElementById(clickedButton).style.pointerEvents = 'none';
+    
+    $("#"+clickedButton).css ({
+        backgroundColor: "#c4ffc9",
+        pointerEvents: "none"
+    });
     
     checkBug(clickedButton);
     
     if (turn == "blue"){
         bluePoints++;
-        document.getElementById("blueP").innerHTML = bluePoints;
+        $("#blueP").html(bluePoints);
         changeTurn(turn);
     }
     else {
         greenPoints++;
-        document.getElementById("greenP").innerHTML = greenPoints;
+        $("#greenP").html(greenPoints);
         changeTurn(turn);
     }
 
@@ -43,32 +46,25 @@ function correctAnswer() {
 
 function wrongAnswer() {
     if (turn == "blue") {
-        document.getElementById("blueP").innerHTML = bluePoints;
+        $("#blueP").html(bluePoints);
         changeTurn(turn);
     }
     else {
-        document.getElementById("greenP").innerHTML = greenPoints;
+        $("#greenP").html(greenPoints);
         changeTurn(turn);
     }
 }
 
 function changeTurn(){
-        var g = document.getElementById("greenTeamId");
-        var b = document.getElementById("blueTeamId");
     
     if (turn == "blue"){
-        b.style.backgroundColor = "transparent";
-        b.style.fontSize = "medium";
         turn = "green";
-        g.style.backgroundColor ="#95f892";
-        g.style.fontSize = "x-large";
+        $("#greenTeamId").toggleClass("greenActive").toggleClass("notActive");;
+        $("#blueTeamId").toggleClass("blueActive").toggleClass("notActive");
     } else {
-        g.style.backgroundColor = "transparent";
-        g.style.fontSize = "medium";
         turn = "blue";
-        
-        b.style.backgroundColor ="#bad5ff";
-        b.style.fontSize = "x-large";
+        $("#greenTeamId").toggleClass("greenActive").toggleClass("notActive");
+        $("#blueTeamId").toggleClass("blueActive").toggleClass("notActive");
     }
 }
 
