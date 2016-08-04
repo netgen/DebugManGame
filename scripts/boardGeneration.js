@@ -40,6 +40,9 @@ function parseInput() {
 		return;
 	}
 
+	$('.page').hide();
+	$('.loading-page').show();
+
 	$.ajax({
 		url: "assets/questions.json",
 		type: "GET",
