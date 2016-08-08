@@ -47,6 +47,7 @@ function correctAnswer() {
     if (boxes == 0) {
         gameOver()
     }
+    console.log(boxes);
 }
 
 
@@ -75,13 +76,13 @@ function changeTurn(){
     
     if (turn == "blue"){
         turn = "green";
-        $("#greenTeamId").toggleClass("greenActive").toggleClass("notActive");;
-        $("#blueTeamId").toggleClass("blueActive");
+        $("#greenTeamId").toggleClass("activeSidebar").toggleClass("notActive");;
+        $("#blueTeamId").toggleClass("activeSidebar");
         $("#blueTeamId").toggleClass("notActive");
     } else {
         turn = "blue";
-        $("#greenTeamId").toggleClass("greenActive").toggleClass("notActive");
-        $("#blueTeamId").toggleClass("blueActive").toggleClass("notActive");
+        $("#greenTeamId").toggleClass("activeSidebar").toggleClass("notActive");
+        $("#blueTeamId").toggleClass("activeSidebar").toggleClass("notActive");
     }
 }
 
@@ -145,7 +146,6 @@ function timer() {
 		time--;
 		timerDiv.innerHTML = time + "s";
         if (time == 0) {
-           // $('#myModal').modal('hide');
             wrongAnswer();
             return;
         }

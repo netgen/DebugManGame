@@ -10,52 +10,49 @@
       color: #005aa7;
       background-color: #e0e5e2;
       text-align: center;
+      font-size: x-large;
     }
     
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 700px}
-    
-    /* Set gray background color and 100% height */
-    .sidenav {
-      padding-top: 20px;
-      background-color: #e0e5e2;
-      height: 100%;
-    }
-    
+
+
+.sidenav {
+          padding-top: 20px;
+          background-color: #e0e5e2;
+          display: table-cell;
+          height: 1000px;
+            font-size: large;
+}
+
+
 .green {
-    color: #0bc60b;
-    font-size: medium;
+    color: #30d830;
+    font-size: large;
 }
 
 .blue {
-    color: blue;
-    font-size: medium;
+    color: #1a6ef5;
+    font-size: large;
 }
 
-.blueActive {
-    background-color: #bad5ff;
+.activeSidebar {
+    background-color: #e9f2ef;
     font-size: x-large;
 }
-
-.greenActive {
-    background-color: #95f892;
-    font-size : x-large;
-}
-
 .notActive {
-    background-color : transparent;
-    font-size: medium;
+    background-color: #e0e5e2;
+    font-size: large;
+   
 }
-    /* Set black background color, white text and some padding */
-    footer {
-        background-color: #d3e6dc;
-        color: #0c62eb;
-        padding: 15px;
-        position: fixed;
-        bottom:0;
-        left: 0;
-        right: 0;
-    }
+
+footer {
+    background-color: #d3e6dc;
+    color: #0c62eb;
+    padding: 15px;
+    position: fixed;
+    bottom:0;
+    left: 0;
+    right: 0;
+ }
     
     /* On small screens, set height to 'auto' for sidenav and grid */
     @media screen and (max-width: 767px) {
@@ -127,3 +124,7 @@ th, td {
     padding: 5px;
     text-align: center;
 }
+
+table {
+    margin: 0 auto; 
+  }
