@@ -66,5 +66,9 @@ $(function() {
 		return String.fromCharCode(65 + index);
 	});
 
+	Handlebars.registerHelper("oneUp", function(number) {
+		return number + 1;
+	});
+
 	$('[data-toggle="tooltip"]').tooltip();
 });

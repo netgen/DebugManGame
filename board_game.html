@@ -11,18 +11,6 @@
 
 			<div class="col-sm-8 text-center"> 
 				<table>
-					{{#each grid}}
-						<tr>
-							<td>
-								<p id="row{{@index}}" class="fieldUnactive">
-									{{@index}}
-								</p>
-							</td>
-							{{#each this}}
-								<td>{{#button this.row this.column}}{{/button}}</td>
-							{{/each}}
-						</tr>
-					{{/each}}
 					<tr>
 						<td></td>
 						{{#each grid.[0]}}
@@ -33,6 +21,18 @@
 							</td>
 						{{/each}}
 					</tr>
+					{{#each grid}}
+						<tr>
+							<td>
+								<p id="row{{@index}}" class="fieldUnactive">
+									{{oneUp @index}}
+								</p>
+							</td>
+							{{#each this}}
+								<td>{{#button this.row this.column}}{{/button}}</td>
+							{{/each}}
+						</tr>
+					{{/each}}
 				</table>
 
 				<!-- Trigger the modal with a button -->
