@@ -15,6 +15,12 @@ var bluePoints = 0;
 var greenPoints = 0;
 var turn = "blue";
 
+
+ var myWindow;
+function popup() {
+    myWindow = window.open("", "", "width=400,height=200");
+}
+
 function correctAnswer() {
     $("#"+clickedButton).css ({
         backgroundColor: "#c4ffc9",
@@ -110,10 +116,14 @@ function checkBug(buttonID) {
 function setIdClickedButton(buttonID) {
     clickedButton = buttonID;
     var questionObj = getQuestion(buttonID);
-    $("#question").text(questionObj.question);
-    resetTime();
+    
+    myWindow.document.write("<p>"+questionObj.question+" " + questionObj.answer+ "</p>");
+    
+     $("#question").text(questionObj.question);
      $("#correctBtn").attr("disabled", false);   
      $("#wrongBtn").attr("disabled", false); 
+    
+    resetTime();
 }
 
 
