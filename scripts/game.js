@@ -76,9 +76,8 @@ function changeTurn(){
     
     if (turn == "blue"){
         turn = "green";
-        $("#greenTeamId").toggleClass("activeSidebar").toggleClass("notActive");;
-        $("#blueTeamId").toggleClass("activeSidebar");
-        $("#blueTeamId").toggleClass("notActive");
+        $("#greenTeamId").toggleClass("activeSidebar").toggleClass("notActive");
+        $("#blueTeamId").toggleClass("activeSidebar").toggleClass("notActive");
     } else {
         turn = "blue";
         $("#greenTeamId").toggleClass("activeSidebar").toggleClass("notActive");

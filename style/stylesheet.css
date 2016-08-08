@@ -35,13 +35,13 @@
 }
 
 .activeSidebar {
-    background-color: #e9f2ef;
+    background-color: #e0e5e2;
     font-size: x-large;
 }
+
 .notActive {
     background-color: #e0e5e2;
     font-size: large;
-   
 }
 
 footer {
@@ -127,4 +127,4 @@ th, td {
 
 table {
     margin: 0 auto; 
-  }
+}
