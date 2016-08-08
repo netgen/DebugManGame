@@ -1,132 +1,329 @@
 {
   "1" : [
     {
-      "question": "What isn't round?",
-      "answer": "A square.",
-      "difficulty": 1
-     },
-  
-    {
-      "question": "What does have three points?",
-      "answer": "A triangle.",
+      "question": "What is sushi traditinally wrapped in?",
+      "answer": "Seaweed.",
       "difficulty": 1
     },
-    
     {
-      "question": "What do students do?",
-      "answer": "Nothing.",
+      "question": "What element begins with the letter 'K'?",
+      "answer": "Krypton",
       "difficulty": 1
     },
-    
     {
-      "question": "Which operating system has the most bugs?",
-      "answer": "Windows.",
+      "question": "Which continent has the fewest flowering plants?",
+      "answer": "Antarctica.",
       "difficulty": 1
     },
-    
     {
-      "question": "From what are juices made?",
-      "answer": "From fruits.",
+      "question": "What railway linked Moscow and Irkutsk in 1900?",
+      "answer": "The Trans-Siberian Railway.",
       "difficulty": 1
     },
-   
     {
-      "question": "Which university is in Zagreb?",
-      "answer": "University of Zagreb.",
+      "question": "Name the world's biggest island.",
+      "answer": "Greenland",
       "difficulty": 1
     },
-
     {
-      "question": "What do you use for calling people?",
-      "answer": "A telephone.",
+      "question": "Name the world's largest ocean.",
+      "answer": "Pacific Ocean.",
+      "difficulty": 1
+    },
+    {
+      "question": "Name the world's longest river.",
+      "answer": "Amazon.",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the name of Oprah Winfrey’s production company?",
+      "answer": "Harpo.",
+      "difficulty": 1
+    },
+    {
+      "question": "The acronym NASA stands for what?",
+      "answer": "National Aeronautics & Space Administration.",
+      "difficulty": 1
+    },
+    {
+      "question": "In ‘The Simpsons’, what is the name of the beer served in Springfield?",
+      "answer": "Duff.",
+      "difficulty": 1
+    },
+    {
+      "question": "Superman works for the Daily Planet, but who works for the Daily Bugle?",
+      "answer": "Spiderman, a.k.a. Peter Parker.",
+      "difficulty": 1
+    },
+    {
+      "question": "What’s the least expensive and most popular fruit?",
+      "answer": "Banana.",
+      "difficulty": 1
+    },
+    {
+      "question": "Who was the last president of the Soviet Union?",
+      "answer": "Mikail Gorbachev.",
+      "difficulty": 1
+    },
+    {
+      "question": "What political system was gradually dismantled in South Africa, starting in 1989?",
+      "answer": "Apartheid.",
+      "difficulty": 1
+    },
+    {
+      "question": "What was developed in the 40s Manhattan Project?",
+      "answer": "Atomic Bomb.",
+      "difficulty": 1
+    },
+    {
+      "question": "Croatia and Slovenia used to be part of which country?",
+      "answer": "Yugoslavia.",
+      "difficulty": 1
+    },
+    {
+      "question": "Which caped crusader operated in Gotham city?",
+      "answer": "Batman.",
+      "difficulty": 1
+    },
+    {
+      "question": "Which controversial American sportsman had the first names Orenthal James?",
+      "answer": "O J Simpson.",
+      "difficulty": 1
+    },
+    {
+      "question": "Which Richard starred in Petty Woman?",
+      "answer": "Richard Gere.",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the main airport in Germany?",
+      "answer": "Frankfurt.",
+      "difficulty": 1
+    },
+    {
+      "question": "Who was the most famous blonde in Gentlemen Prefer Blondes?",
+      "answer": "Marilyn Monroe.",
       "difficulty": 1
     }
   ],
 
   "2" : [
     {
-      "question": "What is round?",
-      "answer": "A circle.",
+      "question": "Which is the only American state to begin with the letter ‘p’?",
+      "answer": "Pennsylvania.",
       "difficulty": 2
     },
-
     {
-      "question": "Who wants to live forever?",
-      "answer": "Nobody.",
+      "question": "What’s the largest and densest of the four rocky planets?",
+      "answer": "Earth.",
       "difficulty": 2
     },
-
     {
-      "question": "Which planet has a ring?",
-      "answer": "Saturn.",
+      "question": "Which explorer introduced pigs to North America?",
+      "answer": "Christopher Columbus.",
       "difficulty": 2
     },
-
     {
-      "question": "Who sings \"Can't touch this\"?",
-      "answer": "MC Hammer.",
+      "question": "Which country has more tractors per capita, Canada, Iceland or Japan?",
+      "answer": "Iceland.",
       "difficulty": 2
     },
-
     {
-      "question": "Who wants to be a...",
-      "answer": "Millionare.",
+      "question": "Which BBC music programme was broadcast weekly between 1964 and 2006?",
+      "answer": "Top of the Pops.",
       "difficulty": 2
     },
-
     {
-      "question": "How do people get up?",
-      "answer": "With great difficulty.",
+      "question": "What colour is Absynth?",
+      "answer": "Green.",
       "difficulty": 2
     },
-
     {
-      "question": "Which country is the best?",
-      "answer": "USA.",
+      "question": "If you had Lafite-Rothschild on your dinner table, what would it be?",
+      "answer": "Wine.",
+      "difficulty": 2
+    },
+    {
+      "question": "In ex-YU countries, what's the name of the most notorious serial killer?",
+      "answer": "Propuh.",
+      "difficulty": 2
+    },
+    {
+      "question": "What’s the ballet term for a 360-degree turn on one foot?",
+      "answer": "Pirouette.",
+      "difficulty": 2
+    },
+    {
+      "question": "How is Stefani Joanne Angelina Germanotta better known in the music industry?",
+      "answer": "Lady Gaga.",
+      "difficulty": 2
+    },
+    {
+      "question": "Which planet of our solar system was the first to be discovered by telescope?",
+      "answer": "Uranus.",
+      "difficulty": 2
+    },
+    {
+      "question": "On a computer keyboard what letter is between Q and E?",
+      "answer": "W.",
+      "difficulty": 2
+    },
+    {
+      "question": "Which sitcom about an army hospital in Korea was transmitted in the UK without the canned laughter of the US version?",
+      "answer": "M*A*S*H.",
+      "difficulty": 2
+    },
+    {
+      "question": "Which Danny starred in Batman Returns?",
+      "answer": "Danny De Vito.",
+      "difficulty": 2
+    },
+    {
+      "question": "Which fictional bear thought he had \"very little brain\"?",
+      "answer": "Winnie-the-Pooh.",
+      "difficulty": 2
+    },
+    {
+      "question": "Churchill, Sherman and Panzer were all developed as types of what?",
+      "answer": "Tank.",
+      "difficulty": 2
+    },
+    {
+      "question": "Who is Homer Simpson’s brother?",
+      "answer": "Herb Powell.",
+      "difficulty": 2
+    },
+    {
+      "question": "There is only one kind of fruit that has its seeds on the outside. Which one?",
+      "answer": "Strawberry.",
+      "difficulty": 2
+    },
+    {
+      "question": "Clark Gable used to do it four or more times a day, but do what?",
+      "answer": "Clark Gable used to shower four times a day.",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the only rock regularly eaten by humans?",
+      "answer": "Salt.",
+      "difficulty": 2
+    },
+    {
+      "question": "In which season do most burglaries take place?",
+      "answer": "Winter.",
       "difficulty": 2
     }
   ],
 
   "3" : [
     {
-      "question": "What does the fox say?",
-      "answer": "Ring-ding-ding-ding-dingeringeding!",
+      "question": "On what day of the week do the most auto accidents happen?",
+      "answer": "Saturday.",
       "difficulty": 3
     },
-
     {
-      "question": "Who discovered North America first?",
-      "answer": "The Vikings.",
+      "question": "Which mammal has the longest gestation period?",
+      "answer": "Elephant.",
       "difficulty": 3
     },
-
     {
-      "question": "Can rastafarians drink coffee?",
-      "answer": "No.",
+      "question": "What national holiday in Mexico has picnickers munching chocolate coffins and sugar skulls?",
+      "answer": "The Day of the Dead.",
       "difficulty": 3
     },
-
     {
-      "question": "Which cookies are the most popular ones?",
-      "answer": "Oreos.",
+      "question": "What nation was bounced from the Organisation of American States in 1962?",
+      "answer": "Cuba.",
       "difficulty": 3
     },
-
     {
-      "question": "Who owns the Facebook?",
-      "answer": "Mark Zuckerberg.",
+      "question": "Who averaged one patent for every three weeks of his life?",
+      "answer": "Thomas Edison.",
       "difficulty": 3
     },
-
     {
-      "question": "Who plants potatoes?",
-      "answer": "A farmer.",
+      "question": "Who, after anchoring off Hawaii in 1779, was mistaken for the god Lono? ",
+      "answer": "Captain James Cook.",
       "difficulty": 3
     },
-
     {
-      "question": "Where do people sleep?",
-      "answer": "In a bed.",
+      "question": "What star sign is \"Gladys Knight\"?",
+      "answer": "Gemini.",
+      "difficulty": 3
+    },
+    {
+      "question": "Which writer said, \"Where large sums of money are involved, it is advisable to trust nobody\"?",
+      "answer": "Agatha Christie.",
+      "difficulty": 3
+    },
+    {
+      "question": "Freddie Mercury died in which year?",
+      "answer": "1991.",
+      "difficulty": 3
+    },
+    {
+      "question": "At the beginning of the 1990s which country had most camels?",
+      "answer": "Somalia.",
+      "difficulty": 3
+    },
+    {
+      "question": "What is Bono's real name?",
+      "answer": "Paul Hewson.",
+      "difficulty": 3
+    },
+    {
+      "question": "Who said, \"Money is like an arm or a leg, use it or lose it\"?",
+      "answer": "Henry Ford.",
+      "difficulty": 3
+    },
+    {
+      "question": "Which country had its only gold in men's basketball in the 1980 Olympics?",
+      "answer": "Yugoslavia.",
+      "difficulty": 3
+    },
+    {
+      "question": "The human body has  45 miles of what?",
+      "answer": "Nerves.",
+      "difficulty": 3
+    },
+    {
+      "question": "What does a CAT scan stand for?",
+      "answer": "Computerized Axial Topography.",
+      "difficulty": 3
+    },
+    {
+      "question": "In digital electronics, what does TTL stand for?",
+      "answer": "Transistor Transistor Logic.",
+      "difficulty": 3
+    },
+    {
+      "question": "Standard TTL circuits operate with a power supply voltage of how much?",
+      "answer": "5 Volts.",
+      "difficulty": 3
+    },
+    {
+      "question": "What 1970s president openly discussed his battle with hemorrhoids?",
+      "answer": "Jimmy Carter.",
+      "difficulty": 3
+    },
+    {
+      "question": "What country did ever-prudent King Farouk I declare war on in 1945?",
+      "answer": "Germany.",
+      "difficulty": 3
+    },
+    {
+      "question": "Slippery Frank Cline was whose bodyguard?",
+      "answer": "Al Capone.",
+      "difficulty": 3
+    },
+    {
+      "question": "How old was the man who was granted the first divorce in Irish history?",
+      "answer": "68",
+      "difficulty": 3
+    },
+    {
+      "question": "In the 13th century European children were baptized with what?",
+      "answer": "Beer.",
       "difficulty": 3
     }
   ]
