@@ -77,11 +77,15 @@ function changeTurn(){
     if (turn == "blue"){
         turn = "green";
         $("#greenTeamId").toggleClass("activeSidebar").toggleClass("notActive");
+        $("#greenTeamId p").fadeTo("slow", 1.0);
         $("#blueTeamId").toggleClass("activeSidebar").toggleClass("notActive");
+        $("#blueTeamId p").fadeTo("slow", 0.2);
     } else {
         turn = "blue";
         $("#greenTeamId").toggleClass("activeSidebar").toggleClass("notActive");
+        $("#blueTeamId p").fadeTo("slow", 1.0);
         $("#blueTeamId").toggleClass("activeSidebar").toggleClass("notActive");
+        $("#greenTeamId p").fadeTo("slow", 0.2);
     }
 }
 
