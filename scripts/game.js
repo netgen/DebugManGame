@@ -7,7 +7,7 @@ var fulltime = 30;
 var timerReset;
 
 
-var boxes = localStorage.noRows * localStorage.noColumns;
+var boxes;
 var clickedButton;
 var bugs = [];
 
@@ -15,10 +15,12 @@ var bluePoints = 0;
 var greenPoints = 0;
 var turn = "blue";
 
-
  var myWindow;
+
 function popup() {
     myWindow = window.open("", "", "width=400,height=200");
+    boxes = localStorage.noRows * localStorage.noColumns;
+    console.log(boxes);
 }
 
 function correctAnswer() {
@@ -41,13 +43,13 @@ function correctAnswer() {
         changeTurn(turn);
     }
 
-    playSound("correct_answer");
+    //playSound("correct_answer");
     
     boxes--;
     if (boxes == 0) {
         gameOver()
     }
-    console.log(boxes);
+    
 }
 
 
@@ -99,15 +101,15 @@ function checkBug(buttonID) {
     var questionObj = getQuestion(buttonID);
     if(questionObj.hasBug){
         if(questionObj.difficulty == 1){
-              $("#"+clickedButton).css('backgroundImage','url(assets/images/ladybug.png)');
+            $("#"+buttonID).css('backgroundImage','url(assets/images/fly.png)');
             return zKoef;
-        }
+        }  
         if(questionObj.difficulty == 2){
-            $("#"+clickedButton).css('backgroundImage','url(assets/images/bee.png)');
+            $("#"+buttonID).css('backgroundImage','url(assets/images/bee.png)');
             return wKoef;
         }
         if(questionObj.difficulty == 3){
-              $("#"+clickedButton).css('backgroundImage','url(assets/images/fly.png)');
+               $("#"+buttonID).css('backgroundImage','url(assets/images/ladybug.png)');
             return qKoef;
         }
     }
@@ -121,7 +123,7 @@ function setIdClickedButton(buttonID) {
     clickedButton = buttonID;
     var questionObj = getQuestion(buttonID);
     
-    myWindow.document.write("<p>"+questionObj.question+" " + questionObj.answer+ "</p>");
+    popupAnswer(questionObj);
     
      $("#question").text(questionObj.question);
      $("#correctBtn").attr("disabled", false);   
@@ -130,10 +132,37 @@ function setIdClickedButton(buttonID) {
     resetTime();
 }
 
+var str1;
+var str2
+function popupAnswer (questionObj){
+    str1 = questionObj.question;
+    str2 = questionObj.answer;
+    myWindow.document.write("<p>"+ str1.fontsize("5") + "</p>");
+    myWindow.document.write("<p>"+str2.fontsize("7")+ "</p>");
+    myWindow.document.close();
+}
+
+var p;
+var l;
+function btnGameOver(){
+    gameOver();
+    
+    for (var i=0; i<localStorage.noRows; i++){
+        for (var j=0; j<localStorage.noColumns; j++){
+                $("#"+i+""+j).css ({
+                    backgroundColor: "#c4ffc9",
+                    pointerEvents: "none"
+                });
+                checkBug(i + "" + j);
+        }
+    }
+    
+}
 
 function gameOver(){
     alert("Game over!");
 }
+
 
 function resetTime(){
     $("#timer").html(fulltime+"s");
