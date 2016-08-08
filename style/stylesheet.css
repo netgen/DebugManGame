@@ -1,15 +1,15 @@
 .gameName {
     text-transform: uppercase;
-    font-size:250%;
+    font-size: 250%;
 }
 
 .navbar {
       border: none;
       margin-bottom: 0;
       border-radius: 0;
-      color:#005aa7;
+      color: #005aa7;
       background-color: #e0e5e2;
-      text-align:center;
+      text-align: center;
     }
     
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
@@ -23,12 +23,12 @@
     }
     
 .green {
-    color:#0bc60b;
+    color: #0bc60b;
     font-size: medium;
 }
 
 .blue {
-    color:blue;
+    color: blue;
     font-size: medium;
 }
 
@@ -54,7 +54,7 @@
         position: fixed;
         bottom:0;
         left: 0;
-        right:0;
+        right: 0;
     }
     
     /* On small screens, set height to 'auto' for sidenav and grid */
@@ -71,17 +71,21 @@
 }
 
 .btn-box {
-    width:70px; 
-    height:70px;
-    margin-right:5px; 
-    margin-bottom:5px;
-    background-color:#86b9ff;
+    width: 70px; 
+    height: 70px;
+    margin-right: 5px; 
+    margin-bottom: 5px;
+    background-color: #6E97D5;
     background-repeat: no-repeat;
     background-position: center;
     -webkit-background-size: contain;
     -moz-background-size: contain;
     -o-background-size: contain;
     background-size: contain;
+}
+
+.btn-box:hover {
+    background-color: #86b9ff;
 }
 
 .btn-modal {
@@ -100,12 +104,26 @@
 }
 
 .btn-footer {
-    margin-right:20px; 
-    margin-left:20px;
+    margin-right: 20px; 
+    margin-left: 20px;
 }
 
-.modal-body{
-    font-size:400%;
+.modal-body {
+    font-size: 400%;
 }
 
+.fieldActive {
+    color: blue;
+    font-weight: bold;
+    font-size: large;
+}
 
+.fieldUnactive {
+    color: gray;
+    font-size: large;
+}
+
+th, td {
+    padding: 5px;
+    text-align: center;
+}

@@ -62,5 +62,9 @@ $(function() {
 			);
 	});
 
+	Handlebars.registerHelper("letter", function(index) {
+		return String.fromCharCode(65 + index);
+	});
+
 	$('[data-toggle="tooltip"]').tooltip();
 });

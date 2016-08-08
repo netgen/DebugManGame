@@ -10,14 +10,29 @@
 			</div>
 
 			<div class="col-sm-8 text-center"> 
-				<table style="border: 1px solid black">
-					{{#each this}}
-					<div>
-						{{#each this}}
-							{{#button this.row this.column}}{{/button}}
-						{{/each}}
-					</div>
+				<table>
+					{{#each grid}}
+						<tr>
+							<td>
+								<p id="row{{@index}}" class="fieldUnactive">
+									{{@index}}
+								</p>
+							</td>
+							{{#each this}}
+								<td>{{#button this.row this.column}}{{/button}}</td>
+							{{/each}}
+						</tr>
 					{{/each}}
+					<tr>
+						<td></td>
+						{{#each grid.[0]}}
+							<td>
+								<p id="col{{@index}}" class="fieldUnactive">
+									{{letter @index}}
+								</p>
+							</td>
+						{{/each}}
+					</tr>
 				</table>
 
 				<!-- Trigger the modal with a button -->

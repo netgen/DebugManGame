@@ -121,9 +121,24 @@ function generateBoard(json) {
 	
 	var template_script = $("#board-temp").html();
 	var template = Handlebars.compile(template_script);
-	$(".game-board").html(template(array));
+	var context = {
+		grid: array,
+		rows: array.length,
+		cols: array[0].length
+	};
+
+	$(".game-board").html(template(context));
 	localStorage.setItem("grid", JSON.stringify(array));
 	window.location.hash = '#board';
+
+	$(".btn-box").hover(function () {
+		var id = $(this).attr("id");
+		$("#row" + id.charAt(0)).toggleClass("fieldUnactive")
+								.toggleClass("fieldActive");
+		$("#col" + id.charAt(1)).toggleClass("fieldUnactive")
+								.toggleClass("fieldActive");
+	});
+
 }
 
 function createField(question, isBug, row, column) {
