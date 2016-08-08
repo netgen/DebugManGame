@@ -4,11 +4,10 @@
 			<div class="col-sm-5"></div>
 	 		<div class="col-sm-1">Number of rows:</div>
 	 		<div class="col-sm-1">
-			 	<select name="noRows">
-			 		<option value="1">1</option>
-			 		<option value="2">2</option>
-			 		<option value="3">3</option>
-			 		<option value="4" selected="selected">4</option>
+			 	<select name="noRows" class="selector">
+			 		{{#times 9}}
+			 			<option value="{{@index}}">{{@index}}</option>
+			 		{{/times}}
 			 	</select>
 			 </div>
 			 <div class="col-sm-5"></div>
@@ -18,11 +17,10 @@
 			<div class="col-sm-5"></div>
 			<div class="col-sm-1">Number of columns:</div>
 			<div class="col-sm-1">
-			 	<select name="noColumns">
-			 		<option value="1">1</option>
-			 		<option value="2">2</option>
-			 		<option value="3">3</option>
-			 		<option value="4" selected="selected">4</option>
+			 	<select name="noColumns" class="selector">
+			 		{{#times 9}}
+			 			<option value="{{@index}}">{{@index}}</option>
+			 		{{/times}}
 			 	</select>
 			</div>
 			<div class="col-sm-5"></div>

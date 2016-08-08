@@ -70,5 +70,25 @@ $(function() {
 		return number + 1;
 	});
 
+	Handlebars.registerHelper("times", function(n, context) {
+		var out = '',
+			data = {};
+
+		for (var i = 0; i < n; i++) {
+			data.index = i + 1;
+			out += context.fn(i, {
+					data: data
+				}
+			);
+		}
+
+		return out;
+	});
+
 	$('[data-toggle="tooltip"]').tooltip();
+
+	var form_script = $(".selector").html();
+	var template = Handlebars.compile(form_script);
+
+	$(".selector").html(template({}));
 });
