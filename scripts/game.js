@@ -13,13 +13,14 @@ var bugs = [];
 
 var bluePoints = 0;
 var greenPoints = 0;
-var turn = "blue";
+var turn = "green";
 
  var myWindow;
 
 function popup() {
     myWindow = window.open("", "", "width=400,height=200");
     boxes = localStorage.noRows * localStorage.noColumns;
+    changeTurn();
     console.log(boxes);
 }
 
@@ -78,15 +79,11 @@ function changeTurn(){
     
     if (turn == "blue"){
         turn = "green";
-        $("#greenTeamId").toggleClass("activeSidebar").toggleClass("notActive");
         $("#greenTeamId p").fadeTo("slow", 1.0);
-        $("#blueTeamId").toggleClass("activeSidebar").toggleClass("notActive");
         $("#blueTeamId p").fadeTo("slow", 0.2);
     } else {
         turn = "blue";
-        $("#greenTeamId").toggleClass("activeSidebar").toggleClass("notActive");
         $("#blueTeamId p").fadeTo("slow", 1.0);
-        $("#blueTeamId").toggleClass("activeSidebar").toggleClass("notActive");
         $("#greenTeamId p").fadeTo("slow", 0.2);
     }
 }

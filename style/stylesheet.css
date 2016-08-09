@@ -7,8 +7,8 @@
       border: none;
       margin-bottom: 0;
       border-radius: 0;
-      color: #005aa7;
-      background-color: #e0e5e2;
+      color: black;
+      background-color: white;
       text-align: center;
       font-size: x-large;
     }
@@ -17,36 +17,31 @@
 
 .sidenav {
           padding-top: 20px;
-          background-color: #e0e5e2;
+          background-color: #dfffec;
           display: table-cell;
           height: 1000px;
             font-size: large;
 }
 
+.gameBoard {
+    background-color: #ffe6d1;
+    height: 1000px;
+}
+
 
 .green {
-    color: #30d830;
+    color: #379537;
     font-size: large;
 }
 
 .blue {
-    color: #1a6ef5;
+    color: #1a87f5;
     font-size: large;
 }
 
-.activeSidebar {
-    background-color: #e0e5e2;
-    font-size: x-large;
-}
-
-.notActive {
-    background-color: #e0e5e2;
-    font-size: large;
-}
 
 footer {
-    background-color: #d3e6dc;
-    color: #0c62eb;
+    background-color: white;
     padding: 15px;
     position: fixed;
     bottom:0;
@@ -72,7 +67,7 @@ footer {
     height: 70px;
     margin-right: 5px; 
     margin-bottom: 5px;
-    background-color: #6E97D5;
+    background-color: #f5a790;
     background-repeat: no-repeat;
     background-position: center;
     -webkit-background-size: contain;
@@ -101,6 +96,9 @@ footer {
 }
 
 .btn-footer {
+    background-color:orangered;
+    color: white;
+    padding: 5px;
     margin-right: 20px; 
     margin-left: 20px;
 }
@@ -113,11 +111,14 @@ footer {
     color: blue;
     font-weight: bold;
     font-size: large;
+    margin-top: 10px;
 }
 
 .fieldUnactive {
     color: gray;
     font-size: large;
+    margin-top: 10px;
+
 }
 
 th, td {
