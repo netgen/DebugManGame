@@ -15,50 +15,51 @@ var bluePoints = 0;
 var greenPoints = 0;
 var turn = "blue";
 
- var myWindow;
+var myWindow;
 
 function popup() {
     myWindow = window.open("", "", "width=400,height=200");
-    boxes = localStorage.noRows * localStorage.noColumns;
+    boxes = GameState.getRows() * GameState.getColumns();
     console.log(boxes);
 }
 
 function correctAnswer() {
-    $("#"+clickedButton).css ({
+    //clickedButton is CLOSED!
+    $("#" + clickedButton).css({
         backgroundColor: "#c4ffc9",
         pointerEvents: "none"
     });
-    
+
+    GameState.closeQuestion(clickedButton);
+
     var points = checkBug(clickedButton);
     showAnswer();
     
-    if (turn == "blue"){
-        bluePoints+=points;
+    if (turn == "blue") {
+        bluePoints += points;
         $("#blueP").html(bluePoints);
         changeTurn(turn);
-    }
-    else {
-        greenPoints+=points;
+    } else {
+        greenPoints += points;
         $("#greenP").html(greenPoints);
         changeTurn(turn);
     }
 
-    //playSound("correct_answer");
+    GameState.savePoints(bluePoints, greenPoints);
     
     boxes--;
     if (boxes == 0) {
-        gameOver()
+        gameOver();
     }
     
 }
 
-
-function showAnswer(){
-    var questionObj = getQuestion(clickedButton);
+function showAnswer() {
+    var questionObj = GameState.getQuestion(clickedButton);
     $("#correctBtn").attr("disabled", true);   
     $("#wrongBtn").attr("disabled", true); 
     $("#timer").html(questionObj.answer);
-    time=0;
+    time = 0;
     clearTimeout(timerReset);
 }
 
@@ -66,17 +67,16 @@ function wrongAnswer() {
     if (turn == "blue") {
         $("#blueP").html(bluePoints);
         changeTurn(turn);
-    }
-    else {
+    } else {
         $("#greenP").html(greenPoints);
         changeTurn(turn);
     }
+    
     $('#myModal').modal('hide');
 }
 
-function changeTurn(){
-    
-    if (turn == "blue"){
+function changeTurn() {
+    if (turn == "blue") {
         turn = "green";
         $("#greenTeamId").toggleClass("activeSidebar").toggleClass("notActive");
         $("#greenTeamId p").fadeTo("slow", 1.0);
@@ -89,31 +89,34 @@ function changeTurn(){
         $("#blueTeamId").toggleClass("activeSidebar").toggleClass("notActive");
         $("#greenTeamId p").fadeTo("slow", 0.2);
     }
-}
 
-function getQuestion(buttonID) {
-    var y = parseInt(buttonID.charAt(0)),
-        x = parseInt(buttonID.charAt(1));
-    return JSON.parse(localStorage.grid)[y][x];
+    GameState.saveTurn(turn);
 }
 
 function checkBug(buttonID) {
-    var questionObj = getQuestion(buttonID);
-    if(questionObj.hasBug){
-        if(questionObj.difficulty == 1){
-            $("#"+buttonID).css('backgroundImage','url(assets/images/fly.png)');
+    var questionObj = GameState.getQuestion(buttonID);
+    if(questionObj.hasBug) {
+        if(questionObj.difficulty == 1) {
+            $("#"+buttonID).css(
+                'backgroundImage', 'url(assets/images/fly.png)'
+            );
+
             return zKoef;
-        }  
-        if(questionObj.difficulty == 2){
-            $("#"+buttonID).css('backgroundImage','url(assets/images/bee.png)');
+        } else if(questionObj.difficulty == 2) {
+            $("#"+buttonID).css(
+                'backgroundImage','url(assets/images/bee.png)'
+            );
+
             return wKoef;
-        }
-        if(questionObj.difficulty == 3){
-               $("#"+buttonID).css('backgroundImage','url(assets/images/ladybug.png)');
+        } else if(questionObj.difficulty == 3) {
+            $("#"+buttonID).css(
+                'backgroundImage','url(assets/images/ladybug.png)'
+            );
+
             return qKoef;
         }
-    }
-    else {
+
+    } else {
         return 1;
     }
 }
@@ -121,7 +124,7 @@ function checkBug(buttonID) {
 
 function setIdClickedButton(buttonID) {
     clickedButton = buttonID;
-    var questionObj = getQuestion(buttonID);
+    var questionObj = GameState.getQuestion(buttonID);
     
     popupAnswer(questionObj);
     
@@ -133,39 +136,41 @@ function setIdClickedButton(buttonID) {
 }
 
 var str1;
-var str2
-function popupAnswer (questionObj){
+var str2;
+function popupAnswer(questionObj) {
     str1 = questionObj.question;
     str2 = questionObj.answer;
-    myWindow.document.write("<p>"+ str1.fontsize("5") + "</p>");
-    myWindow.document.write("<p>"+str2.fontsize("7")+ "</p>");
+    myWindow.document.write("<p>" + str1.fontsize("5") + "</p>");
+    myWindow.document.write("<p>" + str2.fontsize("7") + "</p>");
     myWindow.document.close();
 }
 
-var p;
-var l;
-function btnGameOver(){
+function btnGameOver() {
     gameOver();
     
-    for (var i=0; i<localStorage.noRows; i++){
-        for (var j=0; j<localStorage.noColumns; j++){
-                $("#"+i+""+j).css ({
+    var m = GameState.getRows();
+    var n = GameState.getColumns();
+
+    for (var i = 0; i < m; i++){
+        for (var j = 0; j < n; j++){
+                $("#" + i + "" + j).css({
                     backgroundColor: "#c4ffc9",
                     pointerEvents: "none"
                 });
+
                 checkBug(i + "" + j);
         }
     }
     
 }
 
-function gameOver(){
+function gameOver() {
     alert("Game over!");
 }
 
 
-function resetTime(){
-    $("#timer").html(fulltime+"s");
+function resetTime() {
+    $("#timer").html(fulltime + "s");
     clearTimeout(timerReset);
     time = fulltime;
     timer();
@@ -173,7 +178,7 @@ function resetTime(){
 
 
 function timer() {
-	timerReset = setTimeout(function () {
+	timerReset = setTimeout(function() {
 		var timerDiv = document.getElementById("timer");
 		time--;
 		timerDiv.innerHTML = time + "s";
