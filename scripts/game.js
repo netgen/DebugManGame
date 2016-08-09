@@ -1,6 +1,6 @@
-var zKoef = 6;
+var zKoef = 2;
 var wKoef = 4;
-var qKoef = 2;
+var qKoef = 6;
 
 var time;
 var fulltime = 30;
@@ -9,7 +9,6 @@ var timerReset;
 
 var boxes;
 var clickedButton;
-var bugs = [];
 
 var bluePoints = 0;
 var greenPoints = 0;
@@ -24,10 +23,7 @@ function popup() {
 
 function correctAnswer() {
     //clickedButton is CLOSED!
-    $("#" + clickedButton).css({
-        backgroundColor: "#c4ffc9",
-        pointerEvents: "none"
-    });
+    $("#" + clickedButton).addClass("btn-closed");
 
     GameState.pushChanges();
 
@@ -35,7 +31,7 @@ function correctAnswer() {
 
     var points = checkBug(clickedButton);
     showAnswer();
-    
+
     if (turn == "blue") {
         bluePoints += points;
         $("#blueP").html(bluePoints);
@@ -44,8 +40,9 @@ function correctAnswer() {
         $("#greenP").html(greenPoints);
     }
 
-    changeTurn(turn);
     GameState.savePoints(bluePoints, greenPoints);
+
+    changeTurn(turn);
     
     boxes--;
     if (boxes == 0) {
@@ -156,11 +153,7 @@ function btnGameOver() {
 
     for (var i = 0; i < m; i++) {
         for (var j = 0; j < n; j++){
-                $("#" + i + "" + j).css({
-                    backgroundColor: "#c4ffc9",
-                    pointerEvents: "none"
-                });
-
+                $("#" + i + "" + j).addClass("btn-closed");
                 checkBug(i + "" + j);
         }
     }
@@ -172,10 +165,32 @@ function gameOver() {
 
 function btnUndo() {
     GameState.load();
-    $("#blueP").html(GameState.getBluePoints());
-    $("#greenP").html(GameState.getGreenPoints());
+    bluePoints = GameState.getBluePoints();
+    greenPoints = GameState.getGreenPoints();
+    $("#blueP").html(bluePoints);
+    $("#greenP").html(greenPoints);
     $("#btnUndo").attr("disabled", true);
     changeTurn();
+
+    var m = GameState.getRows();
+    var n = GameState.getColumns();
+
+    boxes = 0;
+
+    for (var i = 0; i < m; i++) {
+        for (var j = 0; j < n; j++) {
+            var id = i + "" + j;
+            var question = GameState.getQuestion(id);
+
+            if (question.closed) {
+                $("#" + id).addClass("btn-closed");
+            } else {
+                $("#" + id).removeClass("btn-closed");
+                $("#" + id).css("backgroundImage", "none");
+                boxes++;
+            }
+        }
+    }
 }
 
 function resetTime() {
@@ -195,7 +210,7 @@ function timer() {
             wrongAnswer();
             return;
         }
-
-		timer();
+		
+        timer();
 	}, 1000);
 }

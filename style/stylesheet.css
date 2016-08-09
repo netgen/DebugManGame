@@ -85,6 +85,11 @@ footer {
     background-color: #86b9ff;
 }
 
+.btn-closed {
+    pointer-events: none;
+    background-color: #c4ffc9;
+}
+
 .btn-modal {
     width: 150px;
     padding: 15px;
