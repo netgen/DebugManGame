@@ -88,26 +88,21 @@ function closeAfterCorrect(){
 function changeTurn(){    
     if (turn == "blue") {
         turn = "green";
-        $("#greenTeamId p").fadeTo("slow",1.0);
-        $("#blueTeamId p").fadeTo("slow",0.0);
+        $("#greenTeamId p").fadeTo(3000,1.0);
+        $("#blueTeamId p").fadeTo(5000,0.0);
     } else {
         turn = "blue";
-        $("#blueTeamId p").fadeTo("slow",1.0);
-        $("#greenTeamId p").fadeTo("slow",0.0);
+        $("#blueTeamId p").fadeTo(3000,1.0);
+        $("#greenTeamId p").fadeTo(5000,0.0);
     }
 }
 
 
 //this method is called when answer is wrong
-//closes modal and change the team on the move
-function wrongAnswer() {
-    if (turn == "blue") {
-        $("#blueP").html(bluePoints);
-    }
-    else {
-        $("#greenP").html(greenPoints);
-    }
-    $('#myModal').modal('hide');
+//change the team on the move
+function wrongAnswer() {  
+    clearTimeout(timerReset);
+    playSound('assets/sounds/wrong_answer.mp3');
     changeTurn(turn);
 }
 
@@ -229,8 +224,10 @@ function timer() {
 		var timerDiv = document.getElementById("timer");
 		time--;
 		timerDiv.innerHTML = time + "s";
+        playSound('assets/sounds/ticker.mp3');
         if (time == 0) {
             wrongAnswer();
+            $('#myModal').modal('hide');
             return;
         }
 		timer();

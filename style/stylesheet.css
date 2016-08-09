@@ -32,7 +32,7 @@
 
 
 .gameBoard {
-    background-color: #ffffd1;
+    background-color: #fdffd1;
     height: 1000px;
 }
 
@@ -42,7 +42,7 @@
     color: white;
     font-size: x-large;
     font-weight: bold;
-    background-color:rgba(244, 183, 101, 0.84);
+    background-color:rgba(234, 117, 44, 0.9);
 }
 
 .blue {
@@ -80,13 +80,11 @@ footer {
 .btn-box {
     width: 70px; 
     height: 70px;
-    margin-right: 5px; 
-    margin-bottom: 5px;
-    background-color: #f5ce90;
+    background-color: #f7e3a0;
 }
 
 .btn-box:hover {
-    background-color: #eab869;
+    background-color: #f5c67d;
 }
 
 .btn-modal {
@@ -97,10 +95,26 @@ footer {
     background-color: #26c926;
     margin-right: 50px;
 }
+.btn-modal-correct:hover {
+    background-color: rgba(38, 201, 38, 0.85);
+    color: white;
+}
 
 .btn-modal-wrong {
     background-color: #d61919;
     margin-left: 50px;
+}
+
+.btn-modal-wrong:hover {
+    background-color: rgba(214, 25, 25, 0.9);
+    color: white;
+}
+
+.btn-modal-wrong, .btn-modal-correct {
+    font-family: "Arial Rounded MT";
+    font-weight: bold;
+    border-radius: 5px;
+    color: white;
 }
 
 .btn-footer {
@@ -119,6 +133,7 @@ footer {
 .modal-body {
     font-size: 400%;
 }
+
 
 .fieldActive {
     color: orangered;
@@ -145,7 +160,7 @@ table {
 
 
 .well {
-     background-color: #ffffd1;
+     background-color: #fdffd1;
 }
 
 .inputForm {
