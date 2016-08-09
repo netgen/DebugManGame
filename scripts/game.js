@@ -25,7 +25,7 @@ function popup() {
 }
 
 function correctAnswer() {
-    $("#"+clickedButton).css ({
+    $("#" + clickedButton).css({
         backgroundColor: "#c4ffc9",
         pointerEvents: "none"
     });
@@ -33,13 +33,12 @@ function correctAnswer() {
     var points = checkBug(clickedButton);
     showAnswer();
     
-    if (turn == "blue"){
-        bluePoints+=points;
+    if (turn == "blue") {
+        bluePoints += points;
         $("#blueP").html(bluePoints);
         changeTurn(turn);
-    }
-    else {
-        greenPoints+=points;
+    } else {
+        greenPoints += points;
         $("#greenP").html(greenPoints);
         changeTurn(turn);
     }
@@ -54,12 +53,12 @@ function correctAnswer() {
 }
 
 
-function showAnswer(){
+function showAnswer() {
     var questionObj = getQuestion(clickedButton);
     $("#correctBtn").attr("disabled", true);   
     $("#wrongBtn").attr("disabled", true); 
     $("#timer").html(questionObj.answer);
-    time=0;
+    time = 0;
     clearTimeout(timerReset);
 }
 
@@ -75,9 +74,9 @@ function wrongAnswer() {
     $('#myModal').modal('hide');
 }
 
-function changeTurn(){
+function changeTurn() {
     
-    if (turn == "blue"){
+    if (turn == "blue") {
         turn = "green";
         $("#greenTeamId p").fadeTo("slow", 1.0);
         $("#blueTeamId p").fadeTo("slow", 0.2);
@@ -96,21 +95,24 @@ function getQuestion(buttonID) {
 
 function checkBug(buttonID) {
     var questionObj = getQuestion(buttonID);
-    if(questionObj.hasBug){
-        if(questionObj.difficulty == 1){
-            $("#"+buttonID).css('backgroundImage','url(assets/images/fly.png)');
+    if (questionObj.hasBug) {
+        if (questionObj.difficulty == 1) {
+            $("#"+buttonID).css(
+                'backgroundImage','url(assets/images/fly.png)'
+            );
             return zKoef;
-        }  
-        if(questionObj.difficulty == 2){
-            $("#"+buttonID).css('backgroundImage','url(assets/images/bee.png)');
+        } else if (questionObj.difficulty == 2) {
+            $("#"+buttonID).css(
+                'backgroundImage','url(assets/images/bee.png)'
+            );
             return wKoef;
-        }
-        if(questionObj.difficulty == 3){
-               $("#"+buttonID).css('backgroundImage','url(assets/images/ladybug.png)');
+        } else if (questionObj.difficulty == 3) {
+           $("#"+buttonID).css(
+                'backgroundImage','url(assets/images/ladybug.png)'
+            );
             return qKoef;
         }
-    }
-    else {
+    } else {
         return 1;
     }
 }
@@ -131,7 +133,7 @@ function setIdClickedButton(buttonID) {
 
 var str1;
 var str2
-function popupAnswer (questionObj){
+function popupAnswer (questionObj) {
     str1 = questionObj.question;
     str2 = questionObj.answer;
     myWindow.document.write("<p>"+ str1.fontsize("5") + "</p>");
@@ -141,7 +143,7 @@ function popupAnswer (questionObj){
 
 var p;
 var l;
-function btnGameOver(){
+function btnGameOver() {
     gameOver();
     
     for (var i=0; i<localStorage.noRows; i++){
@@ -156,12 +158,12 @@ function btnGameOver(){
     
 }
 
-function gameOver(){
+function gameOver() {
     alert("Game over!");
 }
 
 
-function resetTime(){
+function resetTime() {
     $("#timer").html(fulltime+"s");
     clearTimeout(timerReset);
     time = fulltime;
