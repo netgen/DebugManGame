@@ -45,6 +45,7 @@ function correctAnswer() {
 
     GameState.savePoints(team1Points, team2Points);
 
+    clearTimeout(timerReset);
     changeTurn(turn);
     reduceBoxes();
     
@@ -93,16 +94,7 @@ function closeAfterCorrect(){
 
 //change the team on move
 function changeTurn(){    
-<<<<<<< HEAD
-    if (turn == "blue") {
-        turn = "green";
-        $("#greenTeamId p").fadeTo(3000,1.0);
-        $("#blueTeamId p").fadeTo(5000,0.0);
-    } else {
-        turn = "blue";
-        $("#blueTeamId p").fadeTo(3000,1.0);
-        $("#greenTeamId p").fadeTo(5000,0.0);
-=======
+
     if (turn == "team1") {
         turn = "team2";
         $("#team2TeamId p").fadeTo("slow",1.0);
@@ -111,29 +103,18 @@ function changeTurn(){
         turn = "team1";
         $("#team1TeamId p").fadeTo("slow",1.0);
         $("#team2TeamId p").fadeTo("slow",0.0);
->>>>>>> e64fe70812d9d19ebe61120111ab59d7366121f1
     }
 }
 
 
 //this method is called when answer is wrong
-<<<<<<< HEAD
+
 //change the team on the move
 function wrongAnswer() {  
+    
     clearTimeout(timerReset);
     playSound('assets/sounds/wrong_answer.mp3');
-=======
-//closes modal and change the team on the move
-function wrongAnswer() {
     GameState.pushChanges();
-
-    if (turn == "team1") {
-        $("#team1Pts").html(team1Points);
-    } else {
-        $("#team2Pts").html(team2Points);
-    }
-
->>>>>>> e64fe70812d9d19ebe61120111ab59d7366121f1
     changeTurn(turn);
     GameState.savePoints(team1Points, team2Points);
     
@@ -299,14 +280,9 @@ function timer() {
 	timerReset = setTimeout(function() {
 		var timerDiv = document.getElementById("timer");
 		time--;
-		timerDiv.innerHTML = time + "s";
-<<<<<<< HEAD
+        timerDiv.innerHTML = time + "s";
         playSound('assets/sounds/ticker.mp3');
         if (time == 0) {
-=======
-        
-         if (time === 0) {
->>>>>>> e64fe70812d9d19ebe61120111ab59d7366121f1
             wrongAnswer();
             $('#myModal').modal('hide');
             return;
