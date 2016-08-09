@@ -37,7 +37,7 @@
 }
 
 
-.green {
+.team2 {
     margin-top: 100px;
     color: white;
     font-size: x-large;
@@ -45,7 +45,7 @@
     background-color:rgba(234, 117, 44, 0.9);
 }
 
-.blue {
+.team1 {
     margin-top: 100px;
     color: white;
     font-size: x-large;
@@ -80,17 +80,28 @@ footer {
 .btn-box {
     width: 70px; 
     height: 70px;
-    background-color: #f7e3a0;
+    background-color: #e8e8c3;
 }
 
 .btn-box:hover {
-    background-color: #f5c67d;
+    background-color: #dcdcb8;
+}
+
+.btn-closed-team1 {
+    pointer-events: none;
+    background-color: rgba(236, 53, 27, 0.6);
+}
+
+.btn-closed-team2 {
+    pointer-events: none;
+    background-color:rgba(244, 183, 101, 0.6);
 }
 
 .btn-modal {
     width: 150px;
     padding: 15px;
 }
+
 .btn-modal-correct {
     background-color: #26c926;
     margin-right: 50px;
