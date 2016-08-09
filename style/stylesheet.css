@@ -1,42 +1,55 @@
+.gameName img {
+        float: left;
+        margin-top: 0px;
+}
+
 .gameName {
     text-transform: uppercase;
-    font-size: 250%;
+    font-size: 200%;
+        margin-top: 20px;
 }
 
 .navbar {
+      font-family: "Arial Rounded MT";
+      font-weight: bold;
       border: none;
       margin-bottom: 0;
       border-radius: 0;
-      color: black;
+      color: #4d4d4d;
       background-color: white;
       text-align: center;
       font-size: x-large;
     }
-    
-
 
 .sidenav {
-          padding-top: 20px;
-          background-color: #dfffec;
-          display: table-cell;
-          height: 1000px;
-            font-size: large;
+    font-family: "Arial Rounded MT";
+    padding-top: 20px;
+    font-size: x-large; 
+    font-weight: bold;
+    border-radius: 5px;
+    
 }
 
+
 .gameBoard {
-    background-color: #ffe6d1;
+    background-color: #ffffd1;
     height: 1000px;
 }
 
 
 .green {
-    color: #379537;
-    font-size: large;
+    margin-top: 100px;
+    color: white;
+    font-size: x-large;
+    font-weight: bold;
+    background-color:rgba(244, 183, 101, 0.84);
 }
 
 .blue {
-    color: #1a87f5;
-    font-size: large;
+    margin-top: 100px;
+    color: white;
+    font-size: x-large;
+    background-color:rgba(236, 53, 27, 0.84);
 }
 
 
@@ -47,6 +60,8 @@ footer {
     bottom:0;
     left: 0;
     right: 0;
+    font-family: "Arial Rounded MT";
+    font-weight: bold;
  }
     
     /* On small screens, set height to 'auto' for sidenav and grid */
@@ -67,17 +82,11 @@ footer {
     height: 70px;
     margin-right: 5px; 
     margin-bottom: 5px;
-    background-color: #f5a790;
-    background-repeat: no-repeat;
-    background-position: center;
-    -webkit-background-size: contain;
-    -moz-background-size: contain;
-    -o-background-size: contain;
-    background-size: contain;
+    background-color: #f5ce90;
 }
 
 .btn-box:hover {
-    background-color: #86b9ff;
+    background-color: #eab869;
 }
 
 .btn-modal {
@@ -85,7 +94,6 @@ footer {
     padding: 15px;
 }
 .btn-modal-correct {
-    
     background-color: #26c926;
     margin-right: 50px;
 }
@@ -96,11 +104,16 @@ footer {
 }
 
 .btn-footer {
-    background-color:orangered;
-    color: white;
+    background-color:white;
+    color: #4d4d4d;
     padding: 5px;
     margin-right: 20px; 
     margin-left: 20px;
+    border:none;
+}
+
+.btn-footer:hover {
+    color: #ec351b;
 }
 
 .modal-body {
@@ -108,14 +121,14 @@ footer {
 }
 
 .fieldActive {
-    color: blue;
+    color: orangered;
     font-weight: bold;
     font-size: large;
     margin-top: 10px;
 }
 
 .fieldUnactive {
-    color: gray;
+    color: #4d342b;
     font-size: large;
     margin-top: 10px;
 
@@ -130,3 +143,23 @@ table {
     margin: 0 auto; 
 }
 
+
+.well {
+     background-color: #ffffd1;
+}
+
+.inputForm {
+    font-family: "Arial Rounded MT";
+    font-weight: bold;
+    color: #4d4d4d;
+}
+
+#submitButton {
+    color: white;
+    background-color: rgba(242, 55, 32, 0.96);
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+     font-family: "Arial Rounded MT";
+    font-weight: bold;
+}

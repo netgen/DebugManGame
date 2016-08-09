@@ -1,6 +1,6 @@
-var zKoef = 6;
+var zKoef = 2;
 var wKoef = 4;
-var qKoef = 2;
+var qKoef = 6;
 
 var time;
 var fulltime = 30;
@@ -9,28 +9,31 @@ var timerReset;
 
 var boxes;
 var clickedButton;
-var bugs = [];
 
 var bluePoints = 0;
 var greenPoints = 0;
 var turn = "green";
 
- var myWindow;
+var myWindow;
+
+
+//creates a popup window with answers
 
 function popup() {
     myWindow = window.open("", "", "width=400,height=200");
     boxes = localStorage.noRows * localStorage.noColumns;
     changeTurn();
-    console.log(boxes);
 }
 
+
+//change appearance of clicked button
+
 function correctAnswer() {
-    $("#" + clickedButton).css({
-        backgroundColor: "#c4ffc9",
+    $("#"+clickedButton).css ({
+        backgroundColor: "#f4f8d2",
         pointerEvents: "none"
     });
     
-    var points = checkBug(clickedButton);
     showAnswer();
     
     if (turn == "blue") {
@@ -44,16 +47,25 @@ function correctAnswer() {
     }
 
     //playSound("correct_answer");
-    
+    reduceBoxes();
+}
+
+
+//reduces number of remaining boxes
+
+function reduceBoxes(){
     boxes--;
     if (boxes == 0) {
         gameOver()
-    }
-    
+    }  
 }
 
 
 function showAnswer() {
+//shows answer in modal and resets timer
+//disables clicking on buttons if correct answers
+
+function showAnswer(){
     var questionObj = getQuestion(clickedButton);
     $("#correctBtn").attr("disabled", true);   
     $("#wrongBtn").attr("disabled", true); 
@@ -62,44 +74,67 @@ function showAnswer() {
     clearTimeout(timerReset);
 }
 
-function wrongAnswer() {
-    if (turn == "blue") {
-        $("#blueP").html(bluePoints);
+
+//this method is called on closing modal when answer is correct
+//adds points to team and change the team on the move
+function closeAfterCorrect(){
+    
+    var points = checkBug(clickedButton);
+    
+     if (turn == "blue"){
+            bluePoints+=points;
+            $("#blueP").html(bluePoints);
+        }
+        else {
+            greenPoints+=points;
+            $("#greenP").html(greenPoints);
+        }
         changeTurn(turn);
-    }
-    else {
-        $("#greenP").html(greenPoints);
-        changeTurn(turn);
-    }
-    $('#myModal').modal('hide');
 }
 
 function changeTurn() {
-    
+
+//change the team on the move
+
+function changeTurn(){    
     if (turn == "blue") {
         turn = "green";
         $("#greenTeamId p").fadeTo("slow", 1.0);
-        $("#blueTeamId p").fadeTo("slow", 0.2);
+        $("#blueTeamId p").fadeTo("slow", 0.0);
     } else {
         turn = "blue";
         $("#blueTeamId p").fadeTo("slow", 1.0);
-        $("#greenTeamId p").fadeTo("slow", 0.2);
+        $("#greenTeamId p").fadeTo("slow", 0.0);
     }
 }
 
-function getQuestion(buttonID) {
-    var y = parseInt(buttonID.charAt(0)),
-        x = parseInt(buttonID.charAt(1));
-    return JSON.parse(localStorage.grid)[y][x];
+
+//this method is called when answer is wrong
+//closes modal and change the team on the move
+function wrongAnswer() {
+    if (turn == "blue") {
+        $("#blueP").html(bluePoints);
+    }
+    else {
+        $("#greenP").html(greenPoints);
+    }
+    $('#myModal').modal('hide');
+    changeTurn(turn);
 }
 
+
+//checks if there is a bug on the button
+//returns their coefficient or 1
+
 function checkBug(buttonID) {
+    
     var questionObj = getQuestion(buttonID);
-    if (questionObj.hasBug) {
-        if (questionObj.difficulty == 1) {
+    
+    if(questionObj.hasBug){
+        
+        if(questionObj.difficulty == 1){
             $("#"+buttonID).css(
-                'backgroundImage','url(assets/images/fly.png)'
-            );
+                'backgroundImage','url(assets/images/fly.png)');
             return zKoef;
         } else if (questionObj.difficulty == 2) {
             $("#"+buttonID).css(
@@ -118,6 +153,20 @@ function checkBug(buttonID) {
 }
 
 
+//returns question
+
+function getQuestion(buttonID) {
+    var y = parseInt(buttonID.charAt(0)),
+        x = parseInt(buttonID.charAt(1));
+    return JSON.parse(localStorage.grid)[y][x];
+}
+
+
+//this method is called after button on the board is clicked
+//writes in popup window answer to the question on that button
+//enables clicking on correct/wrong buttons i modal
+//resets time
+
 function setIdClickedButton(buttonID) {
     clickedButton = buttonID;
     var questionObj = getQuestion(buttonID);
@@ -131,9 +180,15 @@ function setIdClickedButton(buttonID) {
     resetTime();
 }
 
+
+
 var str1;
-var str2
+var str2;
+
 function popupAnswer (questionObj) {
+
+//writes answer to the popup window
+function popupAnswer (questionObj){
     str1 = questionObj.question;
     str2 = questionObj.answer;
     myWindow.document.write("<p>"+ str1.fontsize("5") + "</p>");
@@ -143,13 +198,18 @@ function popupAnswer (questionObj) {
 
 var p;
 var l;
+
 function btnGameOver() {
+
+//this method is called when button 'Game over' is clicked
+//opens all fields on game board and disables clicking on them
+
     gameOver();
     
     for (var i=0; i<localStorage.noRows; i++){
         for (var j=0; j<localStorage.noColumns; j++){
                 $("#"+i+""+j).css ({
-                    backgroundColor: "#c4ffc9",
+                    backgroundColor: "#f4f8d2",
                     pointerEvents: "none"
                 });
                 checkBug(i + "" + j);
@@ -158,18 +218,23 @@ function btnGameOver() {
     
 }
 
-function gameOver() {
+//game over
+function gameOver(){
     alert("Game over!");
 }
 
+//resets time
 
-function resetTime() {
+function resetTime(){
     $("#timer").html(fulltime+"s");
     clearTimeout(timerReset);
     time = fulltime;
     timer();
 }
 
+
+//implementation of timer
+//if nothing is clicked, game acts like the answer is wrong
 
 function timer() {
 	timerReset = setTimeout(function () {
