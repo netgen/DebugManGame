@@ -37,7 +37,7 @@
 }
 
 
-.green {
+.team2 {
     margin-top: 100px;
     color: white;
     font-size: x-large;
@@ -45,7 +45,7 @@
     background-color:rgba(244, 183, 101, 0.84);
 }
 
-.blue {
+.team1 {
     margin-top: 100px;
     color: white;
     font-size: x-large;
@@ -83,6 +83,12 @@ footer {
     margin-right: 5px; 
     margin-bottom: 5px;
     background-color: #f5ce90;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
 }
 
 .btn-box:hover {

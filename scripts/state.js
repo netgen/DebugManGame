@@ -18,9 +18,9 @@ var GameState = {
         this.data.grid[y][x].closed = true;
 	},
 
-	savePoints: function(bluePoints, greenPoints) {
-		this.data.bluePts = bluePoints;
-		this.data.greenPts = greenPoints;
+	savePoints: function(team1Points, team2Points) {
+		this.data.team1Pts = team1Points;
+		this.data.team2Pts = team2Points;
 	},
 
 	saveTurn: function(team) {
@@ -41,11 +41,11 @@ var GameState = {
 		return this.data.noColumns;
 	},
 
-	getBluePoints: function() {
-		return this.data.bluePts;
+	getTeam1Points: function() {
+		return this.data.team1Pts;
 	},
 
-	getGreenPoints: function() {
-		return this.data.greenPts;
+	getTeam2Points: function() {
+		return this.data.team2Pts;
 	}
 };

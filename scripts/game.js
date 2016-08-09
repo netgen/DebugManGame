@@ -10,9 +10,9 @@ var timerReset;
 var boxes;
 var clickedButton;
 
-var bluePoints = 0;
-var greenPoints = 0;
-var turn = "green";
+var team1Points = 0;
+var team2Points = 0;
+var turn = "team2";
 
 var myWindow;
 
@@ -35,15 +35,15 @@ function correctAnswer() {
     var points = checkBug(clickedButton);
     showAnswer();
 
-    if (turn == "blue") {
-        bluePoints += points;
-        $("#blueP").html(bluePoints);
+    if (turn == "team1") {
+        team1Points += points;
+        $("#team1Pts").html(team1Points);
     } else {
-        greenPoints += points;
-        $("#greenP").html(greenPoints);
+        team2Points += points;
+        $("#team2Pts").html(team2Points);
     }
 
-    GameState.savePoints(bluePoints, greenPoints);
+    GameState.savePoints(team1Points, team2Points);
 
     changeTurn(turn);
     reduceBoxes();
@@ -79,13 +79,13 @@ function closeAfterCorrect(){
     
     var points = checkBug(clickedButton);
     
-     if (turn == "blue"){
-            bluePoints+=points;
-            $("#blueP").html(bluePoints);
+     if (turn == "team1"){
+            team1Points += points;
+            $("#team1Pts").html(team1Points);
         }
         else {
-            greenPoints+=points;
-            $("#greenP").html(greenPoints);
+            team2Points += points;
+            $("#team2Pts").html(team2Points);
         }
         changeTurn(turn);
 }
@@ -93,14 +93,14 @@ function closeAfterCorrect(){
 
 //change the team on move
 function changeTurn(){    
-    if (turn == "blue") {
-        turn = "green";
-        $("#greenTeamId p").fadeTo("slow",1.0);
-        $("#blueTeamId p").fadeTo("slow",0.0);
+    if (turn == "team1") {
+        turn = "team2";
+        $("#team2TeamId p").fadeTo("slow",1.0);
+        $("#team1TeamId p").fadeTo("slow",0.0);
     } else {
-        turn = "blue";
-        $("#blueTeamId p").fadeTo("slow",1.0);
-        $("#greenTeamId p").fadeTo("slow",0.0);
+        turn = "team1";
+        $("#team1TeamId p").fadeTo("slow",1.0);
+        $("#team2TeamId p").fadeTo("slow",0.0);
     }
 }
 
@@ -110,14 +110,14 @@ function changeTurn(){
 function wrongAnswer() {
     GameState.pushChanges();
 
-    if (turn == "blue") {
-        $("#blueP").html(bluePoints);
+    if (turn == "team1") {
+        $("#team1Pts").html(team1Points);
     } else {
-        $("#greenP").html(greenPoints);
+        $("#team2Pts").html(team2Points);
     }
 
     changeTurn(turn);
-    GameState.savePoints(bluePoints, greenPoints);
+    GameState.savePoints(team1Points, team2Points);
     
     $('#myModal').modal('hide');
 }
@@ -132,18 +132,18 @@ function showAnswer() {
 }
 
 function changeTurn() {
-    if (turn == "blue") {
-        turn = "green";
-        $("#greenTeamId").toggleClass("activeSidebar").toggleClass("notActive");
-        $("#greenTeamId p").fadeTo("slow", 1.0);
-        $("#blueTeamId").toggleClass("activeSidebar").toggleClass("notActive");
-        $("#blueTeamId p").fadeTo("slow", 0.2);
+    if (turn == "team1") {
+        turn = "team2";
+        $("#team2TeamId").toggleClass("activeSidebar").toggleClass("notActive");
+        $("#team2TeamId p").fadeTo("slow", 1.0);
+        $("#team1TeamId").toggleClass("activeSidebar").toggleClass("notActive");
+        $("#team1TeamId p").fadeTo("slow", 0.2);
     } else {
-        turn = "blue";
-        $("#greenTeamId").toggleClass("activeSidebar").toggleClass("notActive");
-        $("#blueTeamId p").fadeTo("slow", 1.0);
-        $("#blueTeamId").toggleClass("activeSidebar").toggleClass("notActive");
-        $("#greenTeamId p").fadeTo("slow", 0.2);
+        turn = "team1";
+        $("#team2TeamId").toggleClass("activeSidebar").toggleClass("notActive");
+        $("#team1TeamId p").fadeTo("slow", 1.0);
+        $("#team1TeamId").toggleClass("activeSidebar").toggleClass("notActive");
+        $("#team2TeamId p").fadeTo("slow", 0.2);
     }
 
     GameState.saveTurn(turn);
@@ -239,10 +239,10 @@ function gameOver() {
 
 function btnUndo() {
     GameState.load();
-    bluePoints = GameState.getBluePoints();
-    greenPoints = GameState.getGreenPoints();
-    $("#blueP").html(bluePoints);
-    $("#greenP").html(greenPoints);
+    team1Points = GameState.getTeam1Points();
+    team2Points = GameState.getTeam2Points();
+    $("#team1Pts").html(team1Points);
+    $("#team2Pts").html(team2Points);
     $("#btnUndo").attr("disabled", true);
     changeTurn();
 
