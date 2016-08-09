@@ -4,45 +4,52 @@ function _(name) {
 
 var GameState = {
 
-	closeQuestion: function(buttonID) {
-		var data = JSON.parse(localStorage.data);
+	data: {},
 
+	load: function() {
+		this.data = JSON.parse(localStorage.data);
+	},
+
+	pushChanges: function() {
+		localStorage.data = JSON.stringify(this.data);
+		$("#btnUndo").attr("disabled", false);
+	},
+
+	saveQuestion: function(buttonID) {
 		var y = parseInt(buttonID.charAt(0)),
         	x = parseInt(buttonID.charAt(1));
-        
-        data.grid[y][x].closed = true;
 
-		localStorage.data = JSON.stringify(data);
+        this.data.grid[y][x].closed = true;
 	},
 
 	savePoints: function(bluePoints, greenPoints) {
-		var data = JSON.parse(localStorage.data);
-
-		data.bluePts = bluePoints;
-		data.greenPts = greenPoints;
-
-		localStorage.data = JSON.stringify(data);
+		this.data.bluePts = bluePoints;
+		this.data.greenPts = greenPoints;
 	},
 
 	saveTurn: function(team) {
-		var data = JSON.parse(localStorage.data);
-
-		data["turn"] = team;
-		
-		localStorage.data = JSON.stringify(data);
+		this.data["turn"] = team;
 	},
 
 	getQuestion: function(buttonID) {
 		var y = parseInt(buttonID.charAt(0)),
         	x = parseInt(buttonID.charAt(1));
-    	return _("grid")[y][x];
+    	return this.data.grid[y][x];
 	},
 
 	getRows: function() {
-		return _("noRows");
+		return this.data.noRows;
 	},
 
 	getColumns: function() {
-		return _("noColumns");
+		return this.data.noColumns;
+	},
+
+	getBluePoints: function() {
+		return this.data.bluePts;
+	},
+
+	getGreenPoints: function() {
+		return this.data.greenPts;
 	}
 };

@@ -20,7 +20,6 @@ var myWindow;
 function popup() {
     myWindow = window.open("", "", "width=400,height=200");
     boxes = GameState.getRows() * GameState.getColumns();
-    console.log(boxes);
 }
 
 function correctAnswer() {
@@ -30,7 +29,9 @@ function correctAnswer() {
         pointerEvents: "none"
     });
 
-    GameState.closeQuestion(clickedButton);
+    GameState.pushChanges();
+
+    GameState.saveQuestion(clickedButton);
 
     var points = checkBug(clickedButton);
     showAnswer();
@@ -38,13 +39,12 @@ function correctAnswer() {
     if (turn == "blue") {
         bluePoints += points;
         $("#blueP").html(bluePoints);
-        changeTurn(turn);
     } else {
         greenPoints += points;
         $("#greenP").html(greenPoints);
-        changeTurn(turn);
     }
 
+    changeTurn(turn);
     GameState.savePoints(bluePoints, greenPoints);
     
     boxes--;
@@ -54,25 +54,28 @@ function correctAnswer() {
     
 }
 
+function wrongAnswer() {
+    GameState.pushChanges();
+
+    if (turn == "blue") {
+        $("#blueP").html(bluePoints);
+    } else {
+        $("#greenP").html(greenPoints);
+    }
+
+    changeTurn(turn);
+    GameState.savePoints(bluePoints, greenPoints);
+    
+    $('#myModal').modal('hide');
+}
+
 function showAnswer() {
     var questionObj = GameState.getQuestion(clickedButton);
-    $("#correctBtn").attr("disabled", true);   
-    $("#wrongBtn").attr("disabled", true); 
+    $("#correctBtn").attr("disabled", true);
+    $("#wrongBtn").attr("disabled", true);
     $("#timer").html(questionObj.answer);
     time = 0;
     clearTimeout(timerReset);
-}
-
-function wrongAnswer() {
-    if (turn == "blue") {
-        $("#blueP").html(bluePoints);
-        changeTurn(turn);
-    } else {
-        $("#greenP").html(greenPoints);
-        changeTurn(turn);
-    }
-    
-    $('#myModal').modal('hide');
 }
 
 function changeTurn() {
@@ -128,9 +131,9 @@ function setIdClickedButton(buttonID) {
     
     popupAnswer(questionObj);
     
-     $("#question").text(questionObj.question);
-     $("#correctBtn").attr("disabled", false);   
-     $("#wrongBtn").attr("disabled", false); 
+    $("#question").text(questionObj.question);
+    $("#correctBtn").attr("disabled", false);   
+    $("#wrongBtn").attr("disabled", false); 
     
     resetTime();
 }
@@ -151,7 +154,7 @@ function btnGameOver() {
     var m = GameState.getRows();
     var n = GameState.getColumns();
 
-    for (var i = 0; i < m; i++){
+    for (var i = 0; i < m; i++) {
         for (var j = 0; j < n; j++){
                 $("#" + i + "" + j).css({
                     backgroundColor: "#c4ffc9",
@@ -161,13 +164,19 @@ function btnGameOver() {
                 checkBug(i + "" + j);
         }
     }
-    
 }
 
 function gameOver() {
     alert("Game over!");
 }
 
+function btnUndo() {
+    GameState.load();
+    $("#blueP").html(GameState.getBluePoints());
+    $("#greenP").html(GameState.getGreenPoints());
+    $("#btnUndo").attr("disabled", true);
+    changeTurn();
+}
 
 function resetTime() {
     $("#timer").html(fulltime + "s");
@@ -176,16 +185,17 @@ function resetTime() {
     timer();
 }
 
-
 function timer() {
 	timerReset = setTimeout(function() {
 		var timerDiv = document.getElementById("timer");
 		time--;
 		timerDiv.innerHTML = time + "s";
-        if (time == 0) {
+        
+         if (time == 0) {
             wrongAnswer();
             return;
         }
+
 		timer();
 	}, 1000);
 }

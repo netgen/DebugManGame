@@ -149,7 +149,8 @@ function generateBoard(json) {
 								.toggleClass("fieldActive");
 	});
 
-	$("#btnUndo").attr("disabled", "disabled")
+	GameState.load();
+	$("#btnUndo").attr("disabled", true);
 }
 
 function createField(question, isBug, row, column) {
