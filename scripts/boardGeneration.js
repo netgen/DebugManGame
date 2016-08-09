@@ -127,8 +127,18 @@ function generateBoard(json) {
 		cols: array[0].length
 	};
 
+	var data = {
+		noRows: rows,
+		noColumns: cols,
+		grid: array,
+		turn: "",
+		bluePts: 0,
+		greenPts: 0
+	};
+
 	$(".game-board").html(template(context));
-	localStorage.setItem("grid", JSON.stringify(array));
+	localStorage.clear();
+	localStorage.setItem("data", JSON.stringify(data));
 	window.location.hash = '#board';
 
 	$(".btn-box").hover(function () {
@@ -139,12 +149,15 @@ function generateBoard(json) {
 								.toggleClass("fieldActive");
 	});
 
+	GameState.load();
+	$("#btnUndo").attr("disabled", true);
 }
 
 function createField(question, isBug, row, column) {
 	question["hasBug"] = isBug;
 	question["row"] = row;
 	question["column"] = column;
+	question["closed"] = false;
 	return question;
 }
 
