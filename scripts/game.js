@@ -22,7 +22,6 @@ function popup() {
 }
 
 function correctAnswer() {
-    //clickedButton is CLOSED!
     $("#" + clickedButton).addClass("btn-closed");
 
     GameState.pushChanges();
@@ -45,7 +44,7 @@ function correctAnswer() {
     changeTurn(turn);
     
     boxes--;
-    if (boxes == 0) {
+    if (boxes === 0) {
         gameOver();
     }
     
@@ -96,19 +95,19 @@ function changeTurn() {
 function checkBug(buttonID) {
     var questionObj = GameState.getQuestion(buttonID);
     if(questionObj.hasBug) {
-        if(questionObj.difficulty == 1) {
+        if(questionObj.difficulty === 1) {
             $("#"+buttonID).css(
                 'backgroundImage', 'url(assets/images/fly.png)'
             );
 
             return zKoef;
-        } else if(questionObj.difficulty == 2) {
+        } else if(questionObj.difficulty === 2) {
             $("#"+buttonID).css(
                 'backgroundImage','url(assets/images/bee.png)'
             );
 
             return wKoef;
-        } else if(questionObj.difficulty == 3) {
+        } else if(questionObj.difficulty === 3) {
             $("#"+buttonID).css(
                 'backgroundImage','url(assets/images/ladybug.png)'
             );
@@ -206,7 +205,7 @@ function timer() {
 		time--;
 		timerDiv.innerHTML = time + "s";
         
-         if (time == 0) {
+         if (time === 0) {
             wrongAnswer();
             return;
         }

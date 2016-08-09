@@ -1,7 +1,3 @@
-function _(name) {
-	return JSON.parse(localStorage.data)[name];
-}
-
 var GameState = {
 
 	data: {},
