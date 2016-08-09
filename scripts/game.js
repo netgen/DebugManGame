@@ -35,18 +35,7 @@ function correctAnswer() {
     });
     
     showAnswer();
-    
-    if (turn == "blue") {
-        bluePoints += points;
-        $("#blueP").html(bluePoints);
-        changeTurn(turn);
-    } else {
-        greenPoints += points;
-        $("#greenP").html(greenPoints);
-        changeTurn(turn);
-    }
-
-    //playSound("correct_answer");
+   
     reduceBoxes();
 }
 
@@ -61,7 +50,6 @@ function reduceBoxes(){
 }
 
 
-function showAnswer() {
 //shows answer in modal and resets timer
 //disables clicking on buttons if correct answers
 
@@ -79,6 +67,8 @@ function showAnswer(){
 //adds points to team and change the team on the move
 function closeAfterCorrect(){
     
+    playSound('assets/sounds/correct_answer.mp3');
+    
     var points = checkBug(clickedButton);
     
      if (turn == "blue"){
@@ -92,19 +82,18 @@ function closeAfterCorrect(){
         changeTurn(turn);
 }
 
-function changeTurn() {
 
 //change the team on the move
 
 function changeTurn(){    
     if (turn == "blue") {
         turn = "green";
-        $("#greenTeamId p").fadeTo("slow", 1.0);
-        $("#blueTeamId p").fadeTo("slow", 0.0);
+        $("#greenTeamId p").fadeTo("slow",1.0);
+        $("#blueTeamId p").fadeTo("slow",0.0);
     } else {
         turn = "blue";
-        $("#blueTeamId p").fadeTo("slow", 1.0);
-        $("#greenTeamId p").fadeTo("slow", 0.0);
+        $("#blueTeamId p").fadeTo("slow",1.0);
+        $("#greenTeamId p").fadeTo("slow",0.0);
     }
 }
 
@@ -185,7 +174,6 @@ function setIdClickedButton(buttonID) {
 var str1;
 var str2;
 
-function popupAnswer (questionObj) {
 
 //writes answer to the popup window
 function popupAnswer (questionObj){
