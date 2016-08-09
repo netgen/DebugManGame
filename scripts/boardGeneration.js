@@ -158,6 +158,7 @@ function createField(question, isBug, row, column) {
 	question["row"] = row;
 	question["column"] = column;
 	question["closed"] = false;
+	question["opener"] = null;
 	return question;
 }
 

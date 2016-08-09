@@ -26,16 +26,16 @@ function popup() {
 
 //change appearance of clicked button
 function correctAnswer() {
-    $("#" + clickedButton).addClass("btn-closed");
+    $("#" + clickedButton).addClass("btn-closed-" + turn);
 
     GameState.pushChanges();
 
-    GameState.saveQuestion(clickedButton);
+    GameState.saveQuestion(clickedButton, turn);
 
     var points = checkBug(clickedButton);
     showAnswer();
 
-    if (turn == "team1") {
+    if (turn === "team1") {
         team1Points += points;
         $("#team1Pts").html(team1Points);
     } else {
@@ -225,7 +225,7 @@ function btnGameOver() {
 
     for (var i = 0; i < m; i++) {
         for (var j = 0; j < n; j++){
-                $("#" + i + "" + j).addClass("btn-closed");
+                //$("#" + i + "" + j).addClass("btn-closed");
                 checkBug(i + "" + j);
         }
     }
@@ -257,9 +257,10 @@ function btnUndo() {
             var question = GameState.getQuestion(id);
 
             if (question.closed) {
-                $("#" + id).addClass("btn-closed");
+                $("#" + id).addClass("btn-closed-" + question.opener);
             } else {
-                $("#" + id).removeClass("btn-closed");
+                $("#" + id).removeClass("btn-closed-team1");
+                $("#" + id).removeClass("btn-closed-team2");
                 $("#" + id).css("backgroundImage", "none");
                 boxes++;
             }

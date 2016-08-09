@@ -82,7 +82,7 @@ footer {
     height: 70px;
     margin-right: 5px; 
     margin-bottom: 5px;
-    background-color: #f5ce90;
+    background-color: #bcbc9e;
     background-repeat: no-repeat;
     background-position: center;
     -webkit-background-size: contain;
@@ -92,18 +92,24 @@ footer {
 }
 
 .btn-box:hover {
-    background-color: #eab869;
+    background-color: #dcdcb8;
 }
 
-.btn-closed {
+.btn-closed-team1 {
     pointer-events: none;
-    background-color: #c4ffc9;
+    background-color: rgba(236, 53, 27, 0.6);
+}
+
+.btn-closed-team2 {
+    pointer-events: none;
+    background-color:rgba(244, 183, 101, 0.6);
 }
 
 .btn-modal {
     width: 150px;
     padding: 15px;
 }
+
 .btn-modal-correct {
     background-color: #26c926;
     margin-right: 50px;

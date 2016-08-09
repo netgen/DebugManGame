@@ -11,11 +11,12 @@ var GameState = {
 		$("#btnUndo").attr("disabled", false);
 	},
 
-	saveQuestion: function(buttonID) {
+	saveQuestion: function(buttonID, team) {
 		var y = parseInt(buttonID.charAt(0)),
         	x = parseInt(buttonID.charAt(1));
 
         this.data.grid[y][x].closed = true;
+        this.data.grid[y][x].opener = team; 
 	},
 
 	savePoints: function(team1Points, team2Points) {
