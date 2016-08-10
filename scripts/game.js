@@ -21,6 +21,7 @@ var myWindow;
 function popup() {
     myWindow = window.open("", "", "width=400,height=200");
     boxes = GameState.getRows() * GameState.getColumns();
+    changeTurn();
 }
 
 
@@ -32,21 +33,11 @@ function correctAnswer() {
 
     GameState.saveQuestion(clickedButton, turn);
 
-    var points = checkBug(clickedButton);
     showAnswer();
-
-    if (turn === "team1") {
-        team1Points += points;
-        $("#team1Pts").html(team1Points);
-    } else {
-        team2Points += points;
-        $("#team2Pts").html(team2Points);
-    }
 
     GameState.savePoints(team1Points, team2Points);
 
     clearTimeout(timerReset);
-    changeTurn(turn);
     reduceBoxes();
     
 }
@@ -92,21 +83,6 @@ function closeAfterCorrect(){
 }
 
 
-//change the team on move
-function changeTurn(){    
-
-    if (turn == "team1") {
-        turn = "team2";
-        $("#team2TeamId p").fadeTo("slow",1.0);
-        $("#team1TeamId p").fadeTo("slow",0.0);
-    } else {
-        turn = "team1";
-        $("#team1TeamId p").fadeTo("slow",1.0);
-        $("#team2TeamId p").fadeTo("slow",0.0);
-    }
-}
-
-
 //this method is called when answer is wrong
 
 //change the team on the move
@@ -130,19 +106,17 @@ function showAnswer() {
     clearTimeout(timerReset);
 }
 
+
+//change the team on move
 function changeTurn() {
     if (turn == "team1") {
         turn = "team2";
-        $("#team2TeamId").toggleClass("activeSidebar").toggleClass("notActive");
-        $("#team2TeamId p").fadeTo("slow", 1.0);
-        $("#team1TeamId").toggleClass("activeSidebar").toggleClass("notActive");
-        $("#team1TeamId p").fadeTo("slow", 0.2);
+        $("#team2Id p").fadeTo(3000, 1.0);
+        $("#team1Id p").fadeTo(3000, 0.2);
     } else {
         turn = "team1";
-        $("#team2TeamId").toggleClass("activeSidebar").toggleClass("notActive");
-        $("#team1TeamId p").fadeTo("slow", 1.0);
-        $("#team1TeamId").toggleClass("activeSidebar").toggleClass("notActive");
-        $("#team2TeamId p").fadeTo("slow", 0.2);
+        $("#team1Id p").fadeTo(3000, 1.0);
+        $("#team2Id p").fadeTo(3000, 0.2);
     }
 
     GameState.saveTurn(turn);
