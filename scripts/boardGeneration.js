@@ -165,6 +165,14 @@ function generateBoard(json) {
 		array[row][col] = nField;
 	}
 
+	for (var i = 0; i < ezBugs.length; i++) {
+		var coordinates = rangeSlot(array, rows, cols, normBugs);
+		var row = coordinates.row,
+			col = coordinates.column;
+		var eField = createField(ezBugs[i], true, row, col);
+		array[row][col] = eField;
+	}
+
 	for (var i = 0; i < rows; i++) {
 		for (var j = 0; j < cols; j++) {
 			if (!array[i][j]) {
