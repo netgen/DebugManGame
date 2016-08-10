@@ -224,7 +224,18 @@ function btnGameOver() {
 
 //resets time
 function gameOver() {
-    alert("Game over!");
+    var from, to;
+
+    if (team1Points > team2Points) {
+        from = 0;
+        to = $(".team1").width();
+    } else {
+        var whole = $(".main-content").width();
+        from = whole - $(".team2").width();
+        to = whole; 
+    }
+
+    playConfetti(from, to);
 }
 
 function btnUndo() {

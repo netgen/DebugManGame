@@ -4,8 +4,10 @@ var CONF_NUMBER = 50;
 
 var colors = ["blue", "yellow", "green", "red", "purple", "pink", "orange"];
 
-function Confetti() {
-	this.x = Math.random() * W;
+function Confetti(from, to) {
+	this.to = to;
+	this.from = from;
+	this.x = Math.random() * (to - from) + from;
 	this.y = Math.random() * H - H;
 	this.speed = 0.7;
 	this.color = colors[Math.floor(Math.random() * colors.length)];
@@ -31,13 +33,13 @@ Confetti.prototype.update = function(now) {
 	this.y += this.speed * dt;
 	
 	if (this.y > H) {
-		this.x = Math.random() * W;
+		this.x = Math.random() * (this.to - this.from) + this.from;
 		this.y = Math.random() * H - H;
 		this.color = colors[Math.floor(Math.random() * colors.length)];
 	}
 };
 
-$(function () {
+function playConfetti(from, to) {
 	var canvas = document.getElementById("canvas");
 	var context = canvas.getContext("2d");
 	W = window.innerWidth;
@@ -49,7 +51,7 @@ $(function () {
 	var conf = [];
 
 	for (var i = 0; i < CONF_NUMBER; i++) {
-		conf.push(new Confetti());
+		conf.push(new Confetti(from, to));
 	}
 
 	var tick = function(now) {
@@ -63,4 +65,4 @@ $(function () {
 	};
 
 	window.requestAnimationFrame(tick);
-});
+};
