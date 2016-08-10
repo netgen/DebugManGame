@@ -14,6 +14,28 @@ var team1Points = 0;
 var team2Points = 0;
 var turn = "team2";
 
+var answered = false;
+
+$(document).keydown(function(e){
+    
+    e = e || window.event;
+
+    if (e.keyCode == '67') {
+        correctAnswer();
+    }
+    else if (e.keyCode == '87') {
+        wrongAnswer();
+    }
+    
+     else if (e.keyCode == '27' && answered) {
+         $('#myModal').modal('hide');
+    }
+
+});
+
+
+
+
 var myWindow;
 
 //creates a popup window with answers
@@ -32,6 +54,7 @@ function correctAnswer() {
     
     $("#" + clickedButton).addClass("btn-closed-" + turn);
 
+    answered = true;
     GameState.pushChanges();
     GameState.saveQuestion(clickedButton, turn);
     
@@ -110,6 +133,7 @@ function changeTurn() {
         $("#team2Id p").fadeTo(3000, 0.2);
     }
 
+    answered = false;
     GameState.saveTurn(turn);
 }
 
