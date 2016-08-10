@@ -1,36 +1,64 @@
-function Confetti(color, width, height) {
-	this.x = Math.random() * width;
-	this.y = Math.random() * height - height + 600;
-	this.color = color;
+var W, H;
+
+var CONF_NUMBER = 50;
+
+var colors = ["blue", "yellow", "green", "red", "purple", "pink", "orange"];
+
+function Confetti() {
+	this.x = Math.random() * W;
+	this.y = Math.random() * H - H;
+	this.speed = 0.7;
+	this.color = colors[Math.floor(Math.random() * colors.length)];
+	this.last_time = null;
 }
 
 Confetti.prototype.draw = function(context) {
 	context.beginPath();
-	context.arc(this.x, this.y, 20, 0, 2 * Math.PI, false);
+	context.arc(this.x, this.y, 7, 0, 2 * Math.PI, false);
 	context.fillStyle = this.color;
 	context.fill();
 	context.closePath();
 };
 
 Confetti.prototype.update = function(now) {
-	this.y -= now / 100;
+	if (!this.last_time) {
+		this.last_time = now;
+	}
+
+	var dt = now - this.last_time;
+	this.last_time = now;
+
+	this.y += this.speed * dt;
+	
+	if (this.y > H) {
+		this.x = Math.random() * W;
+		this.y = Math.random() * H - H;
+		this.color = colors[Math.floor(Math.random() * colors.length)];
+	}
 };
 
 $(function () {
 	var canvas = document.getElementById("canvas");
 	var context = canvas.getContext("2d");
-	var width = window.innerWidth;
-	var height = window.innerHeight;
+	W = window.innerWidth;
+	H = window.innerHeight;
 
-	canvas.width = width;
-	canvas.height = height;
+	canvas.width = W;
+	canvas.height = H;
 
-	var conf = new Confetti("green", width, height);
+	var conf = [];
+
+	for (var i = 0; i < CONF_NUMBER; i++) {
+		conf.push(new Confetti());
+	}
 
 	var tick = function(now) {
-		context.clearRect(0, 0, width, height);
-		conf.update(now);
-		conf.draw(context);
+		context.clearRect(0, 0, W, H);
+
+		for (var i = 0; i < conf.length; i++) {
+			conf[i].update(now);
+			conf[i].draw(context);
+		}
 		window.requestAnimationFrame(tick);
 	};
 
