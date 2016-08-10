@@ -25,18 +25,38 @@ function popup() {
 }
 
 
+//this method is called on closing modal when answer is correct
+//adds points to team and change the team on the move
 //change appearance of clicked button
 function correctAnswer() {
+    
     $("#" + clickedButton).addClass("btn-closed-" + turn);
 
     GameState.pushChanges();
-
     GameState.saveQuestion(clickedButton, turn);
+    
+    $('#myModal').on('hidden.bs.modal', function () {
 
+                playSound('assets/sounds/correct_answer.mp3');
+
+                var points = checkBug(clickedButton);
+                
+                 if (turn == "team1"){
+                        team1Points += points;
+                        $("#team1Pts").html(team1Points);
+                    }
+                    else {
+                        team2Points += points;
+                        $("#team2Pts").html(team2Points);
+                    }
+                    changeTurn(turn);
+                GameState.savePoints(team1Points, team2Points);
+            });
+    
+    
     showAnswer();
-
-    GameState.savePoints(team1Points, team2Points);
-
+    $("#closeBtn").attr("disabled", false);
+    
     clearTimeout(timerReset);
     reduceBoxes();
     
@@ -51,40 +71,7 @@ function reduceBoxes() {
 }
 
 
-//shows answer in modal and resets timer
-//disables clicking on buttons if correct answers
-function showAnswer(){
-    var questionObj = getQuestion(clickedButton);
-    $("#correctBtn").attr("disabled", true);   
-    $("#wrongBtn").attr("disabled", true); 
-    $("#timer").html(questionObj.answer);
-    time = 0;
-    clearTimeout(timerReset);
-}
-
-
-//this method is called on closing modal when answer is correct
-//adds points to team and change the team on the move
-function closeAfterCorrect(){
-    
-    playSound('assets/sounds/correct_answer.mp3');
-    
-    var points = checkBug(clickedButton);
-    
-     if (turn == "team1"){
-            team1Points += points;
-            $("#team1Pts").html(team1Points);
-        }
-        else {
-            team2Points += points;
-            $("#team2Pts").html(team2Points);
-        }
-        changeTurn(turn);
-}
-
-
 //this method is called when answer is wrong
-
 //change the team on the move
 function wrongAnswer() {  
     
@@ -97,11 +84,15 @@ function wrongAnswer() {
     $('#myModal').modal('hide');
 }
 
+
+//shows answer in modal and resets timer
+//disables clicking on buttons if correct answers
 function showAnswer() {
     var questionObj = GameState.getQuestion(clickedButton);
     $("#correctBtn").attr("disabled", true);
     $("#wrongBtn").attr("disabled", true);
     $("#timer").html(questionObj.answer);
+    $("#closeBtn").attr("disabled", false);
     time = 0;
     clearTimeout(timerReset);
 }
@@ -173,6 +164,7 @@ function setIdClickedButton(buttonID) {
     $("#question").text(questionObj.question);
     $("#correctBtn").attr("disabled", false);   
     $("#wrongBtn").attr("disabled", false); 
+    $("#closeBtn").attr("disabled", true);
     
     resetTime();
 }
@@ -189,6 +181,7 @@ function popupAnswer(questionObj) {
     myWindow.document.write("<p>" + str2.fontsize("7") + "</p>");
     myWindow.document.close();
 }
+
 
 function btnGameOver() {
     gameOver();

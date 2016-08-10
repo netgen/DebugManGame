@@ -39,19 +39,19 @@
 				<div id="boardContent" class="btn-group">
 
 					<!-- Modal -->
-					<div id="myModal" class="modal fade" role="dialog">
+					<div id="myModal" class="modal fade" role="dialog" data-backdrop="static">
 
 						<div class="modal-dialog">
 
 							<!-- Modal content-->
 							<div class="modal-content">
 								<div class="modal-header">
-                                    <button type="button" class="close" onclick="closeAfterCorrect()" data-dismiss="modal">&#xD7;</button>
+                                    <button type="button" class="close" id="closeBtn" data-dismiss="modal">&#xD7;</button>
 									<h3 class="modal-title" id="question">Pitanje</h3>
 								</div>
 								<div class="modal-body" id="timer"> 30s</div>
 								<div class="modal-footer" style="text-align:center">
-									<button type="button" id="correctBtn" class="btn btn-modal btn-modal-correct" data-dismiss="modal-fade" onclick="correctAnswer()" >CORRECT</button>
+									<button type="button" id="correctBtn" class="btn btn-modal btn-modal-correct" data-dismiss="modal-fade" onclick="correctAnswer()">CORRECT</button>
 									<button type="button" id="wrongBtn" class="btn btn-modal btn-modal-wrong" data-dismiss="modal" onclick="wrongAnswer()">WRONG</button>
 								</div>
 							</div>

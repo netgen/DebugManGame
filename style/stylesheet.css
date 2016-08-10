@@ -129,16 +129,13 @@ footer {
 }
 
 .btn-footer {
-    background-color:white;
-    color: #4d4d4d;
     padding: 5px;
     margin-right: 20px; 
     margin-left: 20px;
-    border:none;
 }
 
 .btn-footer:hover {
-    color: #ec351b;
+    background-color: rgba(242, 55, 32, 0.77);
 }
 
 .modal-body {
@@ -180,7 +177,7 @@ table {
     color: #4d4d4d;
 }
 
-#submitButton {
+#submitButton, .btn-footer {
     color: white;
     background-color: rgba(242, 55, 32, 0.96);
     border-radius: 5px;
@@ -188,4 +185,9 @@ table {
     padding: 10px;
      font-family: "Arial Rounded MT";
     font-weight: bold;
+}
+
+.close: disabled {
+    pointer-events: none;
+   cursor:wait;
 }
