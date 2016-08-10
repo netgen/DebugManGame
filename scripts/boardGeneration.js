@@ -76,10 +76,57 @@ function create2DArray(rows, columns) {
 	var array = new Array(rows);
 
 	for (var i = 0; i < rows; i++) {
-		array[i] = new Array(columns);
+		array[i] = new Array();
 	}
 
 	return array;
+}
+
+function random(min, max) {
+	return Math.floor(Math.random() * (max - 1)) + min;
+}
+
+function freeSlot(array, rows, cols) {
+	while (true) {
+		var r = random(0, rows),
+			c = random(0, cols);
+
+		if (!array[r][c]) {
+			return {
+				row: r,
+				column: c
+			};
+		}
+	}
+}
+
+var around = [[1, -1], [1, 0], [1, 1], [0, -1],
+			  [-1, -1], [-1, 0], [-1, 1], [0, 1]];
+
+function inBoundaries(row, col, rows, cols) {
+	return (row >= 0 && row < rows) &&
+			(col >= 0 && col < cols);
+}
+
+function rangeSlot(array, rows, cols, bugs) {
+	while (true) {
+		var b = random(0, bugs.length);
+
+		for (var i = 0; i < around.length; i++) {
+			var direction = around[i];
+			var row = bugs[b].row + direction[0],
+				col = bugs[b].column + direction[1];
+
+			if (inBoundaries(row, col, rows, cols)) {
+				if (!array[row][col]) {
+					return {
+						row: row,
+						column: col
+					}
+				}
+			}
+		}
+	}
 }
 
 function generateBoard(json) {
@@ -98,22 +145,37 @@ function generateBoard(json) {
 
 	var remainder = rows * cols - (ezBugs.length + normBugs.length + hardBugs.length);
 	var otherQs = shuffle(easy.concat(normal, hard)).splice(0, remainder);
-	var allBugs = shuffle(ezBugs.concat(normBugs, hardBugs));
-
 	var array = create2DArray(rows, cols);
 
-	function isBug() {
-		if (allBugs.length === 0) return false;
-		if (otherQs.length === 0) return true;
-		var rand = Math.floor(Math.random() * 10);
-		return rand <= 4;
+	//randomly place hard bugs
+	for (var i = 0; i < hardBugs.length; i++) {
+		var coordinates = freeSlot(array, rows, cols);
+		var row = coordinates.row,
+			col = coordinates.column;
+		var hField = createField(hardBugs[i], true, row, col);
+		array[row][col] = hField;
+	}
+
+	//place medium bugs semi-randomly (around hard bugs)
+	for (var i = 0; i < normBugs.length; i++) {
+		var coordinates = rangeSlot(array, rows, cols, hardBugs);
+		var row = coordinates.row,
+			col = coordinates.column;
+		var nField = createField(normBugs[i], true, row, col);
+		array[row][col] = nField;
+	}
+
+	for (var i = 0; i < ezBugs.length; i++) {
+		var coordinates = rangeSlot(array, rows, cols, normBugs);
+		var row = coordinates.row,
+			col = coordinates.column;
+		var eField = createField(ezBugs[i], true, row, col);
+		array[row][col] = eField;
 	}
 
 	for (var i = 0; i < rows; i++) {
 		for (var j = 0; j < cols; j++) {
-			if (isBug()) {
-				array[i][j] = createField(allBugs.pop(), true, i, j);
-			} else {
+			if (!array[i][j]) {
 				array[i][j] = createField(otherQs.pop(), false, i, j);
 			}
 		}
