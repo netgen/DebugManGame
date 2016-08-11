@@ -198,8 +198,8 @@ function generateBoard(json) {
 		noColumns: cols,
 		grid: array,
 		turn: "",
-		team1Pts: 0,
-		team2Pts: 0
+		team1: new Team(0, 0, 0),
+		team2: new Team(0, 0, 0)
 	};
 
 	$(".game-board").html(template(context));

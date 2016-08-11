@@ -4,6 +4,12 @@ var GameState = {
 
 	load: function() {
 		this.data = JSON.parse(localStorage.data);
+		var team1 = this.data.team1;
+		var team2 = this.data.team2;
+		this.data.team1 = new Team(0, 0, 0);
+		this.data.team1.copy(team1);
+		this.data.team2 = new Team(0, 0, 0);
+		this.data.team2.copy(team2);
 	},
 
 	pushChanges: function() {
@@ -19,9 +25,10 @@ var GameState = {
         this.data.grid[y][x].opener = team; 
 	},
 
-	savePoints: function(team1Points, team2Points) {
-		this.data.team1Pts = team1Points;
-		this.data.team2Pts = team2Points;
+	//must be changed
+	savePoints: function(team1, team2) {
+		this.data.team2.copy(team2);
+		this.data.team1.copy(team1);
 	},
 
 	saveTurn: function(team) {
@@ -42,11 +49,11 @@ var GameState = {
 		return this.data.noColumns;
 	},
 
-	getTeam1Points: function() {
-		return this.data.team1Pts;
+	getTeamPoints: function(team) {
+		return calculatePoints(this.data[team]);
 	},
 
-	getTeam2Points: function() {
-		return this.data.team2Pts;
+	getTeam: function(team) {
+		return this.data[team];
 	}
 };

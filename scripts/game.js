@@ -1,19 +1,13 @@
-var zKoef = 2;
-var wKoef = 4;
-var qKoef = 6;
-
 var time;
 var fulltime = 30;
 var timerReset;
 
-
 var boxes;
 var clickedButton;
 
-var team1Points = 0;
-var team2Points = 0;
+var team1 = new Team(0, 0, 0);
+var team2 = new Team(0, 0,0 );
 var turn = "team2";
-
 
 $(document).keydown(function(e){
     
@@ -38,6 +32,13 @@ function popup() {
     changeTurn();
 }
 
+function updateStatus(teamName, team) {
+    $("#" + teamName + "easyBugs").html(team.getBugs("easy"));
+    $("#" + teamName + "normBugs").html(team.getBugs("norm"));
+    $("#" + teamName + "hardBugs").html(team.getBugs("hard"));
+    $("#" + teamName + "Pts").html(team.getPoints());
+}
+
 //this method is called on closing modal when answer is correct
 //adds points to team and change the team on the move
 //change appearance of clicked button
@@ -50,20 +51,20 @@ function correctAnswer() {
     
     playSound('assets/sounds/correct_answer.mp3');
 
-    var points = checkBug(clickedButton);
+    var bug = checkBug(clickedButton);
     
      if (turn == "team1"){
-        team1Points += points;
-        $("#team1Pts").html(team1Points);
+        team1.addBug(bug);
+        updateStatus(turn, team1);
      } else {
-        team2Points += points;
-        $("#team2Pts").html(team2Points);
+        team2.addBug(bug);
+        updateStatus(turn, team2);
     }
     
-     showAnswer();
-     hideModal();
+    showAnswer();
+    hideModal();
     
-    GameState.savePoints(team1Points, team2Points);
+    GameState.savePoints(team1, team2);
 
     
     $("#closeBtn").attr("disabled", false);
@@ -85,19 +86,15 @@ function reduceBoxes() {
 //this method is called when answer is wrong
 //change the team on the move
 function wrongAnswer() {  
-    
     clearTimeout(timerReset);
     playSound('assets/sounds/wrong_answer.mp3');
     
     GameState.pushChanges();
-    
-    //changeTurn(turn);
-    
-    GameState.savePoints(team1Points, team2Points);
+        
+    GameState.savePoints(team1, team2);
     
      $("#checkAnswer").html("Wrong!").css("color", "red");
      hideModal();
-     
 }
 
 function hideModal(){
@@ -150,22 +147,22 @@ function checkBug(buttonID) {
                 'backgroundImage', 'url(assets/images/fly.png)'
             );
 
-            return zKoef;
+            return "easy";
         } else if(questionObj.difficulty === 2) {
             $("#"+buttonID).css(
                 'backgroundImage','url(assets/images/bee.png)'
             );
 
-            return wKoef;
+            return "norm";
         } else if(questionObj.difficulty === 3) {
             $("#"+buttonID).css(
                 'backgroundImage','url(assets/images/ladybug.png)'
             );
 
-            return qKoef;
+            return "hard";
         }
     } else {
-        return 1;
+        return 0;
     }
 }
 
@@ -234,13 +231,13 @@ function btnGameOver() {
 function gameOver() {
     var from, to;
 
-    if (team1Points > team2Points) {
+    if (team1.getPoints() > team2.getPoints()) {
         $("#team1 p").fadeTo(2000, 1.0);
         $("#team2 p").fadeTo(2000, 0.0);
         from = 0;
         to = $("#team1").width();
     } else {
-         $("#team1 p").fadeTo(2000, 1.0);
+        $("#team1 p").fadeTo(2000, 1.0);
         $("#team2 p").fadeTo(2000, 0.0);
         var whole = $(".main-content").width();
         from = whole - $("#team2").width();
@@ -252,10 +249,10 @@ function gameOver() {
 
 function btnUndo() {
     GameState.load();
-    team1Points = GameState.getTeam1Points();
-    team2Points = GameState.getTeam2Points();
-    $("#team1Pts").html(team1Points);
-    $("#team2Pts").html(team2Points);
+    team1 = GameState.getTeam("team1");
+    team2 = GameState.getTeam("team2");
+    updateStatus("team1", team1);
+    updateStatus("team2", team2);
     $("#btnUndo").attr("disabled", true);
     changeTurn();
 
