@@ -14,6 +14,7 @@ var team1Points = 0;
 var team2Points = 0;
 var turn = "team2";
 
+var numOfBugs;
 
 $(document).keydown(function(e){
     
@@ -36,6 +37,7 @@ function popup() {
     myWindow = window.open("", "", "width=400,height=200");
     boxes = GameState.getRows() * GameState.getColumns();
     changeTurn();
+    numOfBugs = parseInt($('#zBugs').val()) + parseInt($('#qBugs').val()) +parseInt($('#wBugs').val());
 }
 
 //this method is called on closing modal when answer is correct
@@ -51,6 +53,7 @@ function correctAnswer() {
     playSound('assets/sounds/correct_answer.mp3');
 
     var points = checkBug(clickedButton);
+    console.log(numOfBugs);
     
      if (turn == "team1"){
         team1Points += points;
@@ -69,16 +72,7 @@ function correctAnswer() {
     $("#closeBtn").attr("disabled", false);
     
     clearTimeout(timerReset);
-    reduceBoxes();
     
-}
-
-//reduces number of remaining boxes
-function reduceBoxes() {
-    boxes--;
-    if (boxes == 0) {
-        gameOver();
-    }  
 }
 
 
@@ -145,13 +139,19 @@ function changeTurn() {
 function checkBug(buttonID) {
     var questionObj = GameState.getQuestion(buttonID);
     if(questionObj.hasBug) {
+        
+            numOfBugs--;
+            if (numOfBugs == 0) {
+                btnGameOver();
+            }
         if(questionObj.difficulty === 1) {
             $("#"+buttonID).css(
                 'backgroundImage', 'url(assets/images/fly.png)'
             );
 
             return zKoef;
-        } else if(questionObj.difficulty === 2) {
+        
+        }else if(questionObj.difficulty === 2) {
             $("#"+buttonID).css(
                 'backgroundImage','url(assets/images/bee.png)'
             );
@@ -161,11 +161,11 @@ function checkBug(buttonID) {
             $("#"+buttonID).css(
                 'backgroundImage','url(assets/images/ladybug.png)'
             );
-
-            return qKoef;
-        }
+             return qKoef;
+            }
+        
     } else {
-        return 1;
+        return 0;
     }
 }
 
