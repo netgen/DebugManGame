@@ -9,6 +9,8 @@ var team1 = new Team(0, 0, 0);
 var team2 = new Team(0, 0,0 );
 var turn = "team2";
 
+var numOfBugs;
+
 $(document).keydown(function(e){
     
     e = e || window.event;
@@ -30,6 +32,7 @@ function popup() {
     myWindow = window.open("", "", "width=400,height=200");
     boxes = GameState.getRows() * GameState.getColumns();
     changeTurn();
+    numOfBugs = parseInt($('#zBugs').val()) + parseInt($('#qBugs').val()) +parseInt($('#wBugs').val());
 }
 
 function updateStatus(teamName, team) {
@@ -43,8 +46,6 @@ function updateStatus(teamName, team) {
 //adds points to team and change the team on the move
 //change appearance of clicked button
 function correctAnswer() {
-    
-    $("#" + clickedButton).addClass("btn-closed-" + turn);
 
     GameState.pushChanges();
     GameState.saveQuestion(clickedButton, turn);
@@ -53,14 +54,22 @@ function correctAnswer() {
 
     var bug = checkBug(clickedButton);
     
-     if (turn == "team1"){
-        team1.addBug(bug);
-        updateStatus(turn, team1);
-     } else {
-        team2.addBug(bug);
-        updateStatus(turn, team2);
+    if (bug) {
+        if (turn == "team1"){
+            team1.addBug(bug);
+            updateStatus(turn, team1);
+        } else {
+            team2.addBug(bug);
+            updateStatus(turn, team2);
+        }
     }
-    
+
+    if (!bug) {
+        $("#" + clickedButton).addClass("btn-closed");
+    } else {
+        $("#" + clickedButton).addClass("btn-closed-" + turn);
+    }
+
     showAnswer();
     hideModal();
     
@@ -70,16 +79,7 @@ function correctAnswer() {
     $("#closeBtn").attr("disabled", false);
     
     clearTimeout(timerReset);
-    reduceBoxes();
     
-}
-
-//reduces number of remaining boxes
-function reduceBoxes() {
-    boxes--;
-    if (boxes == 0) {
-        gameOver();
-    }  
 }
 
 
@@ -109,8 +109,6 @@ function hideModal(){
 //disables clicking on buttons if correct answers
 function showAnswer() {
     var questionObj = GameState.getQuestion(clickedButton);
-    $("#correctBtn").attr("disabled", true);
-    $("#wrongBtn").attr("disabled", true);
     $("#timer").html(questionObj.answer);
     $("#checkAnswer").html("Correct!").css("color", "#06bc06");
     $("#closeBtn").attr("disabled", false);
@@ -142,12 +140,19 @@ function changeTurn() {
 function checkBug(buttonID) {
     var questionObj = GameState.getQuestion(buttonID);
     if(questionObj.hasBug) {
+        
+        numOfBugs--;
+        if (numOfBugs == 0) {
+            btnGameOver();
+        }
+
         if(questionObj.difficulty === 1) {
             $("#"+buttonID).css(
                 'backgroundImage', 'url(assets/images/fly.png)'
             );
 
             return "easy";
+
         } else if(questionObj.difficulty === 2) {
             $("#"+buttonID).css(
                 'backgroundImage','url(assets/images/bee.png)'
@@ -161,8 +166,9 @@ function checkBug(buttonID) {
 
             return "hard";
         }
+        
     } else {
-        return 0;
+        return null;
     }
 }
 
@@ -188,8 +194,6 @@ function setIdClickedButton(buttonID) {
     popupAnswer(questionObj);
     
     $("#question").text(questionObj.question);
-    $("#correctBtn").attr("disabled", false);   
-    $("#wrongBtn").attr("disabled", false); 
     $("#closeBtn").attr("disabled", true);
     $("#checkAnswer").html("");
     
@@ -218,8 +222,7 @@ function btnGameOver() {
 
     for (var i = 0; i < m; i++) {
         for (var j = 0; j < n; j++){
-                //$("#" + i + "" + j).addClass("btn-closed");
-                $("#" + i + "" + j).attr("disabled", true);
+                $("#" + i + "" + j).addClass("btn-closed");
                 checkBug(i + "" + j);
             
         }
@@ -227,18 +230,19 @@ function btnGameOver() {
 }
 
 
-//resets time
 function gameOver() {
     var from, to;
 
     if (team1.getPoints() > team2.getPoints()) {
-        $("#team1 p").fadeTo(2000, 1.0);
+        $("#team1").addClass("team1Active");
+        $("#team1 p").fadeTo(1000, 1.0);
         $("#team2 p").fadeTo(2000, 0.0);
         from = 0;
         to = $("#team1").width();
     } else {
-        $("#team1 p").fadeTo(2000, 1.0);
-        $("#team2 p").fadeTo(2000, 0.0);
+        $("#team2").addClass("team2Active");
+         $("#team2 p").fadeTo(1000, 1.0);
+        $("#team1 p").fadeTo(2000, 0.0);
         var whole = $(".main-content").width();
         from = whole - $("#team2").width();
         to = whole; 
