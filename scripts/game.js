@@ -120,16 +120,16 @@ function showAnswer() {
 function changeTurn() {
     if (turn == "team1") {
         turn = "team2";
-        $("#team1Id").toggleClass("team1").toggleClass("team1Active");
-        $("#team2Id").toggleClass("team2").toggleClass("team2Active");
-        $("#team2Id p").fadeTo(5000, 1.0);
-        $("#team1Id p").fadeTo(5000, 0.2);
+        $("#team1").toggleClass("team1Active");
+        $("#team2").toggleClass("team2Active");
+        $("#team2 p").fadeTo(5000, 1.0);
+        $("#team1 p").fadeTo(5000, 0.2);
     } else {
         turn = "team1";
-        $("#team1Id").toggleClass("team1").toggleClass("team1Active");
-        $("#team2Id").toggleClass("team2").toggleClass("team2Active");
-        $("#team1Id p").fadeTo(5000, 1.0);
-        $("#team2Id p").fadeTo(5000, 0.2);
+        $("#team1").toggleClass("team1Active");
+        $("#team2").toggleClass("team2Active");
+        $("#team1 p").fadeTo(5000, 1.0);
+        $("#team2 p").fadeTo(5000, 0.2);
     }
 
     answered = false;
@@ -235,15 +235,15 @@ function gameOver() {
     var from, to;
 
     if (team1Points > team2Points) {
-        $("#team1Id p").fadeTo(2000, 1.0);
-        $("#team2Id p").fadeTo(2000, 0.0);
+        $("#team1 p").fadeTo(2000, 1.0);
+        $("#team2 p").fadeTo(2000, 0.0);
         from = 0;
-        to = $(".team1").width();
+        to = $("#team1").width();
     } else {
-         $("#team1Id p").fadeTo(2000, 1.0);
-        $("#team2Id p").fadeTo(2000, 0.0);
+         $("#team1 p").fadeTo(2000, 1.0);
+        $("#team2 p").fadeTo(2000, 0.0);
         var whole = $(".main-content").width();
-        from = whole - $(".team2").width();
+        from = whole - $("#team2").width();
         to = whole; 
     }
 
