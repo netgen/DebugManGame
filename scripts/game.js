@@ -46,7 +46,6 @@ function popup() {
     changeTurn();
 }
 
-
 //this method is called on closing modal when answer is correct
 //adds points to team and change the team on the move
 //change appearance of clicked button
@@ -58,25 +57,21 @@ function correctAnswer() {
     GameState.pushChanges();
     GameState.saveQuestion(clickedButton, turn);
     
-    //$('#myModal').on('hidden.bs.modal', function () {
+    playSound('assets/sounds/correct_answer.mp3');
 
-        playSound('assets/sounds/correct_answer.mp3');
+    var points = checkBug(clickedButton);
+    
+     if (turn == "team1"){
+        team1Points += points;
+        $("#team1Pts").html(team1Points);
+     } else {
+        team2Points += points;
+        $("#team2Pts").html(team2Points);
+    }
+    
+    changeTurn(turn);
+    GameState.savePoints(team1Points, team2Points);
 
-        var points = checkBug(clickedButton);
-        
-         if (turn == "team1"){
-            team1Points += points;
-            $("#team1Pts").html(team1Points);
-         } else {
-            team2Points += points;
-            $("#team2Pts").html(team2Points);
-        }
-        
-        changeTurn(turn);
-        GameState.savePoints(team1Points, team2Points);
-    //});
-    
-    
     showAnswer();
     $("#closeBtn").attr("disabled", false);
     
