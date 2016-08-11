@@ -221,8 +221,7 @@ function btnGameOver() {
 
     for (var i = 0; i < m; i++) {
         for (var j = 0; j < n; j++){
-                //$("#" + i + "" + j).addClass("btn-closed");
-                $("#" + i + "" + j).attr("disabled", true);
+                $("#" + i + "" + j).addClass("btn-closed");
                 checkBug(i + "" + j);
             
         }
@@ -230,7 +229,6 @@ function btnGameOver() {
 }
 
 
-//resets time
 function gameOver() {
     var from, to;
 
