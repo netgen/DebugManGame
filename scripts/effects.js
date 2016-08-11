@@ -40,7 +40,7 @@ function AnimationManager() {
 
 var Animator = new AnimationManager();
 
-$(function () {
+$(function() {
 	Animator.initialize();
 });
 

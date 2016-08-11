@@ -89,7 +89,7 @@ function correctAnswer() {
 function reduceBoxes() {
     boxes--;
     if (boxes == 0) {
-        gameOver()
+        gameOver();
     }  
 }
 
