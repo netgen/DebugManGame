@@ -108,24 +108,41 @@ function inBoundaries(row, col, rows, cols) {
 			(col >= 0 && col < cols);
 }
 
-function rangeSlot(array, rows, cols, bugs) {
-	while (true) {
-		var b = random(0, bugs.length);
+function rangeSlot(array, rows, cols, bug) {
+	for (var i = 0; i < around.length; i++) {
+		var direction = around[i];
+		var row = bug.row + direction[0],
+			col = bug.column + direction[1];
 
-		for (var i = 0; i < around.length; i++) {
-			var direction = around[i];
-			var row = bugs[b].row + direction[0],
-				col = bugs[b].column + direction[1];
-
-			if (inBoundaries(row, col, rows, cols)) {
-				if (!array[row][col]) {
-					return {
-						row: row,
-						column: col
-					}
+		if (inBoundaries(row, col, rows, cols)) {
+			if (!array[row][col]) {
+				return {
+					row: row,
+					column: col
 				}
 			}
 		}
+	}
+
+	return freeSlot(array, rows, cols);
+}
+
+
+function placeAround(centralBugs, followers, grid, rows, cols) {
+	var limit = Math.min(centralBugs.length, followers.length);
+
+	for (var i = 0; i < limit; i++) {
+		var coordinates = rangeSlot(grid, rows, cols, centralBugs[i]);
+		var row = coordinates.row,
+			col = coordinates.column;
+		grid[row][col] = createField(followers[i], true, row, col);
+	}
+
+	for (var i = limit; i < followers.length; i++) {
+		var coordinates = freeSlot(grid, rows, cols);
+		var row = coordinates.row,
+			col = coordinates.column;
+		grid[row][col] = createField(followers[i], true, row, col);
 	}
 }
 
@@ -156,22 +173,8 @@ function generateBoard(json) {
 		array[row][col] = hField;
 	}
 
-	//place medium bugs semi-randomly (around hard bugs)
-	for (var i = 0; i < normBugs.length; i++) {
-		var coordinates = rangeSlot(array, rows, cols, hardBugs);
-		var row = coordinates.row,
-			col = coordinates.column;
-		var nField = createField(normBugs[i], true, row, col);
-		array[row][col] = nField;
-	}
-
-	for (var i = 0; i < ezBugs.length; i++) {
-		var coordinates = rangeSlot(array, rows, cols, normBugs);
-		var row = coordinates.row,
-			col = coordinates.column;
-		var eField = createField(ezBugs[i], true, row, col);
-		array[row][col] = eField;
-	}
+	placeAround(hardBugs, normBugs, array, rows, cols);
+	placeAround(normBugs, ezBugs, array, rows, cols);
 
 	for (var i = 0; i < rows; i++) {
 		for (var j = 0; j < cols; j++) {
@@ -181,6 +184,7 @@ function generateBoard(json) {
 		}
 	}
 	
+	//inject freshly made board into HTML
 	var template_script = $("#board-temp").html();
 	var template = Handlebars.compile(template_script);
 	var context = {
