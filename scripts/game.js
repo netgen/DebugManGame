@@ -14,7 +14,6 @@ var team1Points = 0;
 var team2Points = 0;
 var turn = "team2";
 
-var answered = false;
 
 $(document).keydown(function(e){
     
@@ -26,14 +25,7 @@ $(document).keydown(function(e){
     else if (e.keyCode == '87') {
         wrongAnswer();
     }
-    
-     else if (e.keyCode == '27' && answered) {
-         $('#myModal').modal('hide');
-    }
-
 });
-
-
 
 
 var myWindow;
@@ -53,7 +45,6 @@ function correctAnswer() {
     
     $("#" + clickedButton).addClass("btn-closed-" + turn);
 
-    answered = true;
     GameState.pushChanges();
     GameState.saveQuestion(clickedButton, turn);
     
@@ -69,10 +60,12 @@ function correctAnswer() {
         $("#team2Pts").html(team2Points);
     }
     
-    changeTurn(turn);
+     showAnswer();
+     hideModal();
+    
     GameState.savePoints(team1Points, team2Points);
 
-    showAnswer();
+    
     $("#closeBtn").attr("disabled", false);
     
     clearTimeout(timerReset);
@@ -95,11 +88,23 @@ function wrongAnswer() {
     
     clearTimeout(timerReset);
     playSound('assets/sounds/wrong_answer.mp3');
+    
     GameState.pushChanges();
-    changeTurn(turn);
+    
+    //changeTurn(turn);
+    
     GameState.savePoints(team1Points, team2Points);
     
-    $('#myModal').modal('hide');
+     $("#checkAnswer").html("Wrong!").css("color", "red");
+     hideModal();
+     
+}
+
+function hideModal(){
+     window.setTimeout(function(){
+        $('#myModal').modal('hide');
+            }, 3000);
+    changeTurn(turn);
 }
 
 
@@ -110,6 +115,7 @@ function showAnswer() {
     $("#correctBtn").attr("disabled", true);
     $("#wrongBtn").attr("disabled", true);
     $("#timer").html(questionObj.answer);
+    $("#checkAnswer").html("Correct!").css("color", "#06bc06");
     $("#closeBtn").attr("disabled", false);
     time = 0;
     clearTimeout(timerReset);
@@ -120,12 +126,16 @@ function showAnswer() {
 function changeTurn() {
     if (turn == "team1") {
         turn = "team2";
-        $("#team2Id p").fadeTo(3000, 1.0);
-        $("#team1Id p").fadeTo(3000, 0.2);
+        $("#team1Id").toggleClass("team1").toggleClass("team1Active");
+        $("#team2Id").toggleClass("team2").toggleClass("team2Active");
+        $("#team2Id p").fadeTo(5000, 1.0);
+        $("#team1Id p").fadeTo(5000, 0.2);
     } else {
         turn = "team1";
-        $("#team1Id p").fadeTo(3000, 1.0);
-        $("#team2Id p").fadeTo(3000, 0.2);
+        $("#team1Id").toggleClass("team1").toggleClass("team1Active");
+        $("#team2Id").toggleClass("team2").toggleClass("team2Active");
+        $("#team1Id p").fadeTo(5000, 1.0);
+        $("#team2Id p").fadeTo(5000, 0.2);
     }
 
     answered = false;
@@ -184,6 +194,7 @@ function setIdClickedButton(buttonID) {
     $("#correctBtn").attr("disabled", false);   
     $("#wrongBtn").attr("disabled", false); 
     $("#closeBtn").attr("disabled", true);
+    $("#checkAnswer").html("");
     
     resetTime();
 }
@@ -211,7 +222,9 @@ function btnGameOver() {
     for (var i = 0; i < m; i++) {
         for (var j = 0; j < n; j++){
                 //$("#" + i + "" + j).addClass("btn-closed");
+                $("#" + i + "" + j).attr("disabled", true);
                 checkBug(i + "" + j);
+            
         }
     }
 }
@@ -222,9 +235,13 @@ function gameOver() {
     var from, to;
 
     if (team1Points > team2Points) {
+        $("#team1Id p").fadeTo(2000, 1.0);
+        $("#team2Id p").fadeTo(2000, 0.0);
         from = 0;
         to = $(".team1").width();
     } else {
+         $("#team1Id p").fadeTo(2000, 1.0);
+        $("#team2Id p").fadeTo(2000, 0.0);
         var whole = $(".main-content").width();
         from = whole - $(".team2").width();
         to = whole; 
@@ -281,7 +298,6 @@ function timer() {
         playSound('assets/sounds/ticker.mp3');
         if (time == 0) {
             wrongAnswer();
-            $('#myModal').modal('hide');
             return;
         }
 		

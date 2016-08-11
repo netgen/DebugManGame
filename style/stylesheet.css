@@ -1,12 +1,17 @@
+body {
+    background-color: #fdffd1;
+}
+
 .gameName img {
-        float: left;
-        margin-top: 0px;
+        left: 0px;
+        top: 10px;
+        position: absolute;
 }
 
 .gameName {
     text-transform: uppercase;
     font-size: 200%;
-        margin-top: 20px;
+    margin-top: 20px;
 }
 
 .navbar {
@@ -23,22 +28,21 @@
 
 .sidenav {
     font-family: "Arial Rounded MT";
-    padding-top: 20px;
     font-size: x-large; 
     font-weight: bold;
     border-radius: 5px;
-    
+    height: 1000px;  
 }
 
 
 .gameBoard {
-    background-color: #fdffd1;
-    height: 1000px;
+    min-height: 500px;
+    height: auto;
+    
 }
 
 
 .team2 {
-    margin-top: 100px;
     color: white;
     font-size: x-large;
     font-weight: bold;
@@ -46,10 +50,23 @@
 }
 
 .team1 {
-    margin-top: 100px;
     color: white;
     font-size: x-large;
     background-color:rgba(236, 53, 27, 0.84);
+}
+
+.team1Active {
+     color: white;
+     background-color: rgba(239, 85, 63, 0.84);
+     border: 1px solid rgb(248, 158, 158);
+     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 10px rgba(0, 0, 0, 0.8);
+}
+
+.team2Active {
+     color: white;
+     background-color: rgba(232, 123, 55, 0.9);
+     border: 1px solid rgb(248, 183, 135);
+     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 10px rgba(10, 10, 10, 0.8);
 }
 
 
@@ -142,7 +159,7 @@ footer {
 }
 
 .modal-body {
-    font-size: 400%;
+    font-size: 40px;
 }
 
 
@@ -206,4 +223,8 @@ canvas {
     left: 0;
     z-index: 100;
     pointer-events: none;
+}
+
+#checkAnswer, #question {
+    font-size: 45px;
 }
