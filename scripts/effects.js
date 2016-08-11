@@ -1,22 +1,68 @@
-var W, H;
+var CONFETTI_NUMBER = 35;
+var COLORS = ["purple", "yellow", "orange", "red", "brown", "blue"];
 
-var CONF_NUMBER = 50;
+function AnimationManager() {
 
-var colors = ["blue", "yellow", "green", "red", "purple", "pink", "orange"];
+	var width, height,
+		canvas, context;
 
-function Confetti(from, to) {
-	this.to = to;
-	this.from = from;
-	this.x = Math.random() * (to - from) + from;
-	this.y = Math.random() * H - H;
-	this.speed = 0.7;
-	this.color = colors[Math.floor(Math.random() * colors.length)];
-	this.last_time = null;
+	this.initialize= function() {
+		canvas = document.getElementById("canvas");
+		context = canvas.getContext("2d");
+		width = window.innerWidth;
+		height = window.innerHeight;
+
+		canvas.width = width;
+		canvas.height = height;
+	}
+
+	this.playConfetti = function(fromX, toX) {
+		var particles = [];
+
+		for (var i = 0; i < CONFETTI_NUMBER; i++) {
+			particles.push(new Confetti(fromX, toX, height));
+		}
+
+		var tick = function(now) {
+			context.clearRect(0, 0, width, height);
+
+			particles.forEach(function(particle) {
+				particle.update(now);
+				particle.draw(context);
+			});
+
+			window.requestAnimationFrame(tick);
+		};
+
+		window.requestAnimationFrame(tick);
+	}
 }
+
+var Animator = new AnimationManager();
+
+$(function () {
+	Animator.initialize();
+});
+
+function Confetti(fromX, toX, height) {
+	this.toX = toX;
+	this.fromX = fromX;
+	this.speed = 0.7;
+	this.last_time = null;
+	this.height = height;
+
+	this.init();
+}
+
+Confetti.prototype.init = function() {
+	this.x = Math.random() * (this.toX - this.fromX) + this.fromX;
+	this.y = Math.random() * this.height - this.height;
+	this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+};
 
 Confetti.prototype.draw = function(context) {
 	context.beginPath();
-	context.arc(this.x, this.y, 7, 0, 2 * Math.PI, false);
+	context.arc(this.x, this.y, 5, 0, 2 * Math.PI, false);
 	context.fillStyle = this.color;
 	context.fill();
 	context.closePath();
@@ -32,37 +78,7 @@ Confetti.prototype.update = function(now) {
 
 	this.y += this.speed * dt;
 	
-	if (this.y > H) {
-		this.x = Math.random() * (this.to - this.from) + this.from;
-		this.y = Math.random() * H - H;
-		this.color = colors[Math.floor(Math.random() * colors.length)];
+	if (this.y > this.height) {
+		this.init();
 	}
-};
-
-function playConfetti(from, to) {
-	var canvas = document.getElementById("canvas");
-	var context = canvas.getContext("2d");
-	W = window.innerWidth;
-	H = window.innerHeight;
-
-	canvas.width = W;
-	canvas.height = H;
-
-	var conf = [];
-
-	for (var i = 0; i < CONF_NUMBER; i++) {
-		conf.push(new Confetti(from, to));
-	}
-
-	var tick = function(now) {
-		context.clearRect(0, 0, W, H);
-
-		for (var i = 0; i < conf.length; i++) {
-			conf[i].update(now);
-			conf[i].draw(context);
-		}
-		window.requestAnimationFrame(tick);
-	};
-
-	window.requestAnimationFrame(tick);
 };

@@ -235,7 +235,7 @@ function gameOver() {
         to = whole; 
     }
 
-    playConfetti(from, to);
+    Animator.playConfetti(from, to);
 }
 
 function btnUndo() {
