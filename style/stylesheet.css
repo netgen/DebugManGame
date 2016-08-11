@@ -28,8 +28,8 @@ body {
 
 .sidenav {
     font-family: "Arial Rounded MT";
-    font-size: x-large; 
-    font-weight: bold;
+    font-size: x-large;
+    color: white;
     border-radius: 5px;
     height: 1000px;  
 }
@@ -38,35 +38,33 @@ body {
 .gameBoard {
     min-height: 500px;
     height: auto;
-    
 }
 
 
-.team2 {
-    color: white;
-    font-size: x-large;
-    font-weight: bold;
-    background-color:rgba(234, 117, 44, 0.9);
+#team2 {
+    background-color: rgba(234, 117, 44, 0.9);
 }
 
-.team1 {
-    color: white;
-    font-size: x-large;
-    background-color:rgba(236, 53, 27, 0.84);
+#team1 {
+    background-color: rgba(236, 53, 27, 0.84);
 }
 
 .team1Active {
-     color: white;
-     background-color: rgba(239, 85, 63, 0.84);
-     border: 1px solid rgb(248, 158, 158);
-     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 10px rgba(0, 0, 0, 0.8);
+    font-weight: bold;
+    color: white;
+    font-size: xx-large;
+    background-color: rgba(239, 85, 63, 0.84);
+    border: 1px solid rgb(248, 158, 158);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 10px rgba(0, 0, 0, 0.8);
 }
 
 .team2Active {
-     color: white;
-     background-color: rgba(232, 123, 55, 0.9);
-     border: 1px solid rgb(248, 183, 135);
-     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 10px rgba(10, 10, 10, 0.8);
+    font-weight: bold;
+    font-size: xx-large;
+    color: white; 
+    background-color: rgba(232, 123, 55, 0.9);
+    border: 1px solid rgb(248, 183, 135);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 10px rgba(10, 10, 10, 0.8);
 }
 
 
