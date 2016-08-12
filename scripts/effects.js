@@ -57,6 +57,7 @@ var Animator = {
 	},
 
 	stopTimer: function() {
+		console.log("CLEAR!");
 		timerOn = false;
 		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 	}

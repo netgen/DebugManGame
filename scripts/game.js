@@ -57,6 +57,7 @@ function updateStatus(teamName, team) {
 //adds points to team and change the team on the move
 //change appearance of clicked button
 function correctAnswer() {
+    Animator.stopTimer();
 
     GameState.pushChanges();
     GameState.saveQuestion(clickedButton, turn);
@@ -96,9 +97,9 @@ function correctAnswer() {
 //this method is called when answer is wrong
 //change the team on the move
 function wrongAnswer() {  
+    Animator.stopTimer();
     clearTimeout(timerReset);
-    
-    
+
     GameState.pushChanges();   
     GameState.savePoints(team1, team2);
     
@@ -300,7 +301,6 @@ function timer() {
         timerDiv.innerHTML = time + "s";
         if (time == 0) {
             wrongAnswer();
-            Animator.stopTimer();
             return;
         }
 		
