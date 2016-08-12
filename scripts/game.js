@@ -29,10 +29,17 @@ var myWindow;
 //creates a popup window with answers
 
 function popup() {
+
     myWindow = window.open("", "", "width=400,height=200");
     boxes = GameState.getRows() * GameState.getColumns();
     changeTurn();
-    numOfBugs = parseInt($('#zBugs').val()) + parseInt($('#qBugs').val()) +parseInt($('#wBugs').val());
+    numOfBugs = parseInt($('#zBugs').val()) + 
+                parseInt($('#qBugs').val()) +
+                parseInt($('#wBugs').val());
+
+    $("#myModal").on("shown.bs.modal", function() {
+        Animator.playTimer(fulltime, $("#timer"));
+    });
 }
 
 function updateStatus(teamName, team) {
@@ -299,6 +306,7 @@ function timer() {
         playSound('assets/sounds/ticker.mp3');
         if (time == 0) {
             wrongAnswer();
+            Animator.stopTimer();
             return;
         }
 		
