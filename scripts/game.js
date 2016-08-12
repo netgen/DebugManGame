@@ -1,5 +1,5 @@
 var time;
-var fulltime = 30;
+var fulltime = 10;
 var timerReset;
 
 var boxes;
@@ -10,6 +10,10 @@ var team2 = new Team(0, 0,0 );
 var turn = "team2";
 
 var numOfBugs;
+
+var sounds = new Sounds();
+
+
 
 $(document).keydown(function(e){
     
@@ -50,7 +54,8 @@ function correctAnswer() {
     GameState.pushChanges();
     GameState.saveQuestion(clickedButton, turn);
     
-    playSound('assets/sounds/correct_answer.mp3');
+    sounds.stopClockSound();
+    sounds.playCorrectAnswer();
 
     var bug = checkBug(clickedButton);
     
@@ -87,7 +92,9 @@ function correctAnswer() {
 //change the team on the move
 function wrongAnswer() {  
     clearTimeout(timerReset);
-    playSound('assets/sounds/wrong_answer.mp3');
+    
+    sounds.stopClockSound();
+    sounds.playWrongAnswer();
     
     GameState.pushChanges();
         
@@ -188,6 +195,8 @@ function getQuestion(buttonID) {
 //resets time
 
 function setIdClickedButton(buttonID) {
+    
+    sounds.playClockSound();
     clickedButton = buttonID;
     var questionObj = GameState.getQuestion(buttonID);
     
@@ -292,11 +301,11 @@ function resetTime() {
 //implementation of timer
 //if nothing is clicked, game acts like the answer is wrong
 function timer() {
+    sounds.clockSound.play();
 	timerReset = setTimeout(function() {
 		var timerDiv = document.getElementById("timer");
 		time--;
         timerDiv.innerHTML = time + "s";
-        playSound('assets/sounds/ticker.mp3');
         if (time == 0) {
             wrongAnswer();
             return;
