@@ -1,6 +1,11 @@
+.container-fluid {
+    background-color: white;
+}
+
 body {
     background-color: #fdffd1;
 }
+
 
 .gameName img {
         left: 0px;
@@ -89,7 +94,7 @@ footer {
         height: auto;
         padding: 15px;
       }
-      .row.content {height:auto;} 
+      .row.content {height:auto;}
     }
 
 .btn-group {
@@ -107,7 +112,7 @@ footer {
 }
 
 .btn-box:hover {
-    background-color: #dcdcb8;
+    background-color: #ebebbf;
 }
 
 .btn-closed {
@@ -242,3 +247,4 @@ canvas {
 #checkAnswer, #question {
     font-size: 45px;
 }
+

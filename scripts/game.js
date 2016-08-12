@@ -32,7 +32,7 @@ var myWindow;
 
 //creates a popup window with answers
 
-function popup() {
+function init() {
     myWindow = window.open("", "", "width=400,height=200");
     boxes = GameState.getRows() * GameState.getColumns();
     changeTurn();
@@ -96,8 +96,7 @@ function wrongAnswer() {
     sounds.stopClockSound();
     sounds.playWrongAnswer();
     
-    GameState.pushChanges();
-        
+    GameState.pushChanges();   
     GameState.savePoints(team1, team2);
     
      $("#checkAnswer").html("Wrong!").css("color", "red");

@@ -43,7 +43,7 @@ $(function() {
 
 		clear();
 		$('.game-board').show();
-        popup();
+        init();
 	}
 
 	function renderErrorPage() {
