@@ -74,12 +74,10 @@ function correctAnswer() {
             team2.addBug(bug);
             updateStatus(turn, team2);
         }
+        $('[data-id="'+clickedButton+'"]').addClass("btn-closed-" + turn);
     }
-
-    if (!bug) {
-        $("#" + clickedButton).addClass("btn-closed");
-    } else {
-        $("#" + clickedButton).addClass("btn-closed-" + turn);
+    else {
+        $('[data-id="'+clickedButton+'"]').addClass("btn-closed");
     }
 
     showAnswer();
@@ -171,7 +169,6 @@ function checkBug(buttonID) {
         }
 
         $('[data-id="'+buttonID+'"]').css('backgroundImage', 'url(assets/images/'+img+'.png)');
-        $('[data-id="'+buttonID+'"]').addClass("btn-closed-" + turn);
     }
 
     return type;            
@@ -230,8 +227,8 @@ function btnGameOver() {
 
     for (var i = 0; i < m; i++) {
         for (var j = 0; j < n; j++){
-                $("#" + i + "" + j).addClass("btn-closed");
                 checkBug(i + "" + j);
+                $('[data-id="'+ i + "" + j +'"]').addClass("btn-closed");
             
         }
     }
