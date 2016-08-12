@@ -1,24 +1,31 @@
 var time;
-var fulltime = 30;
+var fulltime = 10;
 var timerReset;
 
 var boxes;
 var clickedButton;
 
 var team1 = new Team(0, 0, 0);
-var team2 = new Team(0, 0,0 );
+var team2 = new Team(0, 0, 0);
 var turn = "team2";
 
 var numOfBugs;
+
+var sounds = new Sounds();
+
+var KEY_C = 67;
+var KEY_W = 87;
+
+
 
 $(document).keydown(function(e){
     
     e = e || window.event;
 
-    if (e.keyCode == '67') {
+    if (e.keyCode == KEY_C) {
         correctAnswer();
     }
-    else if (e.keyCode == '87') {
+    else if (e.keyCode == KEY_W) {
         wrongAnswer();
     }
 });
@@ -57,7 +64,8 @@ function correctAnswer() {
     GameState.pushChanges();
     GameState.saveQuestion(clickedButton, turn);
     
-    playSound('assets/sounds/correct_answer.mp3');
+    sounds.stopClockSound();
+    sounds.playCorrectAnswer();
 
     var bug = checkBug(clickedButton);
     
@@ -94,7 +102,9 @@ function correctAnswer() {
 //change the team on the move
 function wrongAnswer() {  
     clearTimeout(timerReset);
-    playSound('assets/sounds/wrong_answer.mp3');
+    
+    sounds.stopClockSound();
+    sounds.playWrongAnswer();
     
     GameState.pushChanges();
         
@@ -145,7 +155,7 @@ function changeTurn() {
 }
 
 function checkBug(buttonID) {
-    var questionObj = GameState.getQuestion(buttonID);
+    var questionObj = GameState.getQuestion(buttonID), img, type = null;
     if(questionObj.hasBug) {
         
         numOfBugs--;
@@ -154,29 +164,20 @@ function checkBug(buttonID) {
         }
 
         if(questionObj.difficulty === 1) {
-            $("#"+buttonID).css(
-                'backgroundImage', 'url(assets/images/fly.png)'
-            );
-
-            return "easy";
-
+            img = 'fly';
+            type = "easy";
         } else if(questionObj.difficulty === 2) {
-            $("#"+buttonID).css(
-                'backgroundImage','url(assets/images/bee.png)'
-            );
-
-            return "norm";
+            img = 'bee';
+            type = "norm";
         } else if(questionObj.difficulty === 3) {
-            $("#"+buttonID).css(
-                'backgroundImage','url(assets/images/ladybug.png)'
-            );
-
-            return "hard";
+            img = 'ladybug';
+            type = "hard";
         }
-        
-    } else {
-        return null;
+
+        $('[data-id="'+buttonID+'"]').css('backgroundImage', 'url(assets/images/'+img+'.png)');  
     }
+
+    return type;            
 }
 
 
@@ -194,9 +195,10 @@ function getQuestion(buttonID) {
 //enables clicking on correct/wrong buttons i modal
 //resets time
 
-function setIdClickedButton(buttonID) {
-    clickedButton = buttonID;
-    var questionObj = GameState.getQuestion(buttonID);
+function setIdClickedButton() {
+    sounds.playClockSound();
+    clickedButton = String($(this).data('id'));
+    var questionObj = GameState.getQuestion(clickedButton);
     
     popupAnswer(questionObj);
     
@@ -299,11 +301,11 @@ function resetTime() {
 //implementation of timer
 //if nothing is clicked, game acts like the answer is wrong
 function timer() {
+    sounds.clockSound.play();
 	timerReset = setTimeout(function() {
 		var timerDiv = document.getElementById("timer");
 		time--;
         timerDiv.innerHTML = time + "s";
-        playSound('assets/sounds/ticker.mp3');
         if (time == 0) {
             wrongAnswer();
             Animator.stopTimer();
@@ -313,3 +315,6 @@ function timer() {
         timer();
 	}, 1000);
 }
+
+
+$(document.body).on('click', '.btn-box', setIdClickedButton)

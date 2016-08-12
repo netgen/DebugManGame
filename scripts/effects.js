@@ -1,45 +1,38 @@
 var CONFETTI_NUMBER = 35;
 var COLORS = ["purple", "yellow", "orange", "red", "brown", "blue"];
+var timerOn = false;
 
-function AnimationManager() {
+var Animator = {
 
-	var width, height,
-		canvas, context;
+	initialize: function() {
+		this.canvas = document.getElementById("canvas");
+		this.context = canvas.getContext("2d");
+		this.canvas.width = window.innerWidth;;
+		this.canvas.height = window.innerHeight;
+	},
 
-	var timerOn = false;
-
-	this.initialize= function() {
-		canvas = document.getElementById("canvas");
-		context = canvas.getContext("2d");
-		width = window.innerWidth;
-		height = window.innerHeight;
-
-		canvas.width = width;
-		canvas.height = height;
-	};
-
-	this.playConfetti = function(fromX, toX) {
+	playConfetti: function(fromX, toX) {
 		var particles = [];
 
 		for (var i = 0; i < CONFETTI_NUMBER; i++) {
-			particles.push(new Confetti(fromX, toX, height));
+			particles.push(new Confetti(fromX, toX, this.canvas.height));
 		}
 
 		var tick = function(now) {
-			context.clearRect(0, 0, width, height);
+			this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
 			particles.forEach(function(particle) {
 				particle.update(now);
-				particle.draw(context);
+				particle.draw(this.context);
 			});
 
 			window.requestAnimationFrame(tick);
-		};
+		}.bind(this);
 
 		window.requestAnimationFrame(tick);
-	};
+	},
 
-	this.playTimer = function(duration, parent) {
+	playTimer: function(duration, parent) {
 		timerOn = true;
 
 		var timer = new Timer (
@@ -53,23 +46,22 @@ function AnimationManager() {
 
 		var tick = function(now) {
 			if (!timerOn) return;
-			context.clearRect(0, 0, width, height);
+			this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 			timer.update(now);
-			timer.draw(context);
+			timer.draw(this.context);
 
 			window.requestAnimationFrame(tick);
-		};
+		}.bind(this);
 
 		window.requestAnimationFrame(tick);
-	};
+	},
 
-	this.stopTimer = function() {
+	stopTimer: function() {
 		timerOn = false;
-		context.clearRect(0, 0, width, height);
-	};
-}
+		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+	}
+};
 
-var Animator = new AnimationManager();
 
 $(function() {
 	Animator.initialize();
