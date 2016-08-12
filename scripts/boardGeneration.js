@@ -1,6 +1,5 @@
 function validate() {
-	var valid = true;
-	valid = isNumber("#qBugs") && isNumber("#wBugs") && isNumber("#zBugs");
+	var valid = isNumber("#qBugs") && isNumber("#wBugs") && isNumber("#zBugs");
 
 	$("#submitButton").attr("disabled", !valid);
 }
@@ -43,15 +42,8 @@ function parseInput() {
 	$('.page').hide();
 	$('.loading-page').show();
 
-	$.ajax({
-		url: "assets/questions.json",
-		type: "GET",
-		dataType: "json",
-		mimeType:"application/json"
-	})
-		.success(function(json) {
-			generateBoard(json);
-		})
+	$.get("assets/questions.json")
+		.success(generateBoard)
 		.fail(function(json) {
 			alert("Server dieded :(");
 		});
@@ -146,8 +138,8 @@ function placeAround(centralBugs, followers, grid, rows, cols) {
 	}
 }
 
-function generateBoard(json) {
-	var questions = json;
+
+function generateBoard(questions) {
 	var rows = localStorage["noRows"];
 	var cols = localStorage["noColumns"];
 
@@ -208,7 +200,7 @@ function generateBoard(json) {
 	window.location.hash = '#board';
 
 	$(".btn-box").hover(function () {
-		var id = $(this).attr("id");
+		var id = String($(this).data("id"));
 		$("#row" + id.charAt(0)).toggleClass("fieldUnactive")
 								.toggleClass("fieldActive");
 		$("#col" + id.charAt(1)).toggleClass("fieldUnactive")
@@ -229,5 +221,8 @@ function createField(question, isBug, row, column) {
 }
 
 $(function() {
-	$("#submitButton").click(parseInput);
+	$(document.body).on('submit', "#paramForm", function(e){
+		e.preventDefault();
+		parseInput();
+	});
 })

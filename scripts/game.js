@@ -6,12 +6,15 @@ var boxes;
 var clickedButton;
 
 var team1 = new Team(0, 0, 0);
-var team2 = new Team(0, 0,0 );
+var team2 = new Team(0, 0, 0);
 var turn = "team2";
 
 var numOfBugs;
 
 var sounds = new Sounds();
+
+var KEY_C = 67;
+var KEY_W = 87;
 
 
 
@@ -19,10 +22,10 @@ $(document).keydown(function(e){
     
     e = e || window.event;
 
-    if (e.keyCode == '67') {
+    if (e.keyCode == KEY_C) {
         correctAnswer();
     }
-    else if (e.keyCode == '87') {
+    else if (e.keyCode == KEY_W) {
         wrongAnswer();
     }
 });
@@ -145,7 +148,7 @@ function changeTurn() {
 }
 
 function checkBug(buttonID) {
-    var questionObj = GameState.getQuestion(buttonID);
+    var questionObj = GameState.getQuestion(buttonID), img, type = null;
     if(questionObj.hasBug) {
         
         numOfBugs--;
@@ -154,29 +157,20 @@ function checkBug(buttonID) {
         }
 
         if(questionObj.difficulty === 1) {
-            $("#"+buttonID).css(
-                'backgroundImage', 'url(assets/images/fly.png)'
-            );
-
-            return "easy";
-
+            img = 'fly';
+            type = "easy";
         } else if(questionObj.difficulty === 2) {
-            $("#"+buttonID).css(
-                'backgroundImage','url(assets/images/bee.png)'
-            );
-
-            return "norm";
+            img = 'bee';
+            type = "norm";
         } else if(questionObj.difficulty === 3) {
-            $("#"+buttonID).css(
-                'backgroundImage','url(assets/images/ladybug.png)'
-            );
-
-            return "hard";
+            img = 'ladybug';
+            type = "hard";
         }
-        
-    } else {
-        return null;
+
+        $('[data-id="'+buttonID+'"]').css('backgroundImage', 'url(assets/images/'+img+'.png)');  
     }
+
+    return type;            
 }
 
 
@@ -194,11 +188,10 @@ function getQuestion(buttonID) {
 //enables clicking on correct/wrong buttons i modal
 //resets time
 
-function setIdClickedButton(buttonID) {
-    
+function setIdClickedButton() {
     sounds.playClockSound();
-    clickedButton = buttonID;
-    var questionObj = GameState.getQuestion(buttonID);
+    clickedButton = String($(this).data('id'));
+    var questionObj = GameState.getQuestion(clickedButton);
     
     popupAnswer(questionObj);
     
@@ -314,3 +307,6 @@ function timer() {
         timer();
 	}, 1000);
 }
+
+
+$(document.body).on('click', '.btn-box', setIdClickedButton)
