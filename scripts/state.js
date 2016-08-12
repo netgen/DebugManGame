@@ -10,6 +10,7 @@ var GameState = {
 		this.data.team1.copy(team1);
 		this.data.team2 = new Team(0, 0, 0);
 		this.data.team2.copy(team2);
+		this.loaded = true;
 	},
 
 	pushChanges: function() {

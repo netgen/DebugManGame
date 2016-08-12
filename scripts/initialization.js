@@ -22,6 +22,8 @@ $(function() {
 
 			'#board' : function() {
 				renderBoardPage(null);
+				console.log(GameState)
+				!GameState.loaded && (window.location.href = 'index.html')
 			}
 		};
 
@@ -51,14 +53,10 @@ $(function() {
 		$('.error-page').show();
 	}
 
-	$("#paramForm").submit(function(event) {
-		event.preventDefault();
-	});
-
 	Handlebars.registerHelper("button", function(row, col, context) {
 		return new Handlebars.SafeString(
-				"<input type='button' id='" + 
-					row + "" + col + "'  class='btn-box' onclick='setIdClickedButton(id)'" +
+				"<input type='button' data-id='" + 
+					row + "" + col + "'  class='btn-box'" +
 					" data-toggle='modal' data-target='#myModal' />"
 			);
 	});
@@ -86,10 +84,27 @@ $(function() {
 		return out;
 	});
 
+
+
 	$('[data-toggle="tooltip"]').tooltip();
 
-	var form_script = $(".selector").html();
-	var template = Handlebars.compile(form_script);
+    $.when(
+    	$.get('parameter_form.html'),
+    	$.get('board_game.html')
+	).then(function(res1, res2){
 
-	$(".selector").html(template({}));
+		$(".intro-form").html(res1[0]);
+		$(".game-board").html(res2[0]);
+
+		var form_script = $("#template_select").html();
+		var template = Handlebars.compile(form_script);
+
+		$(".selector").html(template());
+	});
+
+
+
+
+
+
 });
