@@ -237,26 +237,31 @@ function btnGameOver() {
     }
 }
 
-
 function gameOver() {
-    var from, to;
+    var from, to,
+        team1_points = team1.getPoints(),
+        team2_points = team2.getPoints();
 
-    if (team1.getPoints() > team2.getPoints()) {
+    if (team1_points > team2_points) {
         $("#team1").addClass("team1Active");
         $("#team1 p").fadeTo(1000, 1.0);
         $("#team2 p").fadeTo(2000, 0.0);
         from = 0;
         to = $("#team1").width();
-    } else {
+
+        Animator.playConfetti(from, to);
+    } else if (team1_points < team2_points) {
         $("#team2").addClass("team2Active");
-         $("#team2 p").fadeTo(1000, 1.0);
+        $("#team2 p").fadeTo(1000, 1.0);
         $("#team1 p").fadeTo(2000, 0.0);
         var whole = $(".main-content").width();
         from = whole - $("#team2").width();
-        to = whole; 
-    }
+        to = whole;
 
-    Animator.playConfetti(from, to);
+        Animator.playConfetti(from, to);
+    } else {
+        //it's a tie...
+    }
 }
 
 function btnUndo() {

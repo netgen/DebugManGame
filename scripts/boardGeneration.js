@@ -138,11 +138,7 @@ function placeAround(centralBugs, followers, grid, rows, cols) {
 	}
 }
 
-
-function generateBoard(questions) {
-	var rows = localStorage["noRows"];
-	var cols = localStorage["noColumns"];
-
+function placeBugs(rows, cols, questions) {
 	var easy = shuffle(questions["1"]);
 	var ezBugs = easy.splice(0, parseInt(localStorage["zBugs"]));
 
@@ -175,7 +171,15 @@ function generateBoard(questions) {
 			}
 		}
 	}
-	
+
+	return array;
+}
+
+function generateBoard(questions) {
+	var rows = localStorage["noRows"];
+	var cols = localStorage["noColumns"];
+	var array = placeBugs(rows, cols, questions);
+
 	//inject freshly made board into HTML
 	var template_script = $("#board-temp").html();
 	var template = Handlebars.compile(template_script);
