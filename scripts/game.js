@@ -37,7 +37,13 @@ function init() {
     myWindow = window.open("", "", "width=400,height=200");
     boxes = GameState.getRows() * GameState.getColumns();
     changeTurn();
-    numOfBugs = parseInt($('#zBugs').val()) + parseInt($('#qBugs').val()) +parseInt($('#wBugs').val());
+    numOfBugs = parseInt($('#zBugs').val()) + 
+                parseInt($('#qBugs').val()) +
+                parseInt($('#wBugs').val());
+
+    $("#myModal").on("shown.bs.modal", function() {
+        Animator.playTimer(fulltime, $("#timer"));
+    });
 }
 
 function updateStatus(teamName, team) {
@@ -92,8 +98,6 @@ function correctAnswer() {
 function wrongAnswer() {  
     clearTimeout(timerReset);
     
-    sounds.stopClockSound();
-    sounds.playWrongAnswer();
     
     GameState.pushChanges();   
     GameState.savePoints(team1, team2);
@@ -184,7 +188,7 @@ function getQuestion(buttonID) {
 //resets time
 
 function setIdClickedButton() {
-    sounds.playClockSound();
+
     clickedButton = String($(this).data('id'));
     var questionObj = GameState.getQuestion(clickedButton);
     
@@ -289,13 +293,14 @@ function resetTime() {
 //implementation of timer
 //if nothing is clicked, game acts like the answer is wrong
 function timer() {
-    sounds.clockSound.play();
+   
 	timerReset = setTimeout(function() {
 		var timerDiv = document.getElementById("timer");
 		time--;
         timerDiv.innerHTML = time + "s";
         if (time == 0) {
             wrongAnswer();
+            Animator.stopTimer();
             return;
         }
 		

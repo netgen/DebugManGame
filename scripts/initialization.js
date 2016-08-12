@@ -91,7 +91,7 @@ $(function() {
     $.when(
     	$.get('parameter_form.html'),
     	$.get('board_game.html')
-	).then(function(res1, res2){
+	).then(function(res1, res2) {
 
 		$(".intro-form").html(res1[0]);
 		$(".game-board").html(res2[0]);
@@ -101,10 +101,5 @@ $(function() {
 
 		$(".selector").html(template());
 	});
-
-
-
-
-
 
 });
