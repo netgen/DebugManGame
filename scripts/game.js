@@ -11,8 +11,6 @@ var turn = "team2";
 
 var numOfBugs;
 
-var sounds = new Sounds();
-
 var KEY_C = 67;
 var KEY_W = 87;
 
@@ -57,8 +55,6 @@ function correctAnswer() {
     GameState.pushChanges();
     GameState.saveQuestion(clickedButton, turn);
     
-    sounds.stopClockSound();
-    sounds.playCorrectAnswer();
 
     var bug = checkBug(clickedButton);
     
