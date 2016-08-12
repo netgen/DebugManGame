@@ -5,9 +5,6 @@
 	 		<div class="col-sm-1 inputForm">Number of rows:</div>
 	 		<div class="col-sm-1">
 			 	<select name="noRows" class="selector">
-			 		{{#times 8}}
-			 			<option value="{{@index}}">{{@index}}</option>
-			 		{{/times}}
 			 	</select>
 			 </div>
 			 <div class="col-sm-5"></div>
@@ -18,9 +15,6 @@
 			<div class="col-sm-1 inputForm">Number of columns:</div>
 			<div class="col-sm-1">
 			 	<select name="noColumns" class="selector">
-			 		{{#times 8}
-			 			<option value="{{@index}}">{{@index}}</option>
-			 		{{/times}}
 			 	</select>
 			</div>
 			<div class="col-sm-5"></div>
@@ -62,3 +56,9 @@
 		</div>
 	</form>
 </div>
+
+<script type="text/template" id="template_select">
+	{{#times 8}}
+		<option value="{{@index}}">{{@index}}</option>
+	{{/times}}
+</script>
