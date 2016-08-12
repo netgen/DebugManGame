@@ -62,7 +62,8 @@ function correctAnswer() {
     GameState.pushChanges();
     GameState.saveQuestion(clickedButton, turn);
     
-
+    AUDIOS["tick"].pauseAndRewind();
+    AUDIOS["correct"].play();
     var bug = checkBug(clickedButton);
     
     if (bug) {
@@ -99,8 +100,10 @@ function correctAnswer() {
 function wrongAnswer() {  
     Animator.stopTimer();
     clearTimeout(timerReset);
-
-    GameState.pushChanges();   
+    
+    AUDIOS["tick"].pauseAndRewind();
+    AUDIOS["wrong"].play();
+        GameState.pushChanges();   
     GameState.savePoints(team1, team2);
     
      $("#checkAnswer").html("Wrong!").css("color", "red");
@@ -167,7 +170,8 @@ function checkBug(buttonID) {
             type = "hard";
         }
 
-        $('[data-id="'+buttonID+'"]').css('backgroundImage', 'url(assets/images/'+img+'.png)');  
+        $('[data-id="'+buttonID+'"]').css('backgroundImage', 'url(assets/images/'+img+'.png)');
+        $('[data-id="'+buttonID+'"]').addClass("btn-closed-" + turn);
     }
 
     return type;            
@@ -192,6 +196,8 @@ function setIdClickedButton() {
 
     clickedButton = String($(this).data('id'));
     var questionObj = GameState.getQuestion(clickedButton);
+    
+    AUDIOS["tick"].play();
     
     popupAnswer(questionObj);
     
@@ -294,7 +300,6 @@ function resetTime() {
 //implementation of timer
 //if nothing is clicked, game acts like the answer is wrong
 function timer() {
-   
 	timerReset = setTimeout(function() {
 		var timerDiv = document.getElementById("timer");
 		time--;
