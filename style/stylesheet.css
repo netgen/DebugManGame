@@ -12,9 +12,9 @@ body {
 
 
 .gameName img {
-        left: 0px;
-        top: 10px;
-        position: absolute;
+    left: 0px;
+    top: 10px;
+    position: absolute;
 }
 
 .gameName {
@@ -49,6 +49,10 @@ body {
 .gameBoard {
     min-height: 500px;
     height: auto;
+}
+
+.gameBoard p {
+    font-size: x-large;
 }
 
 
