@@ -69,7 +69,7 @@ function correctAnswer() {
     var bug = checkBug(clickedButton, true);
     
     if (bug) {
-        if (turn == "team1"){
+        if (turn === "team1"){
             team1.addBug(bug);
             updateStatus(turn, team1);
         } else {
@@ -87,11 +87,13 @@ function correctAnswer() {
     
     GameState.savePoints(team1, team2);
 
-    
     $("#closeBtn").attr("disabled", false);
     
     clearTimeout(timerReset);
     
+    if (numOfBugs === 0) {
+            btnGameOver();
+    }
 }
 
 
@@ -156,9 +158,6 @@ function checkBug(buttonID, animate) {
         var button = $('[data-id="'+buttonID+'"]');
         
         numOfBugs--;
-        if (numOfBugs == 0) {
-            btnGameOver();
-        }
 
         if(questionObj.difficulty === 1) {
             bug = 'fly';
@@ -244,6 +243,8 @@ function popupAnswer(questionObj) {
 
 function btnGameOver() {
     isGameOver = true;
+
+    GameState.pushChanges();
 
     gameOver();
     
