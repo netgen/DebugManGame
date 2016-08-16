@@ -36,6 +36,8 @@ var Animator = {
 		var tick = function(now) {
 			this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
+			if (flyingBug.isDead()) return;
+
 			flyingBug.update(now);
 			flyingBug.draw(this.context);
 
