@@ -38,7 +38,7 @@ var Animator = {
 
 			if (flyingBug.isDead()) return;
 
-			flyingBug.update(now);
+			flyingBug.tick(now);
 			flyingBug.draw(this.context);
 
 			window.requestAnimationFrame(tick);
@@ -59,7 +59,7 @@ var Animator = {
 			this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
 			particles.forEach(function(particle) {
-				particle.update(now);
+				particle.tick(now);
 				particle.draw(self.context);
 			});
 
@@ -84,7 +84,7 @@ var Animator = {
 		var tick = function(now) {
 			if (!timerOn) return;
 			this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-			timer.update(now);
+			timer.tick(now);
 			timer.draw(this.context);
 
 			window.requestAnimationFrame(tick);

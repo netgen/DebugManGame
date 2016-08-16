@@ -9,6 +9,9 @@ function FlyingBug(from, to, image) {
 	this.speed = 1;
 }
 
+FlyingBug.prototype = Object.create(Animatable.prototype);
+FlyingBug.prototype.constructor = FlyingBug;
+
 FlyingBug.prototype.isDead = function() {
 	return this.dead;
 }
@@ -24,20 +27,13 @@ FlyingBug.prototype.draw = function(context) {
 	context.drawImage(this.image, this.position.x, this.position.y);
 };
 
-FlyingBug.prototype.update = function(now) {
+FlyingBug.prototype.update = function(interval) {
 	if (this.distance() < 18) {
 		this.dead = true;
 		return;
 	}
 
-	if (!this.last_time) {
-		this.last_time = now;
-	}
-
-	var dt = now - this.last_time;
-	this.last_time = now;
-
-	this.position.x += this.direction.x * this.speed * dt;
-	this.position.y += this.direction.y * this.speed * dt;
+	this.position.x += this.direction.x * this.speed * interval;
+	this.position.y += this.direction.y * this.speed * interval;
 	this.speed *= 0.97;
 };
