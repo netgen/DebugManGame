@@ -138,6 +138,18 @@ footer {
     box-shadow: none;
 }
 
+.btn-fly {
+    background-image: url('../assets/images/fly.png');
+}
+
+.btn-bee {
+    background-image: url('../assets/images/bee.png');
+}
+
+.btn-ladybug {
+    background-image: url('../assets/images/ladybug.png');
+}
+
 .btn-modal {
     width: 150px;
     padding: 15px;

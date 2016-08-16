@@ -2,7 +2,6 @@ var time;
 var fulltime = 10;
 var timerReset;
 
-var boxes;
 var clickedButton;
 
 var team1 = new Team(0, 0, 0);
@@ -10,6 +9,7 @@ var team2 = new Team(0, 0, 0);
 var turn = "team2";
 
 var numOfBugs;
+var totalBugs;
 
 var KEY_C = 67;
 var KEY_W = 87;
@@ -35,11 +35,11 @@ var myWindow;
 
 function init() {
     myWindow = window.open("", "", "width=400,height=200");
-    boxes = GameState.getRows() * GameState.getColumns();
     changeTurn();
     numOfBugs = parseInt($('#zBugs').val()) + 
                 parseInt($('#qBugs').val()) +
                 parseInt($('#wBugs').val());
+    totalBugs = numOfBugs;
 
     $("#myModal").on("shown.bs.modal", function() {
         Animator.playTimer(fulltime, $("#timer"));
@@ -149,7 +149,7 @@ function changeTurn() {
 }
 
 function checkBug(buttonID) {
-    var questionObj = GameState.getQuestion(buttonID), img, type = null;
+    var questionObj = GameState.getQuestion(buttonID), bug, type = null;
     if(questionObj.hasBug) {
         
         numOfBugs--;
@@ -158,17 +158,17 @@ function checkBug(buttonID) {
         }
 
         if(questionObj.difficulty === 1) {
-            img = 'fly';
+            bug = 'fly';
             type = "easy";
         } else if(questionObj.difficulty === 2) {
-            img = 'bee';
+            bug = 'bee';
             type = "norm";
         } else if(questionObj.difficulty === 3) {
-            img = 'ladybug';
+            bug = 'ladybug';
             type = "hard";
         }
 
-        $('[data-id="'+buttonID+'"]').css('backgroundImage', 'url(assets/images/'+img+'.png)');
+        $('[data-id="'+buttonID+'"]').addClass('btn-' + bug);
     }
 
     return type;            
@@ -273,20 +273,28 @@ function btnUndo() {
     var m = GameState.getRows();
     var n = GameState.getColumns();
 
-    boxes = 0;
+    numOfBugs = totalBugs;
 
     for (var i = 0; i < m; i++) {
         for (var j = 0; j < n; j++) {
             var id = i + "" + j;
             var question = GameState.getQuestion(id);
+            var button = $('[data-id="' + id + '"]');
 
             if (question.closed) {
-                $("#" + id).addClass("btn-closed-" + question.opener);
+                button.addClass("btn-closed-" + question.opener);
             } else {
-                $("#" + id).removeClass("btn-closed-team1");
-                $("#" + id).removeClass("btn-closed-team2");
-                $("#" + id).css("backgroundImage", "none");
-                boxes++;
+                if (!question.hasBug) {
+                    button.removeClass("btn-closed");
+                } else {
+                    button.removeClass("btn-closed-team1");
+                    button.removeClass("btn-closed-team2");
+                    button.removeClass("btn-fly");
+                    button.removeClass("btn-bee");
+                    button.removeClass("btn-ladybug");
+                    button.css("background-image", "none");
+                    numOfBugs--;
+                }
             }
         }
     }
