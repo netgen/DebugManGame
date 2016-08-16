@@ -13,16 +13,13 @@ body {
     background-color: #fdffd1;
 }
 
-.gameName img {
-    left: 0px;
-    top: 10px;
-    position: absolute;
-}
-
 .gameName {
     text-transform: uppercase;
     font-size: 200%;
     margin-top: 20px;
+    background-image: url('../assets/images/logo-triangles.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .navbar {
