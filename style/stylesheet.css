@@ -6,10 +6,12 @@
 }
 
 body {
-    background-color: #fdffd1;
     font-family: 'Open Sans', sans-serif;
 }
 
+.game-board {
+    background-color: #fdffd1;
+}
 
 .gameName img {
     left: 0px;
@@ -196,8 +198,8 @@ footer {
     margin-left: 20px;
 }
 
-.btn-footer:hover {
-    background-color: rgba(242, 55, 32, 0.77);
+.btn-footer:hover, #submitButton:hover {
+    background-color: rgba(242, 55, 32, 0.96);
 }
 
 .modal-body {
@@ -240,7 +242,7 @@ table {
 
 #submitButton, .btn-footer {
     color: white;
-    background-color: rgba(242, 55, 32, 0.96);
+    background-color: rgba(242, 55, 32, 0.77);
     border-radius: 5px;
     border: none;
     padding: 10px;
