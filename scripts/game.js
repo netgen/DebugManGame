@@ -14,7 +14,7 @@ var totalBugs;
 var KEY_C = 67;
 var KEY_W = 87;
 
-
+var isGameOver = false;
 
 $(document).keydown(function(e){
     
@@ -42,7 +42,9 @@ function init() {
     totalBugs = numOfBugs;
 
     $("#myModal").on("shown.bs.modal", function() {
-        Animator.playTimer(fulltime, $("#timer"));
+        if (!isGameOver) {
+            Animator.playTimer(fulltime, $("#timer"));
+        }
     });
 }
 
@@ -220,6 +222,8 @@ function popupAnswer(questionObj) {
 
 
 function btnGameOver() {
+    isGameOver = true;
+
     gameOver();
     
     var m = GameState.getRows();
@@ -257,7 +261,7 @@ function gameOver() {
 
         Animator.playConfetti(from, to);
     } else {
-        //it's a tie...
+        $("#tieModal").modal("show");
     }
 }
 
@@ -274,6 +278,7 @@ function btnUndo() {
     var n = GameState.getColumns();
 
     numOfBugs = totalBugs;
+    isGameOver = false;
 
     for (var i = 0; i < m; i++) {
         for (var j = 0; j < n; j++) {
