@@ -153,6 +153,7 @@ function changeTurn() {
 function checkBug(buttonID) {
     var questionObj = GameState.getQuestion(buttonID), bug, type = null;
     if(questionObj.hasBug) {
+        var button = $('[data-id="'+buttonID+'"]');
         
         numOfBugs--;
         if (numOfBugs == 0) {
@@ -170,7 +171,24 @@ function checkBug(buttonID) {
             type = "hard";
         }
 
-        $('[data-id="'+buttonID+'"]').addClass('btn-' + bug);
+        var buttonPos = button.offset();
+        var iconPos = $("#" + turn + bug + "Icon").offset();
+
+        Animator.playBug(
+            {
+                x: buttonPos.left,
+                y: buttonPos.top
+            },
+
+            {
+                x: iconPos.left,
+                y: iconPos.top
+            },
+
+            bug
+        );
+
+        button.addClass('btn-' + bug);
     }
 
     return type;            
