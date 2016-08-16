@@ -309,7 +309,7 @@ function btnUndo() {
             var button = $('[data-id="' + id + '"]');
 
             if (question.closed) {
-                button.addClass("btn-closed-" + question.opener);
+                button.addClass("btn-closed");
                 numOfBugs--;
             } else {
                 if (!question.hasBug) {
