@@ -39,5 +39,5 @@ FlyingBug.prototype.update = function(now) {
 
 	this.position.x += this.direction.x * this.speed * dt;
 	this.position.y += this.direction.y * this.speed * dt;
-	this.speed *= 0.99;
+	this.speed *= 0.97;
 };

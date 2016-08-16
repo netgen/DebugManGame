@@ -66,7 +66,7 @@ function correctAnswer() {
     
     AUDIOS["tick"].pauseAndRewind();
     AUDIOS["correct"].play();
-    var bug = checkBug(clickedButton);
+    var bug = checkBug(clickedButton, true);
     
     if (bug) {
         if (turn == "team1"){
@@ -103,7 +103,7 @@ function wrongAnswer() {
     
     AUDIOS["tick"].pauseAndRewind();
     AUDIOS["wrong"].play();
-        GameState.pushChanges();   
+    GameState.pushChanges();   
     GameState.savePoints(team1, team2);
     
      $("#checkAnswer").html("Wrong!").css("color", "red");
@@ -150,7 +150,7 @@ function changeTurn() {
     GameState.saveTurn(turn);
 }
 
-function checkBug(buttonID) {
+function checkBug(buttonID, animate) {
     var questionObj = GameState.getQuestion(buttonID), bug, type = null;
     if(questionObj.hasBug) {
         var button = $('[data-id="'+buttonID+'"]');
@@ -174,20 +174,23 @@ function checkBug(buttonID) {
         var buttonPos = button.offset();
         var iconPos = $("#" + turn + bug + "Icon").offset();
 
-        Animator.playBug(
-            {
-                x: buttonPos.left,
-                y: buttonPos.top
-            },
+        if (animate) {
+            Animator.playBug(
+                {
+                    x: buttonPos.left,
+                    y: buttonPos.top
+                },
 
-            {
-                x: iconPos.left,
-                y: iconPos.top
-            },
+                {
+                    x: iconPos.left,
+                    y: iconPos.top
+                },
 
-            bug
-        );
+                bug
+            );
+        }
 
+        button.removeClass("btn-no-bug");
         button.addClass('btn-' + bug);
     }
 
@@ -249,7 +252,7 @@ function btnGameOver() {
 
     for (var i = 0; i < m; i++) {
         for (var j = 0; j < n; j++){
-                checkBug(i + "" + j);
+                checkBug(i + "" + j, false);
                 $('[data-id="'+ i + "" + j +'"]').addClass("btn-closed");
             
         }
@@ -306,6 +309,7 @@ function btnUndo() {
 
             if (question.closed) {
                 button.addClass("btn-closed-" + question.opener);
+                numOfBugs--;
             } else {
                 if (!question.hasBug) {
                     button.removeClass("btn-closed");
@@ -315,8 +319,7 @@ function btnUndo() {
                     button.removeClass("btn-fly");
                     button.removeClass("btn-bee");
                     button.removeClass("btn-ladybug");
-                    button.css("background-image", "none");
-                    numOfBugs--;
+                    button.addClass("btn-no-bug");
                 }
             }
         }
