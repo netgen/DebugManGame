@@ -98,8 +98,8 @@ body {
 }
 
 .btn-box {
-    width: 70px; 
-    height: 70px;
+    min-width: 35px;
+    min-height: 35px;
     background-color: #dbdbc4;
     background-position: center;
     background-repeat: no-repeat;
