@@ -60,7 +60,7 @@ var Animator = {
 
 		var tick = function(now) {
 			var self = this;
-			this.confettiContext.clearRect(fromX, 0, areaWidth, this.canvas.height);
+			this.confettiContext.clearRect(0, 0, this.confettiCanvas.width, this.confettiCanvas.height);
 
 			particles.forEach(function(particle) {
 				particle.tick(now);
