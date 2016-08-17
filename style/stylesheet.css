@@ -84,18 +84,6 @@ body {
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 10px rgba(10, 10, 10, 0.8);
 }
 
-
-footer {
-    background-color: white;
-    padding: 15px;
-    position: fixed;
-    bottom:0;
-    left: 0;
-    right: 0;
-    font-family: "Arial Rounded MT";
-    font-weight: bold;
- }
-    
     /* On small screens, set height to 'auto' for sidenav and grid */
     @media screen and (max-width: 767px) {
       .sidenav {
@@ -160,49 +148,9 @@ footer {
     background-image: none;
 }
 
-.btn-modal-correct {
-    background-color: #26c926;
-    margin-right: 20px;
-}
-.btn-modal-correct:hover {
-    background-color: rgba(38, 201, 38, 0.85);
-    color: white;
-}
-
-.btn-modal-wrong {
-    background-color: #d61919;
-    margin-left: 50px;
-}
-
-.btn-modal-wrong:hover {
-    background-color: rgba(214, 25, 25, 0.9);
-    color: white;
-}
-
-.btn-modal-wrong, .btn-modal-correct {
-    font-family: "Arial Rounded MT";
-    font-weight: bold;
-    border-radius: 5px;
-    border: none;
-    color: white;
-    width: 150px;
-    padding: 15px;
-}
-
-.btn-footer {
-    padding: 5px;
-    margin-right: 20px; 
-    margin-left: 20px;
-}
-
-.btn-footer:hover, #submitButton:hover {
+.btn-popup:hover, #submitButton:hover {
     background-color: rgba(242, 55, 32, 0.96);
 }
-
-.modal-body {
-    font-size: 40px;
-}
-
 
 .fieldActive {
     color: orangered;
@@ -237,13 +185,15 @@ table {
     color: #4d4d4d;
 }
 
-#submitButton, .btn-footer {
+#submitButton, .btn-popup {
     color: white;
     background-color: rgba(242, 55, 32, 0.77);
     border-radius: 5px;
     border: none;
     padding: 10px;
     font-weight: bold;
+    margin-right: 20px; 
+    margin-left: 20px;
 }
 
 .close: disabled {
@@ -264,10 +214,6 @@ canvas {
     pointer-events: none;
 }
 
-#checkAnswer, #question {
+#checkAnswer, #question, #timer {
     font-size: 45px;
-}
-
-#proba {
-    color: blue;
 }
