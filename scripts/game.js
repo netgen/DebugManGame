@@ -30,11 +30,13 @@ $(document).keydown(function(e){
 
 
 var myWindow;
+var popup;
 
 //creates a popup window with answers
 
 function init() {
-    myWindow = window.open("", "", "width=400,height=200");
+    myWindow = window.open("popupWindow.html", "mypopup" ,"width=600,height=400");
+    console.log(myWindow);
     boxes = GameState.getRows() * GameState.getColumns();
     changeTurn();
     numOfBugs = parseInt($('#zBugs').val()) + 
@@ -197,10 +199,12 @@ function setIdClickedButton() {
     AUDIOS["tick"].play();
     
     popupAnswer(questionObj);
+
     
     $("#question").text(questionObj.question);
     $("#closeBtn").attr("disabled", true);
     $("#checkAnswer").html("");
+
     
     resetTime();
 }
@@ -211,11 +215,17 @@ var str1;
 var str2;
 
 function popupAnswer(questionObj) {
+    
     str1 = questionObj.question;
     str2 = questionObj.answer;
-    myWindow.document.write("<p>" + str1.fontsize("5") + "</p>");
-    myWindow.document.write("<p>" + str2.fontsize("7") + "</p>");
+
+    var div = myWindow.document.getElementById('divId');
+    div.innerHTML = "<br />" + str1.fontsize("6") + "<br />";
+    div.innerHTML = div.innerHTML + " " + str2.fontsize("7");
+    
     myWindow.document.close();
+
+    
 }
 
 
@@ -315,5 +325,8 @@ function timer() {
 	}, 1000);
 }
 
+function newGame() {
+    window.location.href='index.html';
+}
 
-$(document.body).on('click', '.btn-box', setIdClickedButton)
+$(document.body).on('click', '.btn-box', setIdClickedButton);

@@ -1,0 +1,19 @@
+<html>
+<head>
+     <link rel="stylesheet" type="text/css" href="style/stylesheet.css">
+</head>
+    
+<body>
+    <div>
+		<button class="btn-footer" id="btnNewGame">NEW GAME</button>
+		<button class="btn-footer" id="btnGmOv">GAME OVER</button>
+		<button class="btn-footer" id="btnUndo">UNDO</button>
+    </div>
+</body>
+    
+<script>
+    document.getElementById("btnGmOv").onclick = window.opener.btnGameOver;
+    document.getElementById("btnNewGame").onclick = window.opener.newGame; 
+    document.getElementById("btnUndo").onclick = window.opener.btnUndo;    
+</script>
+</html>

@@ -138,14 +138,10 @@ footer {
     box-shadow: none;
 }
 
-.btn-modal {
-    width: 150px;
-    padding: 15px;
-}
 
 .btn-modal-correct {
     background-color: #26c926;
-    margin-right: 50px;
+    margin-right: 20px;
 }
 .btn-modal-correct:hover {
     background-color: rgba(38, 201, 38, 0.85);
@@ -166,7 +162,10 @@ footer {
     font-family: "Arial Rounded MT";
     font-weight: bold;
     border-radius: 5px;
+    border: none;
     color: white;
+    width: 150px;
+    padding: 15px;
 }
 
 .btn-footer {
@@ -248,3 +247,6 @@ canvas {
     font-size: 45px;
 }
 
+#proba {
+    color: blue;
+}
