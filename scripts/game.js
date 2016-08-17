@@ -16,7 +16,7 @@ var KEY_W = 87;
 
 var isGameOver = false;
 
-$(document).keydown(function(e){
+$(document).keydown(function(e) {
     
     e = e || window.event;
 

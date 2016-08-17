@@ -264,6 +264,10 @@ canvas {
     pointer-events: none;
 }
 
+#confettiCanvas {
+    z-index: 3000;
+}
+
 #checkAnswer, #question {
     font-size: 45px;
 }

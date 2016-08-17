@@ -5,6 +5,10 @@ function FlyingBug(from, to, image) {
 	this.image = image;
 	this.position = from;
 	this.to = to;
+	this.size = {
+		width: image.width,
+		height: image.height
+	};
 
 	var distance = [to.x - from.x, to.y - from.y];
 	var norm = Math.sqrt(
