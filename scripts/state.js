@@ -13,6 +13,7 @@ var GameState = {
 		this.loaded = true;
 	},
 
+	// Save the current game state to local storage
 	pushChanges: function() {
 		localStorage.data = JSON.stringify(this.data);
 		$("#btnUndo").attr("disabled", false);
@@ -26,7 +27,6 @@ var GameState = {
         this.data.grid[y][x].opener = team; 
 	},
 
-	//must be changed
 	savePoints: function(team1, team2) {
 		this.data.team2.copy(team2);
 		this.data.team1.copy(team1);

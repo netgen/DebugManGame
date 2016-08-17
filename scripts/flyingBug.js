@@ -1,10 +1,16 @@
+var RADIUS_OF_DYING = 18;
+
 function FlyingBug(from, to, image) {
 	this.dead = false;
 	this.image = image;
 	this.position = from;
 	this.to = to;
+
 	var distance = [to.x - from.x, to.y - from.y];
-	var norm = Math.sqrt(Math.pow(distance[0], 2) + Math.pow(distance[1], 2));
+	var norm = Math.sqrt(
+				Math.pow(distance[0], 2) +
+				Math.pow(distance[1], 2)
+			);
 	this.direction = { x: distance[0] / norm, y: distance[1] / norm };
 	this.speed = 1;
 }
@@ -28,7 +34,7 @@ FlyingBug.prototype.draw = function(context) {
 };
 
 FlyingBug.prototype.update = function(interval) {
-	if (this.distance() < 18) {
+	if (this.distance() < RADIUS_OF_DYING) {
 		this.dead = true;
 		return;
 	}
