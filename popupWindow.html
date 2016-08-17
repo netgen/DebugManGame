@@ -8,6 +8,7 @@
 		<button class="btn-popup" id="btnNewGame">NEW GAME</button>
 		<button class="btn-popup" id="btnGmOv">GAME OVER</button>
 		<button class="btn-popup" id="btnUndo">UNDO</button>
+        <button class="btn-popup" id="btnChangeTurn">CHANGE TURN</button>
     </div>
     <div id="divId"></div>
 </body>
@@ -15,6 +16,7 @@
 <script>
     document.getElementById("btnGmOv").onclick = window.opener.btnGameOver;
     document.getElementById("btnNewGame").onclick = window.opener.newGame; 
-    document.getElementById("btnUndo").onclick = window.opener.btnUndo;    
+    document.getElementById("btnUndo").onclick = window.opener.btnUndo;   
+    document.getElementById("btnChangeTurn").onclick = window.opener.changeTurn;    
 </script>
 </html>
