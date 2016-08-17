@@ -16,7 +16,7 @@ function FlyingBug(from, to, image) {
 				Math.pow(distance[1], 2)
 			);
 	this.direction = { x: distance[0] / norm, y: distance[1] / norm };
-	this.speed = 1;
+	this.speed = 0.9;
 }
 
 FlyingBug.prototype = Object.create(Animatable.prototype);
@@ -45,5 +45,4 @@ FlyingBug.prototype.update = function(interval) {
 
 	this.position.x += this.direction.x * this.speed * interval;
 	this.position.y += this.direction.y * this.speed * interval;
-	this.speed *= 0.97;
 };
