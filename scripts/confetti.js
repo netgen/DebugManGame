@@ -14,7 +14,7 @@ Confetti.prototype = Object.create(Animatable.prototype);
 Confetti.prototype.constructor = Confetti;
 
 Confetti.prototype.init = function() {
-	this.x = Math.random() * (this.toX - this.fromX) + this.fromX;
+	this.x = Math.random() * (this.toX - this.fromX - CONFETTI_SIZE - 1) + this.fromX;
 	this.y = Math.random() * this.height - this.height;
 	this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
 };

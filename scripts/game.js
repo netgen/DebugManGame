@@ -16,7 +16,6 @@ var KEY_W = 87;
 
 var isGameOver = false;
 
-
 var myWindow;
 
 //creates a popup window with answers
