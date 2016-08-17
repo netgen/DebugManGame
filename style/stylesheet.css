@@ -9,6 +9,15 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+.intro-form img {
+    width: auto;
+    height: 40px;
+}
+
+.intro-form input {
+    line-height: 40px;
+}
+
 .game-board {
     background-color: #fdffd1;
 }
