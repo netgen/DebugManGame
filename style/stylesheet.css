@@ -5,11 +5,7 @@
     background-color: white;
 }
 
-body {
-    font-family: 'Open Sans', sans-serif;
-}
-
-.game-board {
+.game-board, #popupBody {
     background-color: #fdffd1;
 }
 
@@ -196,13 +192,14 @@ table {
     margin-left: 20px;
 }
 
-.close: disabled {
+#closeBtn: disabled {
     pointer-events: none;
-   cursor:wait;
+    cursor:wait;
 }
 
 .main-content {
     z-index: 0;
+    font-family: 'Open Sans', sans-serif;
 }
 
 canvas {
@@ -220,4 +217,5 @@ canvas {
 
 #checkAnswer, #question, #timer {
     font-size: 45px;
+    text-align: center;
 }
