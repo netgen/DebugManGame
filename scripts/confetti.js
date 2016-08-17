@@ -1,3 +1,5 @@
+var CONFETTI_SIZE = 5;
+
 function Confetti(fromX, toX, height) {
 	this.toX = toX;
 	this.fromX = fromX;
@@ -19,7 +21,7 @@ Confetti.prototype.init = function() {
 
 Confetti.prototype.draw = function(context) {
 	context.beginPath();
-	context.arc(this.x, this.y, 5, 0, 2 * Math.PI, false);
+	context.arc(this.x, this.y, CONFETTI_SIZE, 0, 2 * Math.PI, false);
 	context.fillStyle = this.color;
 	context.fill();
 	context.closePath();

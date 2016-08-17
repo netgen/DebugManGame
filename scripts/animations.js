@@ -74,11 +74,7 @@ var Animator = {
 
 		var timer = new Timer (
 						duration,
-						{
-							x: parent.offset().left + parent.outerWidth()/2,
-							y: parent.offset().top + parent.outerHeight()/2
-						},
-						Math.min(parent.outerWidth()/2, parent.outerHeight()/2) - 5
+						parent
 					);
 
 		var tick = function(now) {
