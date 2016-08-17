@@ -71,10 +71,13 @@ $(function() {
 		$(".intro-form").html(response1[0]);
 		$(".game-board").html(response2[0]);
 
-		var form_script = $("#template_select").html();
+		var form_script = $("#template_select_row").html();
 		var template = Handlebars.compile(form_script);
+		$("#rowSelector").html(template());
 
-		$(".selector").html(template());
+		form_script = $("#template_select_col").html();
+		template = Handlebars.compile(form_script);
+		$("#colSelector").html(template());
 	});
 
 });
