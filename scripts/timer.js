@@ -6,6 +6,9 @@ function Timer(duration, center, radius) {
 	this.speed = this.angle / (duration * 1000);
 }
 
+Timer.prototype = Object.create(Animatable.prototype);
+Timer.prototype.constructor = Timer;
+
 Timer.prototype.draw = function(context) {
 	if (this.angle < 0) return;
 
@@ -18,13 +21,6 @@ Timer.prototype.draw = function(context) {
 	context.closePath();
 };
 
-Timer.prototype.update = function(now) {
-	if (!this.last_time) {
-		this.last_time = now;
-	}
-
-	var dt = now - this.last_time;
-	this.last_time = now;
-
-	this.angle -= this.speed * dt;
+Timer.prototype.update = function(interval) {
+	this.angle -= this.speed * interval;
 };

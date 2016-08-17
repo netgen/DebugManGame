@@ -6,21 +6,22 @@
 }
 
 body {
-    background-color: #fdffd1;
     font-family: 'Open Sans', sans-serif;
 }
 
-
-.gameName img {
-        left: 0px;
-        top: 10px;
-        position: absolute;
+.game-board {
+    background-color: #fdffd1;
 }
 
 .gameName {
     text-transform: uppercase;
     font-size: 200%;
     margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    background-image: url('../assets/images/logo-triangles.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .navbar {
@@ -38,7 +39,8 @@ body {
     font-size: x-large;
     color: white;
     border-radius: 5px;
-    height: 1000px;  
+    min-height: 500px;
+    height: auto;
 }
 
 .sidenav img {
@@ -49,6 +51,10 @@ body {
 .gameBoard {
     min-height: 500px;
     height: auto;
+}
+
+.gameBoard p {
+    font-size: x-large;
 }
 
 
@@ -138,6 +144,21 @@ footer {
     box-shadow: none;
 }
 
+.btn-fly {
+    background-image: url('../assets/images/fly.png');
+}
+
+.btn-bee {
+    background-image: url('../assets/images/bee.png');
+}
+
+.btn-ladybug {
+    background-image: url('../assets/images/ladybug.png');
+}
+
+.btn-no-bug {
+    background-image: none;
+}
 
 .btn-modal-correct {
     background-color: #26c926;
@@ -174,8 +195,8 @@ footer {
     margin-left: 20px;
 }
 
-.btn-footer:hover {
-    background-color: rgba(242, 55, 32, 0.77);
+.btn-footer:hover, #submitButton:hover {
+    background-color: rgba(242, 55, 32, 0.96);
 }
 
 .modal-body {
@@ -218,7 +239,7 @@ table {
 
 #submitButton, .btn-footer {
     color: white;
-    background-color: rgba(242, 55, 32, 0.96);
+    background-color: rgba(242, 55, 32, 0.77);
     border-radius: 5px;
     border: none;
     padding: 10px;

@@ -8,6 +8,9 @@ function Confetti(fromX, toX, height) {
 	this.init();
 }
 
+Confetti.prototype = Object.create(Animatable.prototype);
+Confetti.prototype.constructor = Confetti;
+
 Confetti.prototype.init = function() {
 	this.x = Math.random() * (this.toX - this.fromX) + this.fromX;
 	this.y = Math.random() * this.height - this.height;
@@ -22,15 +25,8 @@ Confetti.prototype.draw = function(context) {
 	context.closePath();
 };
 
-Confetti.prototype.update = function(now) {
-	if (!this.last_time) {
-		this.last_time = now;
-	}
-
-	var dt = now - this.last_time;
-	this.last_time = now;
-
-	this.y += this.speed * dt;
+Confetti.prototype.update = function(interval) {
+	this.y += this.speed * interval;
 	
 	if (this.y > this.height) {
 		this.init();

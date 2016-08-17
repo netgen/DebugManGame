@@ -2,7 +2,6 @@ var time;
 var fulltime = 10;
 var timerReset;
 
-var boxes;
 var clickedButton;
 
 var team1 = new Team(0, 0, 0);
@@ -10,11 +9,12 @@ var team2 = new Team(0, 0, 0);
 var turn = "team2";
 
 var numOfBugs;
+var totalBugs;
 
 var KEY_C = 67;
 var KEY_W = 87;
 
-
+var isGameOver = false;
 
 $(document).keydown(function(e){
     
@@ -37,14 +37,16 @@ var popup;
 function init() {
     myWindow = window.open("popupWindow.html", "mypopup" ,"width=600,height=400");
     console.log(myWindow);
-    boxes = GameState.getRows() * GameState.getColumns();
     changeTurn();
     numOfBugs = parseInt($('#zBugs').val()) + 
                 parseInt($('#qBugs').val()) +
                 parseInt($('#wBugs').val());
+    totalBugs = numOfBugs;
 
     $("#myModal").on("shown.bs.modal", function() {
-        Animator.playTimer(fulltime, $("#timer"));
+        if (!isGameOver) {
+            Animator.playTimer(fulltime, $("#timer"));
+        }
     });
 }
 
@@ -66,10 +68,10 @@ function correctAnswer() {
     
     AUDIOS["tick"].pauseAndRewind();
     AUDIOS["correct"].play();
-    var bug = checkBug(clickedButton);
+    var bug = checkBug(clickedButton, true);
     
     if (bug) {
-        if (turn == "team1"){
+        if (turn === "team1"){
             team1.addBug(bug);
             updateStatus(turn, team1);
         } else {
@@ -87,11 +89,13 @@ function correctAnswer() {
     
     GameState.savePoints(team1, team2);
 
-    
     $("#closeBtn").attr("disabled", false);
     
     clearTimeout(timerReset);
     
+    if (numOfBugs === 0) {
+            btnGameOver();
+    }
 }
 
 
@@ -103,7 +107,7 @@ function wrongAnswer() {
     
     AUDIOS["tick"].pauseAndRewind();
     AUDIOS["wrong"].play();
-        GameState.pushChanges();   
+    GameState.pushChanges();   
     GameState.savePoints(team1, team2);
     
      $("#checkAnswer").html("Wrong!").css("color", "red");
@@ -150,27 +154,45 @@ function changeTurn() {
     GameState.saveTurn(turn);
 }
 
-function checkBug(buttonID) {
-    var questionObj = GameState.getQuestion(buttonID), img, type = null;
+function checkBug(buttonID, animate) {
+    var questionObj = GameState.getQuestion(buttonID), bug, type = null;
     if(questionObj.hasBug) {
+        var button = $('[data-id="'+buttonID+'"]');
         
         numOfBugs--;
-        if (numOfBugs == 0) {
-            btnGameOver();
-        }
 
         if(questionObj.difficulty === 1) {
-            img = 'fly';
+            bug = 'fly';
             type = "easy";
         } else if(questionObj.difficulty === 2) {
-            img = 'bee';
+            bug = 'bee';
             type = "norm";
         } else if(questionObj.difficulty === 3) {
-            img = 'ladybug';
+            bug = 'ladybug';
             type = "hard";
         }
 
-        $('[data-id="'+buttonID+'"]').css('backgroundImage', 'url(assets/images/'+img+'.png)');
+        var buttonPos = button.offset();
+        var iconPos = $("#" + turn + bug + "Icon").offset();
+
+        if (animate) {
+            Animator.playBug(
+                {
+                    x: buttonPos.left,
+                    y: buttonPos.top
+                },
+
+                {
+                    x: iconPos.left,
+                    y: iconPos.top
+                },
+
+                bug
+            );
+        }
+
+        button.removeClass("btn-no-bug");
+        button.addClass('btn-' + bug);
     }
 
     return type;            
@@ -223,13 +245,16 @@ function popupAnswer(questionObj) {
     div.innerHTML = "<br />" + str1.fontsize("6") + "<br />";
     div.innerHTML = div.innerHTML + " " + str2.fontsize("7");
     
-    myWindow.document.close();
 
     
 }
 
 
 function btnGameOver() {
+    isGameOver = true;
+
+    GameState.pushChanges();
+
     gameOver();
     
     var m = GameState.getRows();
@@ -237,7 +262,7 @@ function btnGameOver() {
 
     for (var i = 0; i < m; i++) {
         for (var j = 0; j < n; j++){
-                checkBug(i + "" + j);
+                checkBug(i + "" + j, false);
                 $('[data-id="'+ i + "" + j +'"]').addClass("btn-closed");
             
         }
@@ -267,7 +292,7 @@ function gameOver() {
 
         Animator.playConfetti(from, to);
     } else {
-        //it's a tie...
+        $("#tieModal").modal("show");
     }
 }
 
@@ -283,20 +308,29 @@ function btnUndo() {
     var m = GameState.getRows();
     var n = GameState.getColumns();
 
-    boxes = 0;
+    numOfBugs = totalBugs;
+    isGameOver = false;
 
     for (var i = 0; i < m; i++) {
         for (var j = 0; j < n; j++) {
             var id = i + "" + j;
             var question = GameState.getQuestion(id);
+            var button = $('[data-id="' + id + '"]');
 
             if (question.closed) {
-                $("#" + id).addClass("btn-closed-" + question.opener);
+                button.addClass("btn-closed");
+                numOfBugs--;
             } else {
-                $("#" + id).removeClass("btn-closed-team1");
-                $("#" + id).removeClass("btn-closed-team2");
-                $("#" + id).css("backgroundImage", "none");
-                boxes++;
+                if (!question.hasBug) {
+                    button.removeClass("btn-closed");
+                } else {
+                    button.removeClass("btn-closed-team1");
+                    button.removeClass("btn-closed-team2");
+                    button.removeClass("btn-fly");
+                    button.removeClass("btn-bee");
+                    button.removeClass("btn-ladybug");
+                    button.addClass("btn-no-bug");
+                }
             }
         }
     }

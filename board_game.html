@@ -5,9 +5,15 @@
 
 			<div class="col-sm-2 sidenav" id="team1">
 				<p>TEAM 1</p>
-				<p><img src="assets/images/fly_icon.png" /> x <span id="team1easyBugs">0</span></p>
-				<p><img src="assets/images/bee_icon.png" /> x <span id="team1normBugs">0</span></p>
-				<p><img src="assets/images/ladybug_icon.png" /> x <span id="team1hardBugs">0</span></p>
+				<p>
+					<img id="team1flyIcon" src="assets/images/fly_icon.png" /> x <span id="team1easyBugs">0</span>
+				</p>
+				<p>
+					<img id="team1beeIcon" src="assets/images/bee_icon.png" /> x <span id="team1normBugs">0</span>
+				</p>
+				<p>
+					<img id="team1ladybugIcon" src="assets/images/ladybug_icon.png" /> x <span id="team1hardBugs">0</span>
+				</p>
 				<p></p>
 				<p>SCORE: <span id="team1Pts">0</span></p>
 			</div>
@@ -40,12 +46,9 @@
 
 				<!-- Trigger the modal with a button -->
 				<div id="boardContent" class="btn-group">
-
 					<!-- Modal -->
 					<div id="myModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="true">
-
 						<div class="modal-dialog">
-
 							<!-- Modal content-->
 							<div class="modal-content">
 								<div class="modal-header">
@@ -60,14 +63,33 @@
 							</div>
 						</div>
 					</div>
+
+					<!-- Modal -->
+					<div id="tieModal" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-body">
+									<h3>It's a tie!</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /Modal -->
 				</div>
 			</div>
 
 			<div class="col-sm-2 sidenav team2Active" id="team2">
 				<p>TEAM 2</p>
-				<p><img src="assets/images/fly_icon.png" /> x <span id="team2easyBugs">0</span></p>
-				<p><img src="assets/images/bee_icon.png" /> x <span id="team2normBugs">0</span></p>
-				<p><img src="assets/images/ladybug_icon.png" /> x <span id="team2hardBugs">0</span></p>
+				<p>
+					<img id="team2flyIcon" src="assets/images/fly_icon.png" /> x <span id="team2easyBugs">0</span>
+				</p>
+				<p>
+					<img id="team2beeIcon" src="assets/images/bee_icon.png" /> x <span id="team2normBugs">0</span>
+				</p>
+				<p>
+					<img id="team2ladybugIcon" src="assets/images/ladybug_icon.png" /> x <span id="team2hardBugs">0</span>
+				</p>
 				<p></p>
 				<p>SCORE: <span id="team2Pts">0</span></p>
 			</div>

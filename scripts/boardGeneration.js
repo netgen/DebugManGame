@@ -75,7 +75,7 @@ function create2DArray(rows, columns) {
 }
 
 function random(min, max) {
-	return Math.floor(Math.random() * (max - 1)) + min;
+	return Math.floor(Math.random() * max) + min;
 }
 
 function freeSlot(array, rows, cols) {
@@ -84,6 +84,7 @@ function freeSlot(array, rows, cols) {
 			c = random(0, cols);
 
 		if (!array[r][c]) {
+
 			return {
 				row: r,
 				column: c

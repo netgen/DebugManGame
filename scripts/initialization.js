@@ -1,3 +1,13 @@
+if (!Object.create) {
+	// Nekompatibilan browser
+	Object.create = function(o) {
+		//izbjegava se pozivanje konstruktora 2 puta
+		function F() {}
+		F.prototype = o;
+		return new F();
+	};
+}
+
 $(function() {
 	
 	$(window).on('hashchange', function() {
