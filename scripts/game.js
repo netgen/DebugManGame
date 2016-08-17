@@ -263,6 +263,9 @@ $(document).keydown(function(e){
 //game over
 //conffeties start to fall
 function gameOver() {
+    
+    setPointerEvents('none');
+    
     var from, to,
         team1_points = team1.getPoints(),
         team2_points = team2.getPoints();
@@ -294,8 +297,6 @@ function gameOver() {
 //this method is called when button 'Game over' is pressed
 function btnGameOver() {
     isGameOver = true;
-    
-    myWindow.document.getElementById('btnUndo').style.pointerEvents = 'none';
 
     GameState.pushChanges();
 
@@ -379,6 +380,12 @@ function timer() {
 function newGame() {
     window.location.href='index.html';
     myWindow.document.getElementById('divId').innerHTML = "";
-    myWindow.document.getElementById('btnUndo').style.pointerEvents = 'all';
+    setPointerEvents('all');
+    
 }
 
+function setPointerEvents(pointerEvent){
+ myWindow.document.getElementById('btnUndo').style.pointerEvents = pointerEvent;
+    myWindow.document.getElementById('btnChangeTurn').style.pointerEvents = pointerEvent;
+    myWindow.document.getElementById('btnGmOv').style.pointerEvents = pointerEvent;
+}
