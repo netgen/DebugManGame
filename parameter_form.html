@@ -5,13 +5,13 @@
 		<div class="form-group">
 			<label for="noRows" class="col-md-6 control-label">Number of rows:</label>
 			<div class="col-md-6">
-				<select name="noRows" class="selector"></select>
+				<select name="noRows" id="rowSelector"></select>
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="noColumns" class="col-md-6 control-label">Number of columns:</label>
 			<div class="col-md-6">
-				<select name="noColumns" class="selector"></select>
+				<select name="noColumns" id="colSelector"></select>
 			</div>
 		</div>
 
@@ -47,7 +47,13 @@
 	</form>
 </div>
 
-<script type="text/template" id="template_select">
+<script type="text/template" id="template_select_row">
+	{{#times 6}}
+		<option value="{{@index}}">{{@index}}</option>
+	{{/times}}
+</script>
+
+<script type="text/template" id="template_select_col">
 	{{#times 8}}
 		<option value="{{@index}}">{{@index}}</option>
 	{{/times}}

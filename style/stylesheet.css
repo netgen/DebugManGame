@@ -5,6 +5,16 @@
     background-color: white;
 }
 
+
+.intro-form img {
+    width: auto;
+    height: 40px;
+}
+
+.intro-form input {
+    line-height: 40px;
+}
+
 .game-board, #popupBody {
     background-color: #fdffd1;
 }
@@ -94,7 +104,7 @@
 }
 
 .btn-box {
-    width: 70px; 
+    width: 70px;
     height: 70px;
     background-color: #dbdbc4;
     background-position: center;
