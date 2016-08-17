@@ -229,3 +229,10 @@ canvas {
     font-size: 45px;
     text-align: center;
 }
+
+#footerImgs {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    margin-right: 15px;
+}
