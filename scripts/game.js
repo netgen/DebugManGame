@@ -20,6 +20,7 @@ var myWindow;
 
 //creates a popup window with answers
 function init() {
+    console.log("Initializing...");
     myWindow = window.open("popupWindow.html", "mypopup" ,"width=600,height=400");
 
     changeTurn();
@@ -156,26 +157,45 @@ function showAnswer() {
 function hideModal(){
      window.setTimeout(function(){
         $('#myModal').modal('hide');
-            }, 3000);
-    changeTurn(turn);
+            }, 2000);
+    changeTurn();
+}
+
+function pulseText(team) {
+    if (isGameOver) return;
+    
+    $("#" + team + "Info").stop()
+                            .delay(50)
+                            .animate({fontSize: "50px"}, 750)
+                            .animate({fontSize: "32px"}, 750)
+                            .animate({fontSize: "50px"}, 750)
+                            .animate({fontSize: "32px"}, 750);
 }
 
 
 //change the team on move
 function changeTurn() {
-    if (turn == "team1") {
+    $("#" + turn + "Info").html("");
+
+    if (turn === "team1") {
         turn = "team2";
         $("#team1").toggleClass("team1Active");
         $("#team2").toggleClass("team2Active");
-        $("#team2 p").fadeTo(5000, 1.0);
-        $("#team1 p").fadeTo(5000, 0.2);
+        $("#team2 p").fadeTo(2000, 1.0).promise().done(function() {
+            pulseText(turn);
+        });
+        $("#team1 p").fadeTo(2000, 0.2);
     } else {
         turn = "team1";
         $("#team1").toggleClass("team1Active");
         $("#team2").toggleClass("team2Active");
-        $("#team1 p").fadeTo(5000, 1.0);
-        $("#team2 p").fadeTo(5000, 0.2);
+        $("#team1 p").fadeTo(2000, 1.0).promise().done(function() {
+            pulseText(turn);
+        });
+        $("#team2 p").fadeTo(2000, 0.2);
     }
+
+    $("#" + turn + "Info").html("YOUR TURN!");
 
     answered = false;
     GameState.saveTurn(turn);
