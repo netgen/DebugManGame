@@ -14,14 +14,14 @@ $(function() {
 		render(uri);
 	});
 
-	// Trigger the first hashchange, to initialize everything
+	// Trigger the first hashchange, to initialize everything.
 	$(window).trigger('hashchange');
 
 	function clear() {
 		$('.page').hide();
 	}
 
-	// Router based on hashchanges
+	// Router based on hashchanges.
 	function render(url) {
 		var temp = url.split('/')[0];
 		$('.main-content .page').hide();
@@ -63,6 +63,7 @@ $(function() {
 
 	$('[data-toggle="tooltip"]').tooltip();
 
+	// Load the two pages and fill them with Handlebars.
     $.when(
     	$.get('parameter_form.html'),
     	$.get('board_game.html')
@@ -78,6 +79,18 @@ $(function() {
 		form_script = $("#template_select_col").html();
 		template = Handlebars.compile(form_script);
 		$("#colSelector").html(template());
+
+		// Prevent the default action of the form.
+		$(document.body).on('submit', "#paramForm", function(e) {
+			e.preventDefault();
+			if (validateBugs()) {
+				parseInput();
+			}
+		});
+
+		$(".bugNumber").change(validateBugs);
 	});
 
+	// Grab all canvases (layers) and their contexts.
+	Animator.initialize();
 });

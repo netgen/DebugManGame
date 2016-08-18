@@ -1,56 +1,4 @@
-function validate() {
-	var valid = isNumber("#qBugs") && isNumber("#wBugs") && isNumber("#zBugs");
-    if (!valid) {
-        alert("Needed a number of questions!");
-        $("#submitButton").attr("disabled", valid);
-    } 
-}
-
-function isNumber(objName) {
-	var value = $(objName).val();
-	if (value === "") return false;
-
-	var num_regex = /^[0-9]+$/;
-	return num_regex.test(value);
-}
-
-function checkParameters() {
-	var zBugs = parseInt(localStorage["zBugs"]);
-	var wBugs = parseInt(localStorage["wBugs"]);
-	var qBugs = parseInt(localStorage["qBugs"]);
-	var noRows = parseInt(localStorage["noRows"]);
-	var noColumns = parseInt(localStorage["noColumns"]);
-
-	if (zBugs + wBugs + qBugs > noRows * noColumns) {
-		return false;
-	}
-
-	return true;
-}
-
-function parseInput() {
-	var array = $("#paramForm").serializeArray();
-
-	for (var i = 0; i < array.length; i++) {
-		var pair = array[i];
-		localStorage.setItem(pair["name"], parseInt(pair["value"]));
-	}
-
-	if (!checkParameters()) {
-		alert("Number of bugs exceeds the board size!");
-		return;
-	}
-
-	$('.page').hide();
-	$('.loading-page').show();
-
-	$.get("assets/questions.json")
-		.success(generateBoard)
-		.fail(function(json) {
-			alert("Server dieded :(");
-		});
-}
-
+// Copies the given array and returns the shuffled version.
 function shuffle(array) {
 	var i = 0,
 		j = 0,
@@ -76,12 +24,13 @@ function create2DArray(rows, columns) {
 	return array;
 }
 
+// Returns a random integer between 'min' and 'max'.
 function random(min, max) {
 	return Math.floor(Math.random() * max) + min;
 }
 
-
-//return free slot for putting bugs
+// Checks for a free slot (its value is falsey) in
+// the game grid.
 function freeSlot(array, rows, cols) {
 	while (true) {
 		var r = random(0, rows),
@@ -97,17 +46,20 @@ function freeSlot(array, rows, cols) {
 	}
 }
 
-var around = [[1, -1], [1, 0], [1, 1], [0, -1],
+var ADJACENT_FIELDS = [[1, -1], [1, 0], [1, 1], [0, -1],
 			  [-1, -1], [-1, 0], [-1, 1], [0, 1]];
 
+// Checks if the given slot is in the limits of the grid.
 function inBoundaries(row, col, rows, cols) {
 	return (row >= 0 && row < rows) &&
 			(col >= 0 && col < cols);
 }
 
+// Tries to find an available field around the given bug;
+// if none is available, returns any other free slot.
 function rangeSlot(array, rows, cols, bug) {
-	for (var i = 0; i < around.length; i++) {
-		var direction = around[i];
+	for (var i = 0; i < ADJACENT_FIELDS.length; i++) {
+		var direction = ADJACENT_FIELDS[i];
 		var row = bug.row + direction[0],
 			col = bug.column + direction[1];
 
@@ -125,8 +77,7 @@ function rangeSlot(array, rows, cols, bug) {
 }
 
 
-
-// places bugs (other questions) around central bugs (hard questions)
+// Places all follower bugs (other questions) around the central bugs (hard questions) in the grid.
 function placeAround(centralBugs, followers, grid, rows, cols) {
 	var limit = Math.min(centralBugs.length, followers.length);
 
@@ -145,16 +96,17 @@ function placeAround(centralBugs, followers, grid, rows, cols) {
 	}
 }
 
-
+// Places all bugs on the grid according to available
+// questions and their difficulty.
 function placeBugs(rows, cols, questions) {
 	var easy = shuffle(questions["1"]);
-	var ezBugs = easy.splice(0, parseInt(localStorage["zBugs"]));
+	var ezBugs = easy.splice(0, parseInt(localStorage["numEasyBugs"]));
 
 	var normal = shuffle(questions["2"]);
-	var normBugs = normal.splice(0, parseInt(localStorage["wBugs"]));
+	var normBugs = normal.splice(0, parseInt(localStorage["numNormBugs"]));
 
 	var hard = shuffle(questions["3"]);
-	var hardBugs = hard.splice(0, parseInt(localStorage["qBugs"]));
+	var hardBugs = hard.splice(0, parseInt(localStorage["numHardBugs"]));
 
 	var remainder = rows * cols - (ezBugs.length + normBugs.length + hardBugs.length);
 	var otherQs = shuffle(easy.concat(normal, hard)).splice(0, remainder);
@@ -183,6 +135,8 @@ function placeBugs(rows, cols, questions) {
 	return array;
 }
 
+// Generates the game board from the given questions
+// in the JSON format.
 function generateBoard(questions) {
 	var rows = localStorage["noRows"];
 	var cols = localStorage["noColumns"];
@@ -222,6 +176,7 @@ function generateBoard(questions) {
 	GameState.load();
 }
 
+// Creates a field with the given question.
 function createField(question, isBug, row, column) {
 	question["hasBug"] = isBug;
 	question["row"] = row;
@@ -230,10 +185,3 @@ function createField(question, isBug, row, column) {
 	question["opener"] = null;
 	return question;
 }
-
-$(function() {
-	$(document.body).on('submit', "#paramForm", function(e){
-		e.preventDefault();
-		parseInput();
-	});
-})

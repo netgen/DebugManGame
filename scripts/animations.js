@@ -155,7 +155,3 @@ var Animator = {
 		this.clearLayer("default");
 	}
 };
-
-$(function() {
-	Animator.initialize();
-});
