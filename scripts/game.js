@@ -163,7 +163,7 @@ function hideModal(){
 
 function pulseText(team) {
     if (isGameOver) return;
-    
+
     $("#" + team + "Info").stop()
                             .delay(50)
                             .animate({fontSize: "50px"}, 750)
