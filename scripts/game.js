@@ -20,13 +20,12 @@ var myWindow;
 
 //creates a popup window with answers
 function init() {
-    console.log("Initializing...");
     myWindow = window.open("popupWindow.html", "mypopup" ,"width=600,height=400");
     myWindow.onload = function() { disableUndo(true) };
     changeTurn();
-    numOfBugs = parseInt($('#zBugs').val()) + 
-                parseInt($('#qBugs').val()) +
-                parseInt($('#wBugs').val());
+    numOfBugs = parseInt($('#numEasyBugs').val()) + 
+                parseInt($('#numNormBugs').val()) +
+                parseInt($('#numHardBugs').val());
     totalBugs = numOfBugs;
 
     $("#myModal").on("shown.bs.modal", function() {
