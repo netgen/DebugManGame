@@ -4,6 +4,10 @@ body {
     font-family: 'Nunito', sans-serif;
 }
 
+p {
+    margin: 20px 0 20px 0;
+}
+
 .paramContainter {
     background-color: white;
 }
@@ -20,6 +24,13 @@ body {
 
 .game-board, #popupBody {
     background-color: #fdffd1;
+}
+
+.game-board {
+    border-top: 7px solid #ddd;
+    border-bottom: 7px solid #ddd;;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .gameName {
@@ -202,7 +213,7 @@ table {
     font-weight: bold;
     margin-right: 20px; 
     margin-left: 20px;
-     padding: 10px;
+    padding: 10px;
 }
 
 #closeBtn: disabled {
@@ -239,7 +250,6 @@ canvas {
 }
 
 .info {
-    margin-top: 73px;
-    padding-top: 5px;
-    font-size: 32px;
+    padding-top: 20px;
+    font-size: 20px;
 }

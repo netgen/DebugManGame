@@ -164,11 +164,11 @@ function pulseText(team) {
     if (isGameOver) return;
 
     $("#" + team + "Info").stop()
-                            .delay(50)
-                            .animate({fontSize: "50px"}, 750)
-                            .animate({fontSize: "32px"}, 750)
-                            .animate({fontSize: "50px"}, 750)
-                            .animate({fontSize: "32px"}, 750);
+                            .delay(100)
+                            .animate({fontSize: "27px"}, 500)
+                            .animate({fontSize: "20px"}, 500)
+                            .animate({fontSize: "27px"}, 500)
+                            .animate({fontSize: "20px"}, 500);
 }
 
 
