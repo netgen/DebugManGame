@@ -1,7 +1,9 @@
 function validate() {
 	var valid = isNumber("#qBugs") && isNumber("#wBugs") && isNumber("#zBugs");
-
-	$("#submitButton").attr("disabled", !valid);
+    if (!valid) {
+        alert("Needed a number of questions!");
+        $("#submitButton").attr("disabled", valid);
+    } 
 }
 
 function isNumber(objName) {
