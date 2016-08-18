@@ -1,24 +1,13 @@
-var time;
-var fulltime = 10;
-var timerReset;
+var time, timerReset, fulltime = 10;
 
-var clickedButton;
-
-var team1 = new Team(0, 0, 0);
-var team2 = new Team(0, 0, 0);
-var turn = "team2";
-
-var numOfBugs;
-var totalBugs;
-
-var KEY_C = 67;
-var KEY_W = 87;
+var numOfBugs, totalBugs;
 
 var isGameOver = false;
 
-var myWindow;
+var keyboardEvents = false;
 
 //creates a popup window with answers
+var myWindow;
 function init() {
     myWindow = window.open("popupWindow.html", "mypopup" ,"width=600,height=400");
     myWindow.onload = function() { disableUndo(true) };
@@ -43,8 +32,9 @@ $(document.body).on('click', '.btn-box', setIdClickedButton);
 //enables clicking on correct/wrong buttons i modal
 //resets time
 
-var questionObj;
+var questonObj, clickedButton;
 function setIdClickedButton() {
+    keyboardEvents = true;
 
     clickedButton = String($(this).data('id'));
     questionObj = GameState.getQuestion(clickedButton);
@@ -52,7 +42,7 @@ function setIdClickedButton() {
     AUDIOS["tick"].play();
     
     popupAnswer(questionObj);
-
+    
     
     $("#question").text(questionObj.question);
     $("#closeBtn").attr("disabled", true);
@@ -148,6 +138,7 @@ function showAnswer() {
     $("#checkAnswer").html("Correct!").css("color", "#06bc06");
     $("#closeBtn").attr("disabled", false);
     time = 0;
+
     clearTimeout(timerReset);
 }
 
@@ -245,6 +236,8 @@ function correctAnswer() {
     if (numOfBugs === 0) {
             btnGameOver();
     }
+    
+    keyboardEvents = false;
 }
 
 
@@ -252,6 +245,7 @@ function correctAnswer() {
 //change the team on the move
 function wrongAnswer() {  
     Animator.stopTimer();
+    
     clearTimeout(timerReset);
     
     AUDIOS["tick"].pauseAndRewind();
@@ -262,8 +256,12 @@ function wrongAnswer() {
     
     $("#checkAnswer").html("Wrong!").css("color", "red");
     hideModal();
+    
+    keyboardEvents = false;
 }
 
+var KEY_C = 67;
+var KEY_W = 87;
 
 //when 'C' is pressed method correctAnswer() is called
 //when 'W' is pressed, method wrongAnswer() is called
@@ -271,10 +269,10 @@ $(document).keydown(function(e){
     
     e = e || window.event;
 
-    if (e.keyCode == KEY_C) {
+    if (keyboardEvents && e.keyCode == KEY_C) {
         correctAnswer();
     }
-    else if (e.keyCode == KEY_W) {
+    else if (keyboardEvents && e.keyCode == KEY_W) {
         wrongAnswer();
     }
 });
@@ -405,7 +403,6 @@ function newGame() {
 }
 
 function setPointerEvents(pointerEvent){
-    myWindow.document.getElementById('btnUndo').style.pointerEvents = pointerEvent;
     myWindow.document.getElementById('btnChangeTurn').style.pointerEvents = pointerEvent;
     myWindow.document.getElementById('btnGmOv').style.pointerEvents = pointerEvent;
 }

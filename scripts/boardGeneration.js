@@ -77,7 +77,7 @@ function rangeSlot(array, rows, cols, bug) {
 }
 
 
-// Places all follower bugs around the central bugs in the grid.
+// Places all follower bugs (other questions) around the central bugs (hard questions) in the grid.
 function placeAround(centralBugs, followers, grid, rows, cols) {
 	var limit = Math.min(centralBugs.length, followers.length);
 

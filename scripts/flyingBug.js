@@ -1,5 +1,5 @@
 var RADIUS_OF_DYING = 18;
-var BUG_SPEED = 0.9;
+var BUG_SPEED = 0.7;
 
 // Creates a flying bug with the specified image
 // which will fly between 'from' and 'to' coordinates.
