@@ -31,15 +31,15 @@
 }
 
 .navbar {
-      font-weight: bold;
-      border: none;
-      margin-bottom: 0;
-      border-radius: 0;
-      color: #4d4d4d;
-      background-color: white;
-      text-align: center;
-      font-size: x-large;
-    }
+    font-weight: bold;
+    border: none;
+    margin-bottom: 0;
+    border-radius: 0;
+    color: #4d4d4d;
+    background-color: white;
+    text-align: center;
+    font-size: x-large;
+}
 
 .sidenav {
     font-size: x-large;
@@ -235,4 +235,10 @@ canvas {
     font-weight: bold;
     font-size: 20px;
     margin-right: 15px;
+}
+
+.info {
+    margin-top: 73px;
+    padding-top: 5px;
+    font-size: 32px;
 }
