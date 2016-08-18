@@ -80,6 +80,8 @@ function random(min, max) {
 	return Math.floor(Math.random() * max) + min;
 }
 
+
+//return free slot for putting bugs
 function freeSlot(array, rows, cols) {
 	while (true) {
 		var r = random(0, rows),
@@ -123,6 +125,8 @@ function rangeSlot(array, rows, cols, bug) {
 }
 
 
+
+// places bugs (other questions) around central bugs (hard questions)
 function placeAround(centralBugs, followers, grid, rows, cols) {
 	var limit = Math.min(centralBugs.length, followers.length);
 
@@ -140,6 +144,7 @@ function placeAround(centralBugs, followers, grid, rows, cols) {
 		grid[row][col] = createField(followers[i], true, row, col);
 	}
 }
+
 
 function placeBugs(rows, cols, questions) {
 	var easy = shuffle(questions["1"]);

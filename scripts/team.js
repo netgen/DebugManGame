@@ -31,3 +31,7 @@ Team.prototype.copy = function(team) {
 	this.normBugs = team.normBugs;
 	this.hardBugs = team.hardBugs;
 };
+
+var team1 = new Team(0, 0, 0);
+var team2 = new Team(0, 0, 0);
+var turn = "team2";
