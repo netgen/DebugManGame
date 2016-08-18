@@ -1,5 +1,8 @@
 var RADIUS_OF_DYING = 18;
+var BUG_SPEED = 0.9;
 
+// Creates a flying bug with the specified image
+// which will fly between 'from' and 'to' coordinates.
 function FlyingBug(from, to, image) {
 	this.dead = false;
 	this.image = image;
@@ -16,16 +19,19 @@ function FlyingBug(from, to, image) {
 				Math.pow(distance[1], 2)
 			);
 	this.direction = { x: distance[0] / norm, y: distance[1] / norm };
-	this.speed = 0.9;
+	this.speed = BUG_SPEED;
 }
 
 FlyingBug.prototype = Object.create(Animatable.prototype);
 FlyingBug.prototype.constructor = FlyingBug;
 
+// Check if the bug is in distance of RADIUS_OF_DYING
+// from the final coordinate.
 FlyingBug.prototype.isDead = function() {
 	return this.dead;
 }
 
+// Recalculates the distance left to the goal.
 FlyingBug.prototype.distance = function() {
 	var dx = this.position.x - this.to.x,
 		dy = this.position.y - this.to.y;

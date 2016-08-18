@@ -155,7 +155,7 @@ function showAnswer() {
 
 //hides modal
 function hideModal(){
-     window.setTimeout(function(){
+    window.setTimeout(function(){
         $('#myModal').modal('hide');
             }, 2000);
     changeTurn();
@@ -401,11 +401,10 @@ function newGame() {
     window.location.href='index.html';
     myWindow.document.getElementById('divId').innerHTML = "";
     setPointerEvents('all');
-    
 }
 
 function setPointerEvents(pointerEvent){
- myWindow.document.getElementById('btnUndo').style.pointerEvents = pointerEvent;
+    myWindow.document.getElementById('btnUndo').style.pointerEvents = pointerEvent;
     myWindow.document.getElementById('btnChangeTurn').style.pointerEvents = pointerEvent;
     myWindow.document.getElementById('btnGmOv').style.pointerEvents = pointerEvent;
 }

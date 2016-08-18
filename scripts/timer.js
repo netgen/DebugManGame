@@ -1,6 +1,8 @@
 var TIMER_COLOR = "rgba(0, 0, 255, 0.8)";
 var TIMER_LINE_WIDTH = 7;
 
+// Creates a new timer of the specified 'duration'
+// (in seconds) which will be placed around the 'parent'.
 function Timer(duration, parent) {
 	this.parent = parent;
 	this.angle = 2 * Math.PI;
@@ -13,6 +15,7 @@ function Timer(duration, parent) {
 Timer.prototype = Object.create(Animatable.prototype);
 Timer.prototype.constructor = Timer;
 
+// Position the timer around the parent.
 Timer.prototype.init = function() {
 	this.center = {
 		x: this.parent.offset().left + this.parent.outerWidth()/2,
