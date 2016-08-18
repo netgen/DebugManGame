@@ -22,7 +22,7 @@ var myWindow;
 function init() {
     console.log("Initializing...");
     myWindow = window.open("popupWindow.html", "mypopup" ,"width=600,height=400");
-
+    myWindow.onload = function() { disableUndo(true) };
     changeTurn();
     numOfBugs = parseInt($('#zBugs').val()) + 
                 parseInt($('#qBugs').val()) +
@@ -210,6 +210,7 @@ function correctAnswer() {
     Animator.stopTimer();
 
     GameState.pushChanges();
+    disableUndo(false);
     GameState.saveQuestion(clickedButton, turn);
     
     AUDIOS["tick"].pauseAndRewind();
@@ -256,11 +257,12 @@ function wrongAnswer() {
     
     AUDIOS["tick"].pauseAndRewind();
     AUDIOS["wrong"].play();
-    GameState.pushChanges();   
+    GameState.pushChanges();
+    disableUndo(false);
     GameState.savePoints(team1, team2);
     
-     $("#checkAnswer").html("Wrong!").css("color", "red");
-     hideModal();
+    $("#checkAnswer").html("Wrong!").css("color", "red");
+    hideModal();
 }
 
 
@@ -343,7 +345,7 @@ function btnUndo() {
     team2 = GameState.getTeam("team2");
     updateStatus("team1", team1);
     updateStatus("team2", team2);
-    $("#btnUndo").attr("disabled", true);
+    disableUndo(true);
     changeTurn();
 
     var m = GameState.getRows();
@@ -407,4 +409,9 @@ function setPointerEvents(pointerEvent){
     myWindow.document.getElementById('btnUndo').style.pointerEvents = pointerEvent;
     myWindow.document.getElementById('btnChangeTurn').style.pointerEvents = pointerEvent;
     myWindow.document.getElementById('btnGmOv').style.pointerEvents = pointerEvent;
+}
+
+function disableUndo(disabled) {
+    myWindow.document.getElementById('btnUndo').style.pointerEvents =
+        disabled ? 'none' : 'all';
 }

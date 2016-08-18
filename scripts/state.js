@@ -16,7 +16,6 @@ var GameState = {
 	// Save the current game state to local storage
 	pushChanges: function() {
 		localStorage.data = JSON.stringify(this.data);
-		$("#btnUndo").attr("disabled", false);
 	},
 
 	saveQuestion: function(buttonID, team) {

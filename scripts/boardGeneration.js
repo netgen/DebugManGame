@@ -213,7 +213,6 @@ function generateBoard(questions) {
 	});
 
 	GameState.load();
-	$("#btnUndo").attr("disabled", true);
 }
 
 function createField(question, isBug, row, column) {
