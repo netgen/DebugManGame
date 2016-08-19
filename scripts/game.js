@@ -1,25 +1,15 @@
-var time, timerReset, fulltime = 10;
-
-var numOfBugs, totalBugs;
-
-var isGameOver = false;
-
-var keyboardEvents = false;
-
-//creates a popup window with answers
-var myWindow;
 function init() {
-    myWindow = window.open("popupWindow.html", "mypopup" ,"width=600,height=400");
-    myWindow.onload = function() { disableUndo(true) };
+    popupWindow = window.open("popupWindow.html", "mypopup" ,"width=600,height=400");
+    popupWindow.onload = function() { disableUndo(true) };
     changeTurn();
-    numOfBugs = parseInt($('#numEasyBugs').val()) + 
+    GameData.numOfBugs = parseInt($('#numEasyBugs').val()) + 
                 parseInt($('#numNormBugs').val()) +
                 parseInt($('#numHardBugs').val());
-    totalBugs = numOfBugs;
+    GameData.totalBugs = GameData.numOfBugs;
 
     $("#myModal").on("shown.bs.modal", function() {
-        if (!isGameOver) {
-            Animator.playTimer(fulltime, $("#timer"));
+        if (!GameData.isGameOver) {
+            Animator.playTimer(GameData.fulltime, $("#timer"));
         }
     });
 }
@@ -32,9 +22,9 @@ $(document.body).on('click', '.btn-box', setIdClickedButton);
 //enables clicking on correct/wrong buttons i modal
 //resets time
 
-var questonObj, clickedButton;
+var questonObj;
 function setIdClickedButton() {
-    keyboardEvents = true;
+    GameData.keyboardEvents = true;
 
     clickedButton = String($(this).data('id'));
     questionObj = GameState.getQuestion(clickedButton);
@@ -64,16 +54,16 @@ function getQuestion(buttonID) {
 
 //writes question and answer to popup window
 function popupAnswer(questionObj) {
-    var div = myWindow.document.getElementById('divId');
+    var div = popupWindow.document.getElementById('divId');
     div.innerHTML = "<br />" + questionObj.question.fontsize(6) + "<br />";
     div.innerHTML = div.innerHTML + " " + questionObj.answer.fontsize(7);   
 }
 
 //resets time
 function resetTime() {
-    $("#timer").html(fulltime + "s");
-    clearTimeout(timerReset);
-    time = fulltime;
+    $("#timer").html(GameData.fulltime + "s");
+    clearTimeout(GameData.timerReset);
+    GameData.time = GameData.fulltime;
     timer();
 }
 
@@ -139,7 +129,7 @@ function showAnswer() {
     $("#closeBtn").attr("disabled", false);
     time = 0;
 
-    clearTimeout(timerReset);
+    clearTimeout(GameData.timerReset);
 }
 
 
@@ -152,7 +142,7 @@ function hideModal(){
 }
 
 function pulseText(team) {
-    if (isGameOver) return;
+    if (GameData.isGameOver) return;
 
     $("#" + team + "Info").stop()
                             .delay(100)
@@ -187,7 +177,6 @@ function changeTurn() {
 
     $("#" + turn + "Info").html("YOUR TURN!");
 
-    answered = false;
     GameState.saveTurn(turn);
 }
 
@@ -209,7 +198,7 @@ function correctAnswer() {
     
     if (bug) {
         
-        numOfBugs--;
+        GameData.numOfBugs--;
         
         if (turn === "team1"){
             team1.addBug(bug);
@@ -231,13 +220,13 @@ function correctAnswer() {
 
     $("#closeBtn").attr("disabled", false);
     
-    clearTimeout(timerReset);
+    clearTimeout(GameData.timerReset);
     
-    if (numOfBugs === 0) {
+    if (GameData.numOfBugs === 0) {
             btnGameOver();
     }
     
-    keyboardEvents = false;
+    GameData.keyboardEvents = false;
 }
 
 
@@ -246,7 +235,7 @@ function correctAnswer() {
 function wrongAnswer() {  
     Animator.stopTimer();
     
-    clearTimeout(timerReset);
+    clearTimeout(GameData.timerReset);
     
     AUDIOS["tick"].pauseAndRewind();
     AUDIOS["wrong"].play();
@@ -257,7 +246,7 @@ function wrongAnswer() {
     $("#checkAnswer").html("Wrong!").css("color", "red");
     hideModal();
     
-    keyboardEvents = false;
+    GameData.keyboardEvents = false;
 }
 
 var KEY_C = 67;
@@ -269,10 +258,10 @@ $(document).keydown(function(e){
     
     e = e || window.event;
 
-    if (keyboardEvents && e.keyCode == KEY_C) {
+    if (GameData.keyboardEvents && e.keyCode == KEY_C) {
         correctAnswer();
     }
-    else if (keyboardEvents && e.keyCode == KEY_W) {
+    else if (GameData.keyboardEvents && e.keyCode == KEY_W) {
         wrongAnswer();
     }
 });
@@ -315,7 +304,7 @@ function gameOver() {
 
 //this method is called when button 'Game over' is pressed
 function btnGameOver() {
-    isGameOver = true;
+    GameData.isGameOver = true;
 
     GameState.pushChanges();
 
@@ -348,8 +337,8 @@ function btnUndo() {
     var m = GameState.getRows();
     var n = GameState.getColumns();
 
-    numOfBugs = totalBugs;
-    isGameOver = false;
+   GameData.numOfBugs = GameData.totalBugs;
+    GameData.isGameOver = false;
 
     for (var i = 0; i < m; i++) {
         for (var j = 0; j < n; j++) {
@@ -380,11 +369,11 @@ function btnUndo() {
 //implementation of timer
 //if nothing is clicked, game acts like the answer is wrong
 function timer() {
-	timerReset = setTimeout(function() {
+	GameData.timerReset = setTimeout(function() {
 		var timerDiv = document.getElementById("timer");
-		time--;
-        timerDiv.innerHTML = time + "s";
-        if (time == 0) {
+		GameData.time--;
+        timerDiv.innerHTML = GameData.time + "s";
+        if (GameData.time == 0) {
             wrongAnswer();
             return;
         }
@@ -398,16 +387,16 @@ function timer() {
 //starts a new game
 function newGame() {
     window.location.href='index.html';
-    myWindow.document.getElementById('divId').innerHTML = "";
+    popupWindow.document.getElementById('divId').innerHTML = "";
     setPointerEvents('all');
 }
 
 function setPointerEvents(pointerEvent){
-    myWindow.document.getElementById('btnChangeTurn').style.pointerEvents = pointerEvent;
-    myWindow.document.getElementById('btnGmOv').style.pointerEvents = pointerEvent;
+    popupWindow.document.getElementById('btnChangeTurn').style.pointerEvents = pointerEvent;
+    popupWindow.document.getElementById('btnGmOv').style.pointerEvents = pointerEvent;
 }
 
 function disableUndo(disabled) {
-    myWindow.document.getElementById('btnUndo').style.pointerEvents =
+    popupWindow.document.getElementById('btnUndo').style.pointerEvents =
         disabled ? 'none' : 'all';
 }
