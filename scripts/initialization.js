@@ -80,6 +80,10 @@ $(function() {
 		template = Handlebars.compile(form_script);
 		$("#colSelector").html(template());
 
+		form_script = $("#template_select_time").html();
+		template = Handlebars.compile(form_script);
+		$("#timeSelector").html(template());
+
 		// Prevent the default action of the form.
 		$(document.body).on('submit', "#paramForm", function(e) {
 			e.preventDefault();

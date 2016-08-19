@@ -14,6 +14,12 @@
 				<select name="noColumns" id="colSelector"></select>
 			</div>
 		</div>
+		<div class="form-group">
+			<label for="qTime" class="col-md-6 control-label">Answering time (seconds):</label>
+			<div class="col-md-6">
+				<select name="qTime" id="timeSelector"></select>
+			</div>
+		</div>
 
 		<div class="form-group">
 			<label for="numEasyBugs" class="col-md-6 control-label"><img src="assets/images/fly_icon.png" /></label>
@@ -55,6 +61,12 @@
 
 <script type="text/template" id="template_select_col">
 	{{#times 8}}
+		<option value="{{@index}}">{{@index}}</option>
+	{{/times}}
+</script>
+
+<script type="text/template" id="template_select_time">
+	{{#times 30}}
 		<option value="{{@index}}">{{@index}}</option>
 	{{/times}}
 </script>
