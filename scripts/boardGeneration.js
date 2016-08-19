@@ -157,7 +157,8 @@ function generateBoard(questions) {
 		grid: array,
 		turn: "",
 		team1: new Team(0, 0, 0),
-		team2: new Team(0, 0, 0)
+		team2: new Team(0, 0, 0),
+		qTime: parseInt(localStorage["qTime"])
 	};
 
 	$(".game-board").html(template(context));

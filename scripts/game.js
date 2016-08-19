@@ -1,4 +1,4 @@
-var time, timerReset, fulltime = 10;
+var time, timerReset, fulltime = 15;
 
 var numOfBugs, totalBugs;
 
@@ -9,9 +9,10 @@ var keyboardEvents = false;
 //creates a popup window with answers
 var myWindow;
 function init() {
+    fulltime = parseInt(GameState.getQuestionTime());
+
     myWindow = window.open("popupWindow.html", "mypopup" ,"width=600,height=400");
     myWindow.onload = function() { disableUndo(true) };
-    changeTurn();
     numOfBugs = parseInt($('#numEasyBugs').val()) + 
                 parseInt($('#numNormBugs').val()) +
                 parseInt($('#numHardBugs').val());
@@ -22,6 +23,8 @@ function init() {
             Animator.playTimer(fulltime, $("#timer"));
         }
     });
+
+    changeTurn();
 }
 
 
