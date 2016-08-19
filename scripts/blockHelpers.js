@@ -30,3 +30,20 @@ Handlebars.registerHelper("times", function(n, context) {
 
 	return out;
 });
+
+// Repeats an action in an interval [a, b], where index
+// is the current value of the counter.
+Handlebars.registerHelper("range", function(a, b, context) {
+	var out = '',
+		data = {};
+
+	for (var i = a; i <= b; i++) {
+		data.index = i;
+		out += context.fn(i, {
+				data: data
+			}
+		);
+	}
+
+	return out;
+});
