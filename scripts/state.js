@@ -67,5 +67,9 @@ var GameState = {
 
 	getTeam: function(team) {
 		return this.data[team];
+	},
+
+	getQuestionTime: function() {
+		return this.data["qTime"];
 	}
 };

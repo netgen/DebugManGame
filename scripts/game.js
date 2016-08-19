@@ -1,8 +1,9 @@
 function init() {
-    popupWindow = window.open("popupWindow.html", "mypopup" ,"width=600,height=400");
-    popupWindow.onload = function() { disableUndo(true) };
-    changeTurn();
-    GameData.numOfBugs = parseInt($('#numEasyBugs').val()) + 
+    GameData.fulltime = parseInt(GameState.getQuestionTime());
+
+    GameData.popupWindow = window.open("popupWindow.html", "mypopup" ,"width=600,height=400");
+    GameData.popupWindow.onload = function() { disableUndo(true) };
+     GameData.numOfBugs = parseInt($('#numEasyBugs').val()) + 
                 parseInt($('#numNormBugs').val()) +
                 parseInt($('#numHardBugs').val());
     GameData.totalBugs = GameData.numOfBugs;
@@ -12,6 +13,8 @@ function init() {
             Animator.playTimer(GameData.fulltime, $("#timer"));
         }
     });
+
+    changeTurn();
 }
 
 
@@ -54,7 +57,7 @@ function getQuestion(buttonID) {
 
 //writes question and answer to popup window
 function popupAnswer(questionObj) {
-    var div = popupWindow.document.getElementById('divId');
+    var div = GameData.popupWindow.document.getElementById('divId');
     div.innerHTML = "<br />" + questionObj.question.fontsize(6) + "<br />";
     div.innerHTML = div.innerHTML + " " + questionObj.answer.fontsize(7);   
 }
@@ -387,16 +390,16 @@ function timer() {
 //starts a new game
 function newGame() {
     window.location.href='index.html';
-    popupWindow.document.getElementById('divId').innerHTML = "";
+    GameData.popupWindow.document.getElementById('divId').innerHTML = "";
     setPointerEvents('all');
 }
 
 function setPointerEvents(pointerEvent){
-    popupWindow.document.getElementById('btnChangeTurn').style.pointerEvents = pointerEvent;
-    popupWindow.document.getElementById('btnGmOv').style.pointerEvents = pointerEvent;
+    GameData.popupWindow.document.getElementById('btnChangeTurn').style.pointerEvents = pointerEvent;
+    GameData.popupWindow.document.getElementById('btnGmOv').style.pointerEvents = pointerEvent;
 }
 
 function disableUndo(disabled) {
-    popupWindow.document.getElementById('btnUndo').style.pointerEvents =
+    GameData.popupWindow.document.getElementById('btnUndo').style.pointerEvents =
         disabled ? 'none' : 'all';
 }
