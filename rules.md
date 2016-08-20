@@ -1,5 +1,8 @@
 # DebugManGame
 
+  Application won't work offline - an HTTP server has to be
+run in the folder where all the files are.
+
   Before the game begins, size of the board (number of the
 questions) and quantity of each bug type are configured.
 Maximum size of board is 6 rows and 8 columns, meaning
